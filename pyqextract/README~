@@ -1,6 +1,0 @@
-pyqextract.py will decode Symantec quarantined vbn files.  Like many others I couldn't get qextract.exe to work so I wrote my own.  This decoder removes the magic bytes Symantec adds to each file that is quarantined.  The "magic bytes" break the IAT, data/code segments by offsetting everything in the executable.
-
-Usage: python pyqextract.py 578D3452A.VBN outifle.exe
-
-
-
