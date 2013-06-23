@@ -1,0 +1,308 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.commands.Command : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.c.Command(<span title="object">object</span>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.commands.html">commands</a></span>
+      
+      <a href="classIndex.html#volatility.commands.Command">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="volatility.plugins.common.AbstractWindowsCommand.html">volatility.plugins.common.AbstractWindowsCommand</a>, <a href="volatility.plugins.linux.common.AbstractLinuxCommand.html">volatility.plugins.linux.common.AbstractLinuxCommand</a>, <a href="volatility.plugins.patcher.Patcher.html">volatility.plugins.patcher.Patcher</a>, <a href="volatility.plugins.registry.shimcache.ShimCache.html">volatility.plugins.registry.shimcache.ShimCache</a></p>
+    </div>
+    <div>Base class for each plugin command<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1369">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#__init__">__init__</a></td>
+    <td><span>Constructor uses args as an initializer. It creates an instance of OptionParser, populates the options, and finally parses the command line. Options are stored in the self.opts attribute.</span></td>
+  </tr><tr class="staticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.commands.Command.html#register_options">register_options</a></td>
+    <td><span>Registers options into a config object provided</span></td>
+  </tr><tr class="classmethod">
+    
+    
+    <td>Class Method</td>
+    <td><a href="volatility.commands.Command.html#help">help</a></td>
+    <td><span>This function returns a string that will be displayed when a user lists available plugins.</span></td>
+  </tr><tr class="staticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.commands.Command.html#is_valid_profile">is_valid_profile</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#calculate">calculate</a></td>
+    <td><span>This function is responsible for performing all calculations</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#execute">execute</a></td>
+    <td><span>Executes the plugin command.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#format_value">format_value</a></td>
+    <td><span>Formats an individual field using the table formatting codes</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#table_header">table_header</a></td>
+    <td><span>Table header renders the title row of a table</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#table_row">table_row</a></td>
+    <td><span>Outputs a single row of a table</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#_formatlookup">_formatlookup</a></td>
+    <td><span>Code to turn profile specific values into format specifications</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#_elide">_elide</a></td>
+    <td><span>Adds three dots in the middle of a string if it is longer than length</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.commands.Command.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, config, *_args, **_kwargs):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.connections.Connections.html">volatility.plugins.connections.Connections</a>, <a href="volatility.plugins.evtlogs.EvtLogs.html">volatility.plugins.evtlogs.EvtLogs</a>, <a href="volatility.plugins.filescan.MutantScan.html">volatility.plugins.filescan.MutantScan</a>, <a href="volatility.plugins.gui.atoms.AtomScan.html">volatility.plugins.gui.atoms.AtomScan</a>, <a href="volatility.plugins.gui.screenshot.Screenshot.html">volatility.plugins.gui.screenshot.Screenshot</a>, <a href="volatility.plugins.gui.userhandles.UserHandles.html">volatility.plugins.gui.userhandles.UserHandles</a>, <a href="volatility.plugins.imagecopy.ImageCopy.html">volatility.plugins.imagecopy.ImageCopy</a>, <a href="volatility.plugins.linux.common.AbstractLinuxCommand.html">volatility.plugins.linux.common.AbstractLinuxCommand</a>, <a href="volatility.plugins.malware.callbacks.Callbacks.html">volatility.plugins.malware.callbacks.Callbacks</a>, <a href="volatility.plugins.malware.cmdhistory.CmdScan.html">volatility.plugins.malware.cmdhistory.CmdScan</a>, <a href="volatility.plugins.malware.devicetree.DriverIrp.html">volatility.plugins.malware.devicetree.DriverIrp</a>, <a href="volatility.plugins.malware.impscan.ImpScan.html">volatility.plugins.malware.impscan.ImpScan</a>, <a href="volatility.plugins.malware.psxview.PsXview.html">volatility.plugins.malware.psxview.PsXview</a>, <a href="volatility.plugins.modules.Modules.html">volatility.plugins.modules.Modules</a>, <a href="volatility.plugins.patcher.Patcher.html">volatility.plugins.patcher.Patcher</a>, <a href="volatility.plugins.registry.lsadump.HashDump.html">volatility.plugins.registry.lsadump.HashDump</a>, <a href="volatility.plugins.registry.lsadump.LSADump.html">volatility.plugins.registry.lsadump.LSADump</a>, <a href="volatility.plugins.registry.printkey.HiveDump.html">volatility.plugins.registry.printkey.HiveDump</a>, <a href="volatility.plugins.registry.printkey.PrintKey.html">volatility.plugins.registry.printkey.PrintKey</a>, <a href="volatility.plugins.sockets.Sockets.html">volatility.plugins.sockets.Sockets</a>, <a href="volatility.plugins.taskmods.DllList.html">volatility.plugins.taskmods.DllList</a>, <a href="volatility.plugins.userassist.UserAssist.html">volatility.plugins.userassist.UserAssist</a>, <a href="volatility.plugins.volshell.volshell.html">volatility.plugins.volshell.volshell</a></div>
+    <div>Constructor uses args as an initializer. It creates an instance
+of OptionParser, populates the options, and finally parses the
+command line. Options are stored in the self.opts attribute.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.commands.Command.register_options">
+    
+  </a>
+  <a name="register_options">
+    
+  </a>
+  <div class="functionHeader">
+    @staticmethod<br />
+    def
+    register_options(config):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.kdbgscan.KDBGScan.html">volatility.plugins.kdbgscan.KDBGScan</a>, <a href="volatility.plugins.kpcrscan.KPCRScan.html">volatility.plugins.kpcrscan.KPCRScan</a></div>
+    <div>Registers options into a config object provided<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.commands.Command.help">
+    
+  </a>
+  <a name="help">
+    
+  </a>
+  <div class="functionHeader">
+    @classmethod<br />
+    def
+    help(cls):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>This function returns a string that will be displayed when a
+user lists available plugins.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.commands.Command.is_valid_profile">
+    
+  </a>
+  <a name="is_valid_profile">
+    
+  </a>
+  <div class="functionHeader">
+    @staticmethod<br />
+    def
+    is_valid_profile(profile):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.common.AbstractWindowsCommand.html">volatility.plugins.common.AbstractWindowsCommand</a>, <a href="volatility.plugins.linux.common.AbstractLinuxCommand.html">volatility.plugins.linux.common.AbstractLinuxCommand</a>, <a href="volatility.plugins.registry.shimcache.ShimCache.html">volatility.plugins.registry.shimcache.ShimCache</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.commands.Command.calculate">
+    
+  </a>
+  <a name="calculate">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    calculate(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.bioskbd.BiosKbd.html">volatility.plugins.bioskbd.BiosKbd</a>, <a href="volatility.plugins.connections.Connections.html">volatility.plugins.connections.Connections</a>, <a href="volatility.plugins.connscan.ConnScan.html">volatility.plugins.connscan.ConnScan</a>, <a href="volatility.plugins.crashinfo.CrashInfo.html">volatility.plugins.crashinfo.CrashInfo</a>, <a href="volatility.plugins.evtlogs.EvtLogs.html">volatility.plugins.evtlogs.EvtLogs</a>, <a href="volatility.plugins.filescan.FileScan.html">volatility.plugins.filescan.FileScan</a>, <a href="volatility.plugins.filescan.PSScan.html">volatility.plugins.filescan.PSScan</a>, <a href="volatility.plugins.getservicesids.GetServiceSids.html">volatility.plugins.getservicesids.GetServiceSids</a>, <a href="volatility.plugins.gui.atoms.Atoms.html">volatility.plugins.gui.atoms.Atoms</a>, <a href="volatility.plugins.gui.atoms.AtomScan.html">volatility.plugins.gui.atoms.AtomScan</a>, <a href="volatility.plugins.gui.clipboard.Clipboard.html">volatility.plugins.gui.clipboard.Clipboard</a>, <a href="volatility.plugins.gui.gditimers.GDITimers.html">volatility.plugins.gui.gditimers.GDITimers</a>, <a href="volatility.plugins.gui.sessions.Sessions.html">volatility.plugins.gui.sessions.Sessions</a>, <a href="volatility.plugins.hibinfo.HibInfo.html">volatility.plugins.hibinfo.HibInfo</a>, <a href="volatility.plugins.imagecopy.ImageCopy.html">volatility.plugins.imagecopy.ImageCopy</a>, <a href="volatility.plugins.kdbgscan.KDBGScan.html">volatility.plugins.kdbgscan.KDBGScan</a>, <a href="volatility.plugins.kpcrscan.KPCRScan.html">volatility.plugins.kpcrscan.KPCRScan</a>, <a href="volatility.plugins.linux.arp.linux_arp.html">volatility.plugins.linux.arp.linux_arp</a>, <a href="volatility.plugins.linux.check_afinfo.linux_check_afinfo.html">volatility.plugins.linux.check_afinfo.linux_check_afinfo</a>, <a href="volatility.plugins.linux.check_fops.linux_check_fop.html">volatility.plugins.linux.check_fops.linux_check_fop</a>, <a href="volatility.plugins.linux.check_idt.linux_check_idt.html">volatility.plugins.linux.check_idt.linux_check_idt</a>, <a href="volatility.plugins.linux.check_modules.linux_check_modules.html">volatility.plugins.linux.check_modules.linux_check_modules</a>, <a href="volatility.plugins.linux.check_syscall.linux_check_syscall.html">volatility.plugins.linux.check_syscall.linux_check_syscall</a>, <a href="volatility.plugins.linux.cpuinfo.linux_cpuinfo.html">volatility.plugins.linux.cpuinfo.linux_cpuinfo</a>, <a href="volatility.plugins.linux.dentry_cache.linux_dentry_cache.html">volatility.plugins.linux.dentry_cache.linux_dentry_cache</a>, <a href="volatility.plugins.linux.dmesg.linux_dmesg.html">volatility.plugins.linux.dmesg.linux_dmesg</a>, <a href="volatility.plugins.linux.dump_map.linux_dump_map.html">volatility.plugins.linux.dump_map.linux_dump_map</a>, <a href="volatility.plugins.linux.find_file.linux_find_file.html">volatility.plugins.linux.find_file.linux_find_file</a>, <a href="volatility.plugins.linux.ifconfig.linux_ifconfig.html">volatility.plugins.linux.ifconfig.linux_ifconfig</a>, <a href="volatility.plugins.linux.iomem.linux_iomem.html">volatility.plugins.linux.iomem.linux_iomem</a>, <a href="volatility.plugins.linux.lsmod.linux_lsmod.html">volatility.plugins.linux.lsmod.linux_lsmod</a>, <a href="volatility.plugins.linux.mount.linux_mount.html">volatility.plugins.linux.mount.linux_mount</a>, <a href="volatility.plugins.linux.netstat.linux_netstat.html">volatility.plugins.linux.netstat.linux_netstat</a>, <a href="volatility.plugins.linux.pslist.linux_pslist.html">volatility.plugins.linux.pslist.linux_pslist</a>, <a href="volatility.plugins.linux.psxview.linux_psxview.html">volatility.plugins.linux.psxview.linux_psxview</a>, <a href="volatility.plugins.linux.route_cache.linux_route_cache.html">volatility.plugins.linux.route_cache.linux_route_cache</a>, <a href="volatility.plugins.linux.sk_buff_cache.linux_sk_buff_cache.html">volatility.plugins.linux.sk_buff_cache.linux_sk_buff_cache</a>, <a href="volatility.plugins.linux.slab_info.linux_slabinfo.html">volatility.plugins.linux.slab_info.linux_slabinfo</a>, <a href="volatility.plugins.linux.tmpfs.linux_tmpfs.html">volatility.plugins.linux.tmpfs.linux_tmpfs</a>, <a href="volatility.plugins.linux.vma_cache.linux_vma_cache.html">volatility.plugins.linux.vma_cache.linux_vma_cache</a>, <a href="volatility.plugins.malware.callbacks.Callbacks.html">volatility.plugins.malware.callbacks.Callbacks</a>, <a href="volatility.plugins.malware.cmdhistory.CmdScan.html">volatility.plugins.malware.cmdhistory.CmdScan</a>, <a href="volatility.plugins.malware.idt.GDT.html">volatility.plugins.malware.idt.GDT</a>, <a href="volatility.plugins.malware.idt.IDT.html">volatility.plugins.malware.idt.IDT</a>, <a href="volatility.plugins.malware.impscan.ImpScan.html">volatility.plugins.malware.impscan.ImpScan</a>, <a href="volatility.plugins.malware.psxview.PsXview.html">volatility.plugins.malware.psxview.PsXview</a>, <a href="volatility.plugins.malware.svcscan.SvcScan.html">volatility.plugins.malware.svcscan.SvcScan</a>, <a href="volatility.plugins.malware.timers.Timers.html">volatility.plugins.malware.timers.Timers</a>, <a href="volatility.plugins.modules.Modules.html">volatility.plugins.modules.Modules</a>, <a href="volatility.plugins.netscan.Netscan.html">volatility.plugins.netscan.Netscan</a>, <a href="volatility.plugins.patcher.Patcher.html">volatility.plugins.patcher.Patcher</a>, <a href="volatility.plugins.pstree.PSTree.html">volatility.plugins.pstree.PSTree</a>, <a href="volatility.plugins.registry.hivescan.HiveScan.html">volatility.plugins.registry.hivescan.HiveScan</a>, <a href="volatility.plugins.registry.lsadump.HashDump.html">volatility.plugins.registry.lsadump.HashDump</a>, <a href="volatility.plugins.registry.lsadump.LSADump.html">volatility.plugins.registry.lsadump.LSADump</a>, <a href="volatility.plugins.registry.printkey.HiveDump.html">volatility.plugins.registry.printkey.HiveDump</a>, <a href="volatility.plugins.registry.shimcache.ShimCache.html">volatility.plugins.registry.shimcache.ShimCache</a>, <a href="volatility.plugins.sockets.Sockets.html">volatility.plugins.sockets.Sockets</a>, <a href="volatility.plugins.sockscan.SockScan.html">volatility.plugins.sockscan.SockScan</a>, <a href="volatility.plugins.ssdt.SSDT.html">volatility.plugins.ssdt.SSDT</a>, <a href="volatility.plugins.taskmods.DllList.html">volatility.plugins.taskmods.DllList</a></div>
+    <div>This function is responsible for performing all calculations</p>
+<p>We should not have any output functions (e.g. print) in this
+function at all.</p>
+<p>If this function is expected to take a long time to return
+some data, the function should return a generator.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.commands.Command.execute">
+    
+  </a>
+  <a name="execute">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    execute(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.linux.common.AbstractLinuxCommand.html">volatility.plugins.linux.common.AbstractLinuxCommand</a></div>
+    <div>Executes the plugin command.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.commands.Command._formatlookup">
+    
+  </a>
+  <a name="_formatlookup">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    _formatlookup(self, profile, code):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Code to turn profile specific values into format specifications<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.commands.Command._elide">
+    
+  </a>
+  <a name="_elide">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    _elide(self, string, length):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Adds three dots in the middle of a string if it is longer than length<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.commands.Command.format_value">
+    
+  </a>
+  <a name="format_value">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    format_value(self, value, fmt):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Formats an individual field using the table formatting codes<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.commands.Command.table_header">
+    
+  </a>
+  <a name="table_header">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    table_header(self, outfd, title_format_list=None):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Table header renders the title row of a table</p>
+<p>This also stores the header types to ensure
+everything is formatted appropriately.
+It must be a list of tuples rather than a dict for ordering purposes.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.commands.Command.table_row">
+    
+  </a>
+  <a name="table_row">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    table_row(self, outfd, *args):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Outputs a single row of a table<table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for volatility, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-22 21:05:12.
+    </address>
+  </body>
+</html>

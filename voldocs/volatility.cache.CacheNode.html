@@ -1,0 +1,208 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.cache.CacheNode : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.c.CacheNode(<span title="object">object</span>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.cache.html">cache</a></span>
+      
+      <a href="classIndex.html#volatility.cache.CacheNode">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="volatility.cache.BlockingNode.html">volatility.cache.BlockingNode</a></p>
+    </div>
+    <div>Base class for Cache nodes<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1387">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.cache.CacheNode.html#__init__">__init__</a></td>
+    <td><span>Creates a new Cache node under the parent. The new node will carry the specified payload</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.cache.CacheNode.html#__getitem__">__getitem__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.cache.CacheNode.html#__str__">__str__</a></td>
+    <td><span>Produce a human readable version of the payload.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.cache.CacheNode.html#set_payload">set_payload</a></td>
+    <td><span>Update the current payload with the new specified payload</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.cache.CacheNode.html#dump">dump</a></td>
+    <td><span>Dump the node to disk for later retrieval. This is normally called when the process has exited.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.cache.CacheNode.html#get_payload">get_payload</a></td>
+    <td><span>Retrieve this node's payload</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.cache.CacheNode.html#_find_generators">_find_generators</a></td>
+    <td><span>A recursive function to flatten generators into lists</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.cache.CacheNode.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, name, stem, storage=None, payload=None, invalidator=None):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.cache.BlockingNode.html">volatility.cache.BlockingNode</a></div>
+    <div>Creates a new Cache node under the parent. The new node
+will carry the specified payload<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.cache.CacheNode.__getitem__">
+    
+  </a>
+  <a name="__getitem__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __getitem__(self, item=''):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.cache.BlockingNode.html">volatility.cache.BlockingNode</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.cache.CacheNode.__str__">
+    
+  </a>
+  <a name="__str__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __str__(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Produce a human readable version of the payload.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.cache.CacheNode._find_generators">
+    
+  </a>
+  <a name="_find_generators">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    _find_generators(self, item):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>A recursive function to flatten generators into lists<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.cache.CacheNode.set_payload">
+    
+  </a>
+  <a name="set_payload">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    set_payload(self, payload):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Update the current payload with the new specified payload<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.cache.CacheNode.dump">
+    
+  </a>
+  <a name="dump">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    dump(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.cache.BlockingNode.html">volatility.cache.BlockingNode</a></div>
+    <div>Dump the node to disk for later retrieval. This is
+normally called when the process has exited.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.cache.CacheNode.get_payload">
+    
+  </a>
+  <a name="get_payload">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_payload(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.cache.BlockingNode.html">volatility.cache.BlockingNode</a></div>
+    <div>Retrieve this node's payload<table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for volatility, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-22 21:05:12.
+    </address>
+  </body>
+</html>

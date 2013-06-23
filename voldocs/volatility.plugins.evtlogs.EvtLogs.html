@@ -1,0 +1,297 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.plugins.evtlogs.EvtLogs : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.p.e.EvtLogs(<a href="volatility.plugins.common.AbstractWindowsCommand.html">common.AbstractWindowsCommand</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.plugins.html">plugins</a>.<a href="volatility.plugins.evtlogs.html">evtlogs</a></span>
+      
+      <a href="classIndex.html#volatility.plugins.evtlogs.EvtLogs">View In Hierarchy</a>
+    </p>
+    <div>
+      
+    </div>
+    <div>Extract Windows Event Logs (XP/2003 only)<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id45">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.evtlogs.EvtLogs.html#__init__">__init__</a></td>
+    <td><span>Constructor uses args as an initializer. It creates an instance of OptionParser, populates the options, and finally parses the command line. Options are stored in the self.opts attribute.</span></td>
+  </tr><tr class="staticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.plugins.evtlogs.EvtLogs.html#is_valid_profile">is_valid_profile</a></td>
+    <td><span>This plugin is valid on XP and 2003</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.evtlogs.EvtLogs.html#load_user_sids">load_user_sids</a></td>
+    <td><span>Load the user SIDs from the registry</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.evtlogs.EvtLogs.html#get_sid_string">get_sid_string</a></td>
+    <td><span>Take a buffer of data from the event record and parse it as a SID.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.evtlogs.EvtLogs.html#calculate">calculate</a></td>
+    <td><span>This function is responsible for performing all calculations</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.evtlogs.EvtLogs.html#remove_unprintable">remove_unprintable</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.evtlogs.EvtLogs.html#parse_evt_info">parse_evt_info</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.evtlogs.EvtLogs.html#render_text">render_text</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.commands.Command.html">Command</a> (via <a href="volatility.plugins.common.AbstractWindowsCommand.html">AbstractWindowsCommand</a>):
+        </p>
+        <table class="children sortable" id="id46">
+  
+  
+<tr class="basestaticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.commands.Command.html#register_options">register_options</a></td>
+    <td><span>Registers options into a config object provided</span></td>
+  </tr><tr class="baseclassmethod">
+    
+    
+    <td>Class Method</td>
+    <td><a href="volatility.commands.Command.html#help">help</a></td>
+    <td><span>This function returns a string that will be displayed when a user lists available plugins.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#execute">execute</a></td>
+    <td><span>Executes the plugin command.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#format_value">format_value</a></td>
+    <td><span>Formats an individual field using the table formatting codes</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#table_header">table_header</a></td>
+    <td><span>Table header renders the title row of a table</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#table_row">table_row</a></td>
+    <td><span>Outputs a single row of a table</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#_formatlookup">_formatlookup</a></td>
+    <td><span>Code to turn profile specific values into format specifications</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#_elide">_elide</a></td>
+    <td><span>Adds three dots in the middle of a string if it is longer than length</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.plugins.evtlogs.EvtLogs.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, config, *args, **kwargs):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.commands.Command.html#__init__">volatility.commands.Command.__init__</a></div>
+    <div>Constructor uses args as an initializer. It creates an instance
+of OptionParser, populates the options, and finally parses the
+command line. Options are stored in the self.opts attribute.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.evtlogs.EvtLogs.is_valid_profile">
+    
+  </a>
+  <a name="is_valid_profile">
+    
+  </a>
+  <div class="functionHeader">
+    @staticmethod<br />
+    def
+    is_valid_profile(profile):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.plugins.common.AbstractWindowsCommand.html#is_valid_profile">volatility.plugins.common.AbstractWindowsCommand.is_valid_profile</a></div>
+    <div>This plugin is valid on XP and 2003<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.evtlogs.EvtLogs.load_user_sids">
+    
+  </a>
+  <a name="load_user_sids">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    load_user_sids(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Load the user SIDs from the registry<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.evtlogs.EvtLogs.get_sid_string">
+    
+  </a>
+  <a name="get_sid_string">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_sid_string(self, data):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Take a buffer of data from the event record
+and parse it as a SID.</p>
+<p>&#64;param data: buffer of data from SidOffset of the
+event record to SidOffset + SidLength.</p>
+<p>&#64;returns: sid string<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.evtlogs.EvtLogs.calculate">
+    
+  </a>
+  <a name="calculate">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    calculate(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.commands.Command.html#calculate">volatility.commands.Command.calculate</a></div>
+    <div>This function is responsible for performing all calculations</p>
+<p>We should not have any output functions (e.g. print) in this
+function at all.</p>
+<p>If this function is expected to take a long time to return
+some data, the function should return a generator.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.evtlogs.EvtLogs.remove_unprintable">
+    
+  </a>
+  <a name="remove_unprintable">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    remove_unprintable(self, str):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.evtlogs.EvtLogs.parse_evt_info">
+    
+  </a>
+  <a name="parse_evt_info">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    parse_evt_info(self, name, buf):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.evtlogs.EvtLogs.render_text">
+    
+  </a>
+  <a name="render_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    render_text(self, outfd, data):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for volatility, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-22 21:05:12.
+    </address>
+  </body>
+</html>

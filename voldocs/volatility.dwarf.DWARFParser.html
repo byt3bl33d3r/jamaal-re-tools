@@ -1,0 +1,301 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.dwarf.DWARFParser : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.d.DWARFParser(<span title="object">object</span>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.dwarf.html">dwarf</a></span>
+      
+      <a href="classIndex.html#volatility.dwarf.DWARFParser">View In Hierarchy</a>
+    </p>
+    <div>
+      
+    </div>
+    <div>A parser for DWARF files.<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id7">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.dwarf.DWARFParser.html#__init__">__init__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.dwarf.DWARFParser.html#resolve">resolve</a></td>
+    <td><span>Lookup anonymous member and replace it with a well known one.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.dwarf.DWARFParser.html#resolve_refs">resolve_refs</a></td>
+    <td><span>Replace references with types.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.dwarf.DWARFParser.html#deep_replace">deep_replace</a></td>
+    <td><span>Recursively replace anonymous references.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.dwarf.DWARFParser.html#get_deepest">get_deepest</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.dwarf.DWARFParser.html#base_type_name">base_type_name</a></td>
+    <td><span>Replace references to base types.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.dwarf.DWARFParser.html#feed_line">feed_line</a></td>
+    <td><span>Accepts another line from the input.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.dwarf.DWARFParser.html#process_statement">process_statement</a></td>
+    <td><span>Process a single parsed statement.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.dwarf.DWARFParser.html#process_variable">process_variable</a></td>
+    <td><span>Process a local variable.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.dwarf.DWARFParser.html#finalize">finalize</a></td>
+    <td><span>Finalize the output.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.dwarf.DWARFParser.html#print_output">print_output</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.dwarf.DWARFParser.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, data=None):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.dwarf.DWARFParser.resolve">
+    
+  </a>
+  <a name="resolve">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    resolve(self, memb):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Lookup anonymous member and replace it with a well known one.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.dwarf.DWARFParser.resolve_refs">
+    
+  </a>
+  <a name="resolve_refs">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    resolve_refs(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Replace references with types.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.dwarf.DWARFParser.deep_replace">
+    
+  </a>
+  <a name="deep_replace">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    deep_replace(self, t, search, repl):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Recursively replace anonymous references.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.dwarf.DWARFParser.get_deepest">
+    
+  </a>
+  <a name="get_deepest">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_deepest(self, t):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.dwarf.DWARFParser.base_type_name">
+    
+  </a>
+  <a name="base_type_name">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    base_type_name(self, data):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Replace references to base types.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.dwarf.DWARFParser.feed_line">
+    
+  </a>
+  <a name="feed_line">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    feed_line(self, line):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Accepts another line from the input.</p>
+<p>A DWARF line looks like:
+&lt;2&gt;&lt;1442&gt;&lt;DW_TAG_member&gt; DW_AT_name&lt;fs&gt;  ...</p>
+<p>The header is level, statement_id, and kind followed by key value pairs.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.dwarf.DWARFParser.process_statement">
+    
+  </a>
+  <a name="process_statement">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    process_statement(self, kind, level, data, statement_id):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Process a single parsed statement.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.dwarf.DWARFParser.process_variable">
+    
+  </a>
+  <a name="process_variable">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    process_variable(self, data):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Process a local variable.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.dwarf.DWARFParser.finalize">
+    
+  </a>
+  <a name="finalize">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    finalize(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Finalize the output.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.dwarf.DWARFParser.print_output">
+    
+  </a>
+  <a name="print_output">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    print_output(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for volatility, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-22 21:05:12.
+    </address>
+  </body>
+</html>

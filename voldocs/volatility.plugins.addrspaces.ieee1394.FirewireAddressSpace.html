@@ -1,0 +1,304 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.p.a.i.FirewireAddressSpace(<a href="volatility.addrspace.BaseAddressSpace.html">addrspace.BaseAddressSpace</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.plugins.html">plugins</a>.<a href="volatility.plugins.addrspaces.html">addrspaces</a>.<a href="volatility.plugins.addrspaces.ieee1394.html">ieee1394</a></span>
+      
+      <a href="classIndex.html#volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace">View In Hierarchy</a>
+    </p>
+    <div>
+      
+    </div>
+    <div>A physical layer address space that provides access via firewire<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1282">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.html#__init__">__init__</a></td>
+    <td><span>base is the AS we will be stacking on top of, opts are options which we may use.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.html#intervals">intervals</a></td>
+    <td><span>Returns a list of intervals, from start of length size, that do not include the exclusions</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.html#read">read</a></td>
+    <td><span>Reads a specified size in bytes from the current offset</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.html#zread">zread</a></td>
+    <td><span>Delegate padded reads to normal read, since errors reading the physical address should probably be reported back to the user</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.html#write">write</a></td>
+    <td><span>Writes a specified size in bytes</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.html#get_address_range">get_address_range</a></td>
+    <td><span>Returns the size of the address range</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.html#get_available_addresses">get_available_addresses</a></td>
+    <td><span>Returns a list of available addresses</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.html#_intervals">_intervals</a></td>
+    <td><span>Accepts a sorted list of intervals and a start and end</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.addrspace.BaseAddressSpace.html">BaseAddressSpace</a>:
+        </p>
+        <table class="children sortable" id="id1283">
+  
+  
+<tr class="basestaticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#register_options">register_options</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#get_config">get_config</a></td>
+    <td><span>Returns the config object used by the vm for use in other vms</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#is_valid_profile">is_valid_profile</a></td>
+    <td><span>Determines whether a selected profile is compatible with this address space</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#as_assert">as_assert</a></td>
+    <td><span>Duplicate for the assert command (so that optimizations don't disable them)</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__eq__">__eq__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__ne__">__ne__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#is_valid_address">is_valid_address</a></td>
+    <td><span>Tell us if the address is valid</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__getstate__">__getstate__</a></td>
+    <td><span>Serialise this address space efficiently</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__setstate__">__setstate__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#_set_profile">_set_profile</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, base, config, layered=False, **kargs):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#__init__">volatility.addrspace.BaseAddressSpace.__init__</a></div>
+    <div>base is the AS we will be stacking on top of, opts are
+options which we may use.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.intervals">
+    
+  </a>
+  <a name="intervals">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    intervals(self, start, size):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Returns a list of intervals, from start of length size, that do not include the exclusions<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace._intervals">
+    
+  </a>
+  <a name="_intervals">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    _intervals(self, exclusions, start, end, accumulator):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Accepts a sorted list of intervals and a start and end</p>
+<p>This will return a list of intervals between start and end
+that does not contain any of the intervals in the list of exclusions.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.read">
+    
+  </a>
+  <a name="read">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    read(self, offset, length):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#read">volatility.addrspace.BaseAddressSpace.read</a></div>
+    <div>Reads a specified size in bytes from the current offset</p>
+<p>Fills any excluded holes with zeros (so in that sense, similar to zread)<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.zread">
+    
+  </a>
+  <a name="zread">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    zread(self, offset, length):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#zread">volatility.addrspace.BaseAddressSpace.zread</a></div>
+    <div>Delegate padded reads to normal read, since errors reading
+the physical address should probably be reported back to the user<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.write">
+    
+  </a>
+  <a name="write">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    write(self, offset, data):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#write">volatility.addrspace.BaseAddressSpace.write</a></div>
+    <div>Writes a specified size in bytes<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.get_address_range">
+    
+  </a>
+  <a name="get_address_range">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_address_range(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Returns the size of the address range<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.get_available_addresses">
+    
+  </a>
+  <a name="get_available_addresses">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_available_addresses(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#get_available_addresses">volatility.addrspace.BaseAddressSpace.get_available_addresses</a></div>
+    <div>Returns a list of available addresses<table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for volatility, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-22 21:05:12.
+    </address>
+  </body>
+</html>

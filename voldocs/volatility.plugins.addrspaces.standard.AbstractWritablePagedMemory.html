@@ -1,0 +1,219 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.plugins.addrspaces.standard.AbstractWritablePagedMemory : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.p.a.s.AbstractWritablePagedMemory(<a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html">AbstractPagedMemory</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.plugins.html">plugins</a>.<a href="volatility.plugins.addrspaces.html">addrspaces</a>.<a href="volatility.plugins.addrspaces.standard.html">standard</a></span>
+      
+      <a href="classIndex.html#volatility.plugins.addrspaces.standard.AbstractWritablePagedMemory">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.legacyintel.IA32PagedMemory.html">volatility.plugins.addrspaces.legacyintel.IA32PagedMemory</a></p>
+    </div>
+    <div>Mixin class that can be used to add write functionality
+to any standard address space that supports write() and
+vtop().<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1247">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.standard.AbstractWritablePagedMemory.html#write">write</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.standard.AbstractWritablePagedMemory.html#write_long_phys">write_long_phys</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html">AbstractPagedMemory</a>:
+        </p>
+        <table class="children sortable" id="id1248">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html#vtop">vtop</a></td>
+    <td><span>Abstract function that converts virtual (paged) addresses to physical addresses</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html#get_available_pages">get_available_pages</a></td>
+    <td><span>A generator that returns (addr, size) for each of the virtual addresses present, sorted by offset</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html#get_available_addresses">get_available_addresses</a></td>
+    <td><span>A generator that returns (addr, size) for each valid address block</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html#is_valid_address">is_valid_address</a></td>
+    <td><span>Returns whether a virtual address is valid</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.addrspace.AbstractVirtualAddressSpace.html">AbstractVirtualAddressSpace</a> (via <a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html">AbstractPagedMemory</a>):
+        </p>
+        <table class="children sortable" id="id1249">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.AbstractVirtualAddressSpace.html#__init__">__init__</a></td>
+    <td><span>base is the AS we will be stacking on top of, opts are options which we may use.</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.addrspace.BaseAddressSpace.html">BaseAddressSpace</a> (via <a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html">AbstractPagedMemory</a>, <a href="volatility.addrspace.AbstractVirtualAddressSpace.html">AbstractVirtualAddressSpace</a>):
+        </p>
+        <table class="children sortable" id="id1250">
+  
+  
+<tr class="basestaticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#register_options">register_options</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#get_config">get_config</a></td>
+    <td><span>Returns the config object used by the vm for use in other vms</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#is_valid_profile">is_valid_profile</a></td>
+    <td><span>Determines whether a selected profile is compatible with this address space</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#as_assert">as_assert</a></td>
+    <td><span>Duplicate for the assert command (so that optimizations don't disable them)</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__eq__">__eq__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__ne__">__ne__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#read">read</a></td>
+    <td><span>Read some data from a certain offset</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#zread">zread</a></td>
+    <td><span>Read data from a certain offset padded with where data is not available</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__getstate__">__getstate__</a></td>
+    <td><span>Serialise this address space efficiently</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__setstate__">__setstate__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#_set_profile">_set_profile</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.plugins.addrspaces.standard.AbstractWritablePagedMemory.write">
+    
+  </a>
+  <a name="write">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    write(self, vaddr, buf):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#write">volatility.addrspace.BaseAddressSpace.write</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.standard.AbstractWritablePagedMemory.write_long_phys">
+    
+  </a>
+  <a name="write_long_phys">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    write_long_phys(self, addr, val):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for volatility, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-22 21:05:12.
+    </address>
+  </body>
+</html>

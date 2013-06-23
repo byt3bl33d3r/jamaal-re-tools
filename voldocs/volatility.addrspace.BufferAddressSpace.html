@@ -1,0 +1,273 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.addrspace.BufferAddressSpace : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.a.BufferAddressSpace(<a href="volatility.addrspace.BaseAddressSpace.html">BaseAddressSpace</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.addrspace.html">addrspace</a></span>
+      
+      <a href="classIndex.html#volatility.addrspace.BufferAddressSpace">View In Hierarchy</a>
+    </p>
+    <div>
+      
+    </div>
+    <div class="undocumented">Undocumented</div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1402">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BufferAddressSpace.html#__init__">__init__</a></td>
+    <td><span>base is the AS we will be stacking on top of, opts are options which we may use.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BufferAddressSpace.html#assign_buffer">assign_buffer</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BufferAddressSpace.html#is_valid_address">is_valid_address</a></td>
+    <td><span>Tell us if the address is valid</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BufferAddressSpace.html#read">read</a></td>
+    <td><span>Read some data from a certain offset</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BufferAddressSpace.html#zread">zread</a></td>
+    <td><span>Read data from a certain offset padded with where data is not available</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BufferAddressSpace.html#write">write</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BufferAddressSpace.html#get_available_addresses">get_available_addresses</a></td>
+    <td><span>Return a generator of address ranges as (offset, size) covered by this AS sorted by offset.</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.addrspace.BaseAddressSpace.html">BaseAddressSpace</a>:
+        </p>
+        <table class="children sortable" id="id1403">
+  
+  
+<tr class="basestaticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#register_options">register_options</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#get_config">get_config</a></td>
+    <td><span>Returns the config object used by the vm for use in other vms</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#is_valid_profile">is_valid_profile</a></td>
+    <td><span>Determines whether a selected profile is compatible with this address space</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#as_assert">as_assert</a></td>
+    <td><span>Duplicate for the assert command (so that optimizations don't disable them)</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__eq__">__eq__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__ne__">__ne__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__getstate__">__getstate__</a></td>
+    <td><span>Serialise this address space efficiently</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__setstate__">__setstate__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#_set_profile">_set_profile</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.addrspace.BufferAddressSpace.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, config, base_offset=0, data='', **kwargs):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#__init__">volatility.addrspace.BaseAddressSpace.__init__</a></div>
+    <div>base is the AS we will be stacking on top of, opts are
+options which we may use.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BufferAddressSpace.assign_buffer">
+    
+  </a>
+  <a name="assign_buffer">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    assign_buffer(self, data, base_offset=0):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BufferAddressSpace.is_valid_address">
+    
+  </a>
+  <a name="is_valid_address">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    is_valid_address(self, addr):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#is_valid_address">volatility.addrspace.BaseAddressSpace.is_valid_address</a></div>
+    <div>Tell us if the address is valid<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BufferAddressSpace.read">
+    
+  </a>
+  <a name="read">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    read(self, addr, length):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#read">volatility.addrspace.BaseAddressSpace.read</a></div>
+    <div>Read some data from a certain offset<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BufferAddressSpace.zread">
+    
+  </a>
+  <a name="zread">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    zread(self, addr, length):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#zread">volatility.addrspace.BaseAddressSpace.zread</a></div>
+    <div>Read data from a certain offset padded with where data is not available<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BufferAddressSpace.write">
+    
+  </a>
+  <a name="write">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    write(self, addr, data):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#write">volatility.addrspace.BaseAddressSpace.write</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BufferAddressSpace.get_available_addresses">
+    
+  </a>
+  <a name="get_available_addresses">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_available_addresses(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#get_available_addresses">volatility.addrspace.BaseAddressSpace.get_available_addresses</a></div>
+    <div>Return a generator of address ranges as (offset, size) covered by this AS sorted by offset.</p>
+<p>The address ranges produced must be disjoint (no overlaps) and not be continuous
+(there must be a gap between two ranges).<table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for volatility, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-22 21:05:12.
+    </address>
+  </body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.win32.hashdump : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="module">v.w.hashdump : module documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.win32.html">win32</a></span>
+      
+      
+    </p>
+    <div>
+      
+    </div>
+    <div>&#64;author:       Brendan Dolan-Gavitt
+&#64;license:      GNU General Public License 2.0 or later
+&#64;contact:      <a class="rst-reference external" href="mailto:bdolangavitt&#64;wesleyan.edu" target="_top">bdolangavitt&#64;wesleyan.edu</a><table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1383">
+  
+  
+<tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#str_to_key">str_to_key</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#sid_to_key">sid_to_key</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#hash_lm">hash_lm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#hash_nt">hash_nt</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#find_control_set">find_control_set</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#get_bootkey">get_bootkey</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#get_hbootkey">get_hbootkey</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#get_user_keys">get_user_keys</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#decrypt_single_hash">decrypt_single_hash</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#decrypt_hashes">decrypt_hashes</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#encrypt_single_hash">encrypt_single_hash</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#encrypt_hashes">encrypt_hashes</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#get_user_hashes">get_user_hashes</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#get_user_name">get_user_name</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#get_user_desc">get_user_desc</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#dump_hashes">dump_hashes</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#dump_memory_hashes">dump_memory_hashes</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.hashdump.html#dump_file_hashes">dump_file_hashes</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.win32.hashdump.str_to_key">
+    
+  </a>
+  <a name="str_to_key">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    str_to_key(s):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.sid_to_key">
+    
+  </a>
+  <a name="sid_to_key">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    sid_to_key(sid):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.hash_lm">
+    
+  </a>
+  <a name="hash_lm">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    hash_lm(pw):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.hash_nt">
+    
+  </a>
+  <a name="hash_nt">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    hash_nt(pw):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.find_control_set">
+    
+  </a>
+  <a name="find_control_set">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    find_control_set(sysaddr):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.get_bootkey">
+    
+  </a>
+  <a name="get_bootkey">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_bootkey(sysaddr):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.get_hbootkey">
+    
+  </a>
+  <a name="get_hbootkey">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_hbootkey(samaddr, bootkey):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.get_user_keys">
+    
+  </a>
+  <a name="get_user_keys">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_user_keys(samaddr):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.decrypt_single_hash">
+    
+  </a>
+  <a name="decrypt_single_hash">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    decrypt_single_hash(rid, hbootkey, enc_hash, lmntstr):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.decrypt_hashes">
+    
+  </a>
+  <a name="decrypt_hashes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    decrypt_hashes(rid, enc_lm_hash, enc_nt_hash, hbootkey):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.encrypt_single_hash">
+    
+  </a>
+  <a name="encrypt_single_hash">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    encrypt_single_hash(rid, hbootkey, hash, lmntstr):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.encrypt_hashes">
+    
+  </a>
+  <a name="encrypt_hashes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    encrypt_hashes(rid, lm_hash, nt_hash, hbootkey):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.get_user_hashes">
+    
+  </a>
+  <a name="get_user_hashes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_user_hashes(user_key, hbootkey):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.get_user_name">
+    
+  </a>
+  <a name="get_user_name">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_user_name(user_key):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.get_user_desc">
+    
+  </a>
+  <a name="get_user_desc">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_user_desc(user_key):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.dump_hashes">
+    
+  </a>
+  <a name="dump_hashes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    dump_hashes(sysaddr, samaddr):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.dump_memory_hashes">
+    
+  </a>
+  <a name="dump_memory_hashes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    dump_memory_hashes(addr_space, config, syshive, samhive):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.hashdump.dump_file_hashes">
+    
+  </a>
+  <a name="dump_file_hashes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    dump_file_hashes(syshive_fname, samhive_fname):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for volatility, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-22 21:05:12.
+    </address>
+  </body>
+</html>

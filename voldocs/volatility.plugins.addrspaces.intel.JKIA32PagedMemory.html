@@ -1,0 +1,707 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.plugins.addrspaces.intel.JKIA32PagedMemory : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.p.a.i.JKIA32PagedMemory(<a href="volatility.plugins.addrspaces.standard.AbstractWritablePagedMemory.html">standard.AbstractWritablePagedMemory</a>, <a href="volatility.addrspace.BaseAddressSpace.html">addrspace.BaseAddressSpace</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.plugins.html">plugins</a>.<a href="volatility.plugins.addrspaces.html">addrspaces</a>.<a href="volatility.plugins.addrspaces.intel.html">intel</a></span>
+      
+      <a href="classIndex.html#volatility.plugins.addrspaces.intel.JKIA32PagedMemory">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemoryPae.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemoryPae</a></p>
+    </div>
+    <div>Standard x86 32 bit non PAE address space.</p>
+<p>Provides an address space for IA32 paged memory, aka the x86
+architecture, without Physical Address Extensions (PAE). Allows
+callers to map virtual address to offsets in physical memory.</p>
+<p>Create a new IA32 address space without PAE to sit on top of
+the base address space and a Directory Table Base (CR3 value)
+of 'dtb'.</p>
+<p>If the 'cache' parameter is true, will cache the Page Directory Entries
+for extra performance. The cache option requires an additional 4KB of
+space.</p>
+<p>Comments in this class mostly come from the Intel(R) 64 and IA-32
+Architectures Software Developer's Manual Volume 3A: System Programming
+Guide, Part 1, revision 031, pages 4-8 to 4-15. This book is available
+for free at <a class="rst-reference external" href="http://www.intel.com/products/processor/manuals/index.htm" target="_top">http://www.intel.com/products/processor/manuals/index.htm</a>.
+Similar information is also available from Advanced Micro Devices (AMD)
+at <a class="rst-reference external" href="http://support.amd.com/us/Processor_TechDocs/24593.pdf" target="_top">http://support.amd.com/us/Processor_TechDocs/24593.pdf</a>.<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1230">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#__init__">__init__</a></td>
+    <td><span>base is the AS we will be stacking on top of, opts are options which we may use.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#is_valid_profile">is_valid_profile</a></td>
+    <td><span>Determines whether a selected profile is compatible with this address space</span></td>
+  </tr><tr class="staticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#register_options">register_options</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#__getstate__">__getstate__</a></td>
+    <td><span>Serialise this address space efficiently</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#load_dtb">load_dtb</a></td>
+    <td><span>Loads the DTB as quickly as possible from the config, then the base, then searching for it</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#entry_present">entry_present</a></td>
+    <td><span>Returns whether or not the 'P' (Present) flag is on in the given entry</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#page_size_flag">page_size_flag</a></td>
+    <td><span>Returns whether or not the 'PS' (Page Size) flag is on in the given entry</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#pde_index">pde_index</a></td>
+    <td><span>Returns the Page Directory Entry Index number from the given virtual address. The index number is in bits 31:22.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#get_pde">get_pde</a></td>
+    <td><span>Return the Page Directory Entry for the given virtual address. If caching</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#get_pte">get_pte</a></td>
+    <td><span>Return the Page Table Entry for the given virtual address and Page Directory Entry.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#get_phys_addr">get_phys_addr</a></td>
+    <td><span>Return the offset in a 4KB memory page from the given virtual address and Page Table Entry.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#get_four_meg_paddr">get_four_meg_paddr</a></td>
+    <td><span>Bits 31:22 are bits 31:22 of the PDE Bits 21:0 are from the original linear address</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#vtop">vtop</a></td>
+    <td><span>Translates virtual addresses into physical offsets. The function should return either None (no valid mapping) or the offset in physical memory where the address maps.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#read">read</a></td>
+    <td><span>Read and return 'length' bytes from the virtual address 'vaddr'. If any part of that block is unavailable, return None.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#zread">zread</a></td>
+    <td><span>Read and return 'length' bytes from the virtual address 'vaddr'. If any part of that block is unavailable, pad it with zeros.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#read_long_phys">read_long_phys</a></td>
+    <td><span>Returns an unsigned 32-bit integer from the address addr in physical memory. If unable to read from that location, returns None.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#get_available_pages">get_available_pages</a></td>
+    <td><span>Return a list of lists of available memory pages. Each entry in the list is the starting virtual address and the size of the memory page.</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#_cache_values">_cache_values</a></td>
+    <td><span>We cache the Page Directory Entries to avoid having to look them up later. There is a 0x1000 byte memory page holding the four byte PDE. 0x1000 / 4 = 0x400 entries</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#__read_chunk">__read_chunk</a></td>
+    <td><span>Read 'length' bytes from the virtual address 'vaddr'. If vaddr does not have a valid mapping, return None.</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html#__read_bytes">__read_bytes</a></td>
+    <td><span>Read 'length' bytes from the virtual address 'vaddr'. The 'pad' parameter controls whether unavailable bytes are padded with zeros.</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.plugins.addrspaces.standard.AbstractWritablePagedMemory.html">AbstractWritablePagedMemory</a>:
+        </p>
+        <table class="children sortable" id="id1231">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.standard.AbstractWritablePagedMemory.html#write">write</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.standard.AbstractWritablePagedMemory.html#write_long_phys">write_long_phys</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html">AbstractPagedMemory</a> (via <a href="volatility.plugins.addrspaces.standard.AbstractWritablePagedMemory.html">AbstractWritablePagedMemory</a>):
+        </p>
+        <table class="children sortable" id="id1232">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html#get_available_addresses">get_available_addresses</a></td>
+    <td><span>A generator that returns (addr, size) for each valid address block</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html#is_valid_address">is_valid_address</a></td>
+    <td><span>Returns whether a virtual address is valid</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.addrspace.BaseAddressSpace.html">BaseAddressSpace</a> (via <a href="volatility.plugins.addrspaces.standard.AbstractWritablePagedMemory.html">AbstractWritablePagedMemory</a>, <a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html">AbstractPagedMemory</a>, <a href="volatility.addrspace.AbstractVirtualAddressSpace.html">AbstractVirtualAddressSpace</a>):
+        </p>
+        <table class="children sortable" id="id1233">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#get_config">get_config</a></td>
+    <td><span>Returns the config object used by the vm for use in other vms</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#as_assert">as_assert</a></td>
+    <td><span>Duplicate for the assert command (so that optimizations don't disable them)</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__eq__">__eq__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__ne__">__ne__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__setstate__">__setstate__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#_set_profile">_set_profile</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.addrspace.BaseAddressSpace.html">BaseAddressSpace</a>:
+        </p>
+        <table class="children sortable" id="id1234">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#get_config">get_config</a></td>
+    <td><span>Returns the config object used by the vm for use in other vms</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#as_assert">as_assert</a></td>
+    <td><span>Duplicate for the assert command (so that optimizations don't disable them)</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__eq__">__eq__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__ne__">__ne__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#get_available_addresses">get_available_addresses</a></td>
+    <td><span>Return a generator of address ranges as (offset, size) covered by this AS sorted by offset.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#is_valid_address">is_valid_address</a></td>
+    <td><span>Tell us if the address is valid</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#write">write</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__setstate__">__setstate__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#_set_profile">_set_profile</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, base, config, *args, dtb=0, **kwargs):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.AbstractVirtualAddressSpace.html#__init__">volatility.addrspace.AbstractVirtualAddressSpace.__init__</a></div>
+    <div>base is the AS we will be stacking on top of, opts are
+options which we may use.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.is_valid_profile">
+    
+  </a>
+  <a name="is_valid_profile">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    is_valid_profile(self, profile):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#is_valid_profile">volatility.addrspace.BaseAddressSpace.is_valid_profile</a></div><div class="interfaceinfo">overridden in <a href="volatility.plugins.addrspaces.amd64.AMD64PagedMemory.html">volatility.plugins.addrspaces.amd64.AMD64PagedMemory</a></div>
+    <div>Determines whether a selected profile is compatible with this address space<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.register_options">
+    
+  </a>
+  <a name="register_options">
+    
+  </a>
+  <div class="functionHeader">
+    @staticmethod<br />
+    def
+    register_options(config):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#register_options">volatility.addrspace.BaseAddressSpace.register_options</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.__getstate__">
+    
+  </a>
+  <a name="__getstate__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __getstate__(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#__getstate__">volatility.addrspace.BaseAddressSpace.__getstate__</a></div>
+    <div>Serialise this address space efficiently<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory._cache_values">
+    
+  </a>
+  <a name="_cache_values">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    _cache_values(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemoryPae.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemoryPae</a></div>
+    <div>We cache the Page Directory Entries to avoid having to
+look them up later. There is a 0x1000 byte memory page
+holding the four byte PDE. 0x1000 / 4 = 0x400 entries<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.load_dtb">
+    
+  </a>
+  <a name="load_dtb">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    load_dtb(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Loads the DTB as quickly as possible from the config, then the base, then searching for it<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.entry_present">
+    
+  </a>
+  <a name="entry_present">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    entry_present(self, entry):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Returns whether or not the 'P' (Present) flag is on
+in the given entry<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.page_size_flag">
+    
+  </a>
+  <a name="page_size_flag">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    page_size_flag(self, entry):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Returns whether or not the 'PS' (Page Size) flag is on
+in the given entry<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.pde_index">
+    
+  </a>
+  <a name="pde_index">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    pde_index(self, vaddr):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Returns the Page Directory Entry Index number from the given
+virtual address. The index number is in bits 31:22.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.get_pde">
+    
+  </a>
+  <a name="get_pde">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_pde(self, vaddr):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemoryPae.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemoryPae</a></div>
+    <div>Return the Page Directory Entry for the given virtual address.
+If caching</p>
+<p>Bits 31:12 are from CR3
+Bits 11:2 are bits 31:22 of the linear address
+Bits 1:0 are 0.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.get_pte">
+    
+  </a>
+  <a name="get_pte">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_pte(self, vaddr, pde_value):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemoryPae.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemoryPae</a></div>
+    <div>Return the Page Table Entry for the given virtual address and
+Page Directory Entry.</p>
+<p>Bits 31:12 are from the PDE
+Bits 11:2 are bits 21:12 of the linear address
+Bits 1:0 are 0<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.get_phys_addr">
+    
+  </a>
+  <a name="get_phys_addr">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_phys_addr(self, vaddr, pte_value):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemoryPae.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemoryPae</a></div>
+    <div>Return the offset in a 4KB memory page from the given virtual
+address and Page Table Entry.</p>
+<p>Bits 31:12 are from the PTE
+Bits 11:0 are from the original linear address<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.get_four_meg_paddr">
+    
+  </a>
+  <a name="get_four_meg_paddr">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_four_meg_paddr(self, vaddr, pde_value):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Bits 31:22 are bits 31:22 of the PDE
+Bits 21:0 are from the original linear address<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.vtop">
+    
+  </a>
+  <a name="vtop">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    vtop(self, vaddr):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html#vtop">volatility.plugins.addrspaces.standard.AbstractPagedMemory.vtop</a></div><div class="interfaceinfo">overridden in <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemoryPae.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemoryPae</a></div>
+    <div>Translates virtual addresses into physical offsets.
+The function should return either None (no valid mapping)
+or the offset in physical memory where the address maps.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.__read_chunk">
+    
+  </a>
+  <a name="__read_chunk">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __read_chunk(self, vaddr, length):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Read 'length' bytes from the virtual address 'vaddr'.
+If vaddr does not have a valid mapping, return None.</p>
+<p>This function should not be called from outside this class
+as it doesn't take page breaks into account. That is,
+the bytes at virtual addresses 0x1fff and 0x2000 are not
+guarenteed to be contigious. Calling functions are responsible
+for determining contiguious blocks.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.__read_bytes">
+    
+  </a>
+  <a name="__read_bytes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __read_bytes(self, vaddr, length, pad):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Read 'length' bytes from the virtual address 'vaddr'.
+The 'pad' parameter controls whether unavailable bytes
+are padded with zeros.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.read">
+    
+  </a>
+  <a name="read">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    read(self, vaddr, length):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#read">volatility.addrspace.BaseAddressSpace.read</a></div>
+    <div>Read and return 'length' bytes from the virtual address 'vaddr'.
+If any part of that block is unavailable, return None.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.zread">
+    
+  </a>
+  <a name="zread">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    zread(self, vaddr, length):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.addrspace.BaseAddressSpace.html#zread">volatility.addrspace.BaseAddressSpace.zread</a></div>
+    <div>Read and return 'length' bytes from the virtual address 'vaddr'.
+If any part of that block is unavailable, pad it with zeros.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.read_long_phys">
+    
+  </a>
+  <a name="read_long_phys">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    read_long_phys(self, addr):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Returns an unsigned 32-bit integer from the address addr in
+physical memory. If unable to read from that location, returns None.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.get_available_pages">
+    
+  </a>
+  <a name="get_available_pages">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_available_pages(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html#get_available_pages">volatility.plugins.addrspaces.standard.AbstractPagedMemory.get_available_pages</a></div><div class="interfaceinfo">overridden in <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemoryPae.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemoryPae</a></div>
+    <div>Return a list of lists of available memory pages.
+Each entry in the list is the starting virtual address
+and the size of the memory page.<table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for volatility, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-22 21:05:12.
+    </address>
+  </body>
+</html>

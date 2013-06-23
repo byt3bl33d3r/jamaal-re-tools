@@ -1,0 +1,289 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace64 : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.p.a.c.WindowsCrashDumpSpace64(<a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html">WindowsCrashDumpSpace32</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.plugins.html">plugins</a>.<a href="volatility.plugins.addrspaces.html">addrspaces</a>.<a href="volatility.plugins.addrspaces.crash.html">crash</a></span>
+      
+      <a href="classIndex.html#volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace64">View In Hierarchy</a>
+    </p>
+    <div>
+      
+    </div>
+    <div>This AS supports windows Crash Dump format<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1263">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace64.html#__init__">__init__</a></td>
+    <td><span>base is the AS we will be stacking on top of, opts are options which we may use.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace64.html#convert_to_raw">convert_to_raw</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace64.html#get_addr">get_addr</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html">WindowsCrashDumpSpace32</a>:
+        </p>
+        <table class="children sortable" id="id1264">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#get_header">get_header</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#get_base">get_base</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#is_valid_address">is_valid_address</a></td>
+    <td><span>Tell us if the address is valid</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#read">read</a></td>
+    <td><span>Read some data from a certain offset</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#write">write</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#zread">zread</a></td>
+    <td><span>Read data from a certain offset padded with where data is not available</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#read_long">read_long</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#get_available_pages">get_available_pages</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#get_number_of_pages">get_number_of_pages</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#get_address_range">get_address_range</a></td>
+    <td><span>This relates to the logical address range that is indexable</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#get_available_addresses">get_available_addresses</a></td>
+    <td><span>This returns the ranges  of valid addresses</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#get_runs">get_runs</a></td>
+    <td><span>This returns the crashdump runs</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#check_address_range">check_address_range</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#close">close</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.plugins.addrspaces.standard.FileAddressSpace.html">FileAddressSpace</a> (via <a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html">WindowsCrashDumpSpace32</a>):
+        </p>
+        <table class="children sortable" id="id1265">
+  
+  
+<tr class="basestaticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.plugins.addrspaces.standard.FileAddressSpace.html#register_options">register_options</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.standard.FileAddressSpace.html#fread">fread</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.addrspaces.standard.FileAddressSpace.html#__eq__">__eq__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.addrspace.BaseAddressSpace.html">BaseAddressSpace</a> (via <a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html">WindowsCrashDumpSpace32</a>, <a href="volatility.plugins.addrspaces.standard.FileAddressSpace.html">FileAddressSpace</a>):
+        </p>
+        <table class="children sortable" id="id1266">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#get_config">get_config</a></td>
+    <td><span>Returns the config object used by the vm for use in other vms</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#is_valid_profile">is_valid_profile</a></td>
+    <td><span>Determines whether a selected profile is compatible with this address space</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#as_assert">as_assert</a></td>
+    <td><span>Duplicate for the assert command (so that optimizations don't disable them)</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__ne__">__ne__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__getstate__">__getstate__</a></td>
+    <td><span>Serialise this address space efficiently</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__setstate__">__setstate__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#_set_profile">_set_profile</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace64.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, base, config, **kwargs):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#__init__">volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.__init__</a></div>
+    <div>base is the AS we will be stacking on top of, opts are
+options which we may use.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace64.convert_to_raw">
+    
+  </a>
+  <a name="convert_to_raw">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    convert_to_raw(self, ofile):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#convert_to_raw">volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.convert_to_raw</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace64.get_addr">
+    
+  </a>
+  <a name="get_addr">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_addr(self, addr):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.html#get_addr">volatility.plugins.addrspaces.crash.WindowsCrashDumpSpace32.get_addr</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for volatility, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-22 21:05:12.
+    </address>
+  </body>
+</html>

@@ -1,0 +1,558 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.obj.Profile : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.o.Profile(<span title="object">object</span>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.obj.html">obj</a></span>
+      
+      <a href="classIndex.html#volatility.obj.Profile">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="volatility.plugins.overlays.windows.vista.VistaSP0x64.html">volatility.plugins.overlays.windows.vista.VistaSP0x64</a>, <a href="volatility.plugins.overlays.windows.vista.VistaSP0x86.html">volatility.plugins.overlays.windows.vista.VistaSP0x86</a>, <a href="volatility.plugins.overlays.windows.vista.VistaSP1x64.html">volatility.plugins.overlays.windows.vista.VistaSP1x64</a>, <a href="volatility.plugins.overlays.windows.vista.VistaSP1x86.html">volatility.plugins.overlays.windows.vista.VistaSP1x86</a>, <a href="volatility.plugins.overlays.windows.vista.VistaSP2x64.html">volatility.plugins.overlays.windows.vista.VistaSP2x64</a>, <a href="volatility.plugins.overlays.windows.vista.VistaSP2x86.html">volatility.plugins.overlays.windows.vista.VistaSP2x86</a>, <a href="volatility.plugins.overlays.windows.win2003.Win2003SP0x86.html">volatility.plugins.overlays.windows.win2003.Win2003SP0x86</a>, <a href="volatility.plugins.overlays.windows.win2003.Win2003SP1x64.html">volatility.plugins.overlays.windows.win2003.Win2003SP1x64</a>, <a href="volatility.plugins.overlays.windows.win2003.Win2003SP1x86.html">volatility.plugins.overlays.windows.win2003.Win2003SP1x86</a>, <a href="volatility.plugins.overlays.windows.win2003.Win2003SP2x64.html">volatility.plugins.overlays.windows.win2003.Win2003SP2x64</a>, <a href="volatility.plugins.overlays.windows.win2003.Win2003SP2x86.html">volatility.plugins.overlays.windows.win2003.Win2003SP2x86</a>, <a href="volatility.plugins.overlays.windows.win7.Win7SP0x64.html">volatility.plugins.overlays.windows.win7.Win7SP0x64</a>, <a href="volatility.plugins.overlays.windows.win7.Win7SP0x86.html">volatility.plugins.overlays.windows.win7.Win7SP0x86</a>, <a href="volatility.plugins.overlays.windows.win7.Win7SP1x64.html">volatility.plugins.overlays.windows.win7.Win7SP1x64</a>, <a href="volatility.plugins.overlays.windows.win7.Win7SP1x86.html">volatility.plugins.overlays.windows.win7.Win7SP1x86</a>, <a href="volatility.plugins.overlays.windows.xp.WinXPSP2x86.html">volatility.plugins.overlays.windows.xp.WinXPSP2x86</a>, <a href="volatility.plugins.overlays.windows.xp.WinXPSP3x86.html">volatility.plugins.overlays.windows.xp.WinXPSP3x86</a></p>
+    </div>
+    <div class="undocumented">No class docstring</div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1426">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#__init__">__init__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#applied_modifications">applied_modifications</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#clear">clear</a></td>
+    <td><span>Clears out the input vtypes and object_classes, and only the base object types</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#reset">reset</a></td>
+    <td><span>Resets the profile's vtypes to those automatically loaded</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#load_vtypes">load_vtypes</a></td>
+    <td><span>Identifies the module from which to load the vtypes</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#load_modifications">load_modifications</a></td>
+    <td><span>Find all subclasses of the modification type and applies them</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#compile">compile</a></td>
+    <td><span>Compiles the vtypes, overlays, object_classes, etc into a types dictionary</span></td>
+  </tr><tr class="classmethod">
+    
+    
+    <td>Class Method</td>
+    <td><a href="volatility.obj.Profile.html#metadata">metadata</a></td>
+    <td><span>Returns a read-only dictionary copy of the metadata associated with a profile</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#has_type">has_type</a></td>
+    <td><span>Returns a simple check of whether the type is in the profile</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#get_obj_offset">get_obj_offset</a></td>
+    <td><span>Returns a members offset within the struct</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#get_obj_size">get_obj_size</a></td>
+    <td><span>Returns the size of a struct</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#obj_has_member">obj_has_member</a></td>
+    <td><span>Returns whether an object has a certain member</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#merge_overlay">merge_overlay</a></td>
+    <td><span>Applies an overlay to the profile's vtypes</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#add_types">add_types</a></td>
+    <td><span>Add in a deprecated function that mimics the previous add_types function</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#apply_overlay">apply_overlay</a></td>
+    <td><span>Calls the old apply_overlay function with a deprecation warning</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#_get_subclasses">_get_subclasses</a></td>
+    <td><span>Returns a list of all subclasses</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#_get_dummy_obj">_get_dummy_obj</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#_apply_overlay">_apply_overlay</a></td>
+    <td><span>Update the overlay with the missing information from type.</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#_resolve_mod_dependencies">_resolve_mod_dependencies</a></td>
+    <td><span>Resolves the modification dependencies, providing an ordered list of all modifications whose only dependencies are in earlier lists</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#_list_to_type">_list_to_type</a></td>
+    <td><span>Parses a specification list and returns a VType object.</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#_convert_members">_convert_members</a></td>
+    <td><span>Convert the structure named by cname from the c description present in vtypes into a list of members that can be used for later parsing.</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.obj.Profile.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, strict=False):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile.applied_modifications">
+    
+  </a>
+  <a name="applied_modifications">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    def
+    applied_modifications(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile.clear">
+    
+  </a>
+  <a name="clear">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    clear(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Clears out the input vtypes and object_classes, and only the base object types<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile.reset">
+    
+  </a>
+  <a name="reset">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    reset(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Resets the profile's vtypes to those automatically loaded<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile.load_vtypes">
+    
+  </a>
+  <a name="load_vtypes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    load_vtypes(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Identifies the module from which to load the vtypes</p>
+<p>Eventually this could do the importing directly, and avoid having
+the profiles loaded in memory all at once.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile.load_modifications">
+    
+  </a>
+  <a name="load_modifications">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    load_modifications(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Find all subclasses of the modification type and applies them</p>
+<p>Each modification object can specify the metadata with which it can work
+Allowing the overlay to decide which profile it should act on<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile.compile">
+    
+  </a>
+  <a name="compile">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    compile(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Compiles the vtypes, overlays, object_classes, etc into a types dictionary</p>
+<p>We populate as we go, so that _list_to_type can refer to existing classes
+rather than Curry everything.  If the compile fails, the profile will be
+left in a bad/unusable state<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile.metadata">
+    
+  </a>
+  <a name="metadata">
+    
+  </a>
+  <div class="functionHeader">
+    @classproperty<br />@classmethod<br />
+    def
+    metadata(cls):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Returns a read-only dictionary copy of the metadata associated with a profile<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile._get_subclasses">
+    
+  </a>
+  <a name="_get_subclasses">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    _get_subclasses(self, cls):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Returns a list of all subclasses<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile._get_dummy_obj">
+    
+  </a>
+  <a name="_get_dummy_obj">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    _get_dummy_obj(self, name):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Returns a dummy object/profile for use in determining size
+and offset of substructures.  This is done since profile are
+effectively a compiled language, so reading the value from
+self.vtypes may not be accurate.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile.has_type">
+    
+  </a>
+  <a name="has_type">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    has_type(self, theType):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Returns a simple check of whether the type is in the profile<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile.get_obj_offset">
+    
+  </a>
+  <a name="get_obj_offset">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_obj_offset(self, name, member):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Returns a members offset within the struct<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile.get_obj_size">
+    
+  </a>
+  <a name="get_obj_size">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_obj_size(self, name):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Returns the size of a struct<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile.obj_has_member">
+    
+  </a>
+  <a name="obj_has_member">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    obj_has_member(self, name, member):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Returns whether an object has a certain member<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile.merge_overlay">
+    
+  </a>
+  <a name="merge_overlay">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    merge_overlay(self, overlay):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Applies an overlay to the profile's vtypes<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile.add_types">
+    
+  </a>
+  <a name="add_types">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    add_types(self, vtypes, overlay=None):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Add in a deprecated function that mimics the previous add_types function<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile.apply_overlay">
+    
+  </a>
+  <a name="apply_overlay">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    apply_overlay(self, *args, **kwargs):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Calls the old apply_overlay function with a deprecation warning<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile._apply_overlay">
+    
+  </a>
+  <a name="_apply_overlay">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    _apply_overlay(self, type_member, overlay):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Update the overlay with the missing information from type.</p>
+<p>Basically if overlay has None in any slot it gets applied from vtype.</p>
+<p>We make extensive use of copy.deepcopy to ensure we don't modify the
+original variables.  Some of the calls may not be necessary (specifically
+the return of type_member and overlay) but this saves us the concern that
+things will get changed later and have a difficult-to-track down knock-on
+effect.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile._resolve_mod_dependencies">
+    
+  </a>
+  <a name="_resolve_mod_dependencies">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    _resolve_mod_dependencies(self, mods):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Resolves the modification dependencies, providing an ordered list
+of all modifications whose only dependencies are in earlier lists<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile._list_to_type">
+    
+  </a>
+  <a name="_list_to_type">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    _list_to_type(self, name, typeList, typeDict=None):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Parses a specification list and returns a VType object.</p>
+<p>This function is a bit complex because we support lots of
+different list types for backwards compatibility.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.Profile._convert_members">
+    
+  </a>
+  <a name="_convert_members">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    _convert_members(self, cname):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Convert the structure named by cname from the c description
+present in vtypes into a list of members that can be used
+for later parsing.</p>
+<p>cname is the name of the struct.</p>
+<p>We expect the vtypes value to be a list of the following format</p>
+<p>[ Size of struct, members_dict ]</p>
+<p>members_dict is a dict of all members (fields) in this
+struct. The key is the member name, and the value is a list of
+this form:</p>
+<p>[ offset_from_start_of_struct, specification_list ]</p>
+<p>The specification list has the form specified by self._list_to_type() above.</p>
+<p>We return an object that is a CType or has been overridden by object_classes.<table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for volatility, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-22 21:05:12.
+    </address>
+  </body>
+</html>

@@ -1,0 +1,208 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.win32.domcachedump : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="module">v.w.domcachedump : module documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.win32.html">win32</a></span>
+      
+      
+    </p>
+    <div>
+      
+    </div>
+    <div>&#64;author:       Brendan Dolan-Gavitt
+&#64;license:      GNU General Public License 2.0 or later
+&#64;contact:      <a class="rst-reference external" href="mailto:bdolangavitt&#64;wesleyan.edu" target="_top">bdolangavitt&#64;wesleyan.edu</a><table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1384">
+  
+  
+<tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.domcachedump.html#get_nlkm">get_nlkm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.domcachedump.html#decrypt_hash">decrypt_hash</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.domcachedump.html#parse_cache_entry">parse_cache_entry</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.domcachedump.html#parse_decrypted_cache">parse_decrypted_cache</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.domcachedump.html#dump_hashes">dump_hashes</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.domcachedump.html#dump_memory_hashes">dump_memory_hashes</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="function">
+    
+    
+    <td>Function</td>
+    <td><a href="volatility.win32.domcachedump.html#dump_file_hashes">dump_file_hashes</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.win32.domcachedump.get_nlkm">
+    
+  </a>
+  <a name="get_nlkm">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_nlkm(secaddr, lsakey):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.domcachedump.decrypt_hash">
+    
+  </a>
+  <a name="decrypt_hash">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    decrypt_hash(edata, nlkm, ch):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.domcachedump.parse_cache_entry">
+    
+  </a>
+  <a name="parse_cache_entry">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    parse_cache_entry(cache_data):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.domcachedump.parse_decrypted_cache">
+    
+  </a>
+  <a name="parse_decrypted_cache">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    parse_decrypted_cache(dec_data, uname_len, domain_len, domain_name_len):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.domcachedump.dump_hashes">
+    
+  </a>
+  <a name="dump_hashes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    dump_hashes(sysaddr, secaddr):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.domcachedump.dump_memory_hashes">
+    
+  </a>
+  <a name="dump_memory_hashes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    dump_memory_hashes(addr_space, config, syshive, sechive):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.win32.domcachedump.dump_file_hashes">
+    
+  </a>
+  <a name="dump_file_hashes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    dump_file_hashes(syshive_fname, sechive_fname):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for volatility, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-22 21:05:12.
+    </address>
+  </body>
+</html>

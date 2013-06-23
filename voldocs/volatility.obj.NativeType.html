@@ -1,0 +1,383 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.obj.NativeType : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.o.NativeType(<a href="volatility.obj.BaseObject.html">BaseObject</a>, <a href="volatility.obj.NumericProxyMixIn.html">NumericProxyMixIn</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.obj.html">obj</a></span>
+      
+      <a href="classIndex.html#volatility.obj.NativeType">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="volatility.obj.BitField.html">volatility.obj.BitField</a>, <a href="volatility.obj.Pointer.html">volatility.obj.Pointer</a>, <a href="volatility.obj.Void.html">volatility.obj.Void</a>, <a href="volatility.plugins.overlays.basic.Enumeration.html">volatility.plugins.overlays.basic.Enumeration</a>, <a href="volatility.plugins.overlays.basic.Flags.html">volatility.plugins.overlays.basic.Flags</a>, <a href="volatility.plugins.overlays.basic.IpAddress.html">volatility.plugins.overlays.basic.IpAddress</a>, <a href="volatility.plugins.overlays.basic.Ipv6Address.html">volatility.plugins.overlays.basic.Ipv6Address</a>, <a href="volatility.plugins.overlays.windows.windows.WinTimeStamp.html">volatility.plugins.overlays.windows.windows.WinTimeStamp</a></p>
+    </div>
+    <div class="undocumented">No class docstring</div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1409">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.NativeType.html#__init__">__init__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.NativeType.html#write">write</a></td>
+    <td><span>Writes the data back into the address space</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.NativeType.html#proxied">proxied</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.NativeType.html#size">size</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.NativeType.html#v">v</a></td>
+    <td><span>Do the actual reading and decoding of this member</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.NativeType.html#cdecl">cdecl</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.NativeType.html#__repr__">__repr__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.NativeType.html#d">d</a></td>
+    <td><span>Display diagnostic information</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.obj.BaseObject.html">BaseObject</a>:
+        </p>
+        <table class="children sortable" id="id1410">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_type">obj_type</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_vm">obj_vm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_offset">obj_offset</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_parent">obj_parent</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_name">obj_name</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_native_vm">obj_native_vm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#set_native_vm">set_native_vm</a></td>
+    <td><span>Sets the native_vm</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#rebase">rebase</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#newattr">newattr</a></td>
+    <td><span>Sets a new attribute after the object has been created</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__getattr__">__getattr__</a></td>
+    <td><span>This is only useful for proper methods (not ones that start with __ )</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__setattr__">__setattr__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__nonzero__">__nonzero__</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__eq__">__eq__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__ne__">__ne__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__hash__">__hash__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#m">m</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#is_valid">is_valid</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#dereference">dereference</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#dereference_as">dereference_as</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#cast">cast</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__format__">__format__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__str__">__str__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__getstate__">__getstate__</a></td>
+    <td><span>This controls how we pickle and unpickle the objects</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__setstate__">__setstate__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.obj.NativeType.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, theType, offset, vm, format_string=None, **kwargs):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#__init__">volatility.obj.BaseObject.__init__</a></div><div class="interfaceinfo">overridden in <a href="volatility.obj.BitField.html">volatility.obj.BitField</a>, <a href="volatility.obj.Pointer.html">volatility.obj.Pointer</a>, <a href="volatility.obj.Void.html">volatility.obj.Void</a>, <a href="volatility.plugins.overlays.basic.Enumeration.html">volatility.plugins.overlays.basic.Enumeration</a>, <a href="volatility.plugins.overlays.basic.Flags.html">volatility.plugins.overlays.basic.Flags</a>, <a href="volatility.plugins.overlays.basic.IpAddress.html">volatility.plugins.overlays.basic.IpAddress</a>, <a href="volatility.plugins.overlays.basic.Ipv6Address.html">volatility.plugins.overlays.basic.Ipv6Address</a>, <a href="volatility.plugins.overlays.windows.windows.WinTimeStamp.html">volatility.plugins.overlays.windows.windows.WinTimeStamp</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.NativeType.write">
+    
+  </a>
+  <a name="write">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    write(self, data):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#write">volatility.obj.BaseObject.write</a></div><div class="interfaceinfo">overridden in <a href="volatility.obj.BitField.html">volatility.obj.BitField</a></div>
+    <div>Writes the data back into the address space<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.NativeType.proxied">
+    
+  </a>
+  <a name="proxied">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    proxied(self, attr):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#proxied">volatility.obj.BaseObject.proxied</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.NativeType.size">
+    
+  </a>
+  <a name="size">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    size(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.NativeType.v">
+    
+  </a>
+  <a name="v">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    v(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#v">volatility.obj.BaseObject.v</a></div><div class="interfaceinfo">overridden in <a href="volatility.obj.BitField.html">volatility.obj.BitField</a>, <a href="volatility.obj.Pointer.html">volatility.obj.Pointer</a>, <a href="volatility.plugins.overlays.basic.Enumeration.html">volatility.plugins.overlays.basic.Enumeration</a>, <a href="volatility.plugins.overlays.basic.Flags.html">volatility.plugins.overlays.basic.Flags</a>, <a href="volatility.plugins.overlays.basic.IpAddress.html">volatility.plugins.overlays.basic.IpAddress</a>, <a href="volatility.plugins.overlays.basic.Ipv6Address.html">volatility.plugins.overlays.basic.Ipv6Address</a>, <a href="volatility.plugins.overlays.windows.windows.WinTimeStamp.html">volatility.plugins.overlays.windows.windows.WinTimeStamp</a></div>
+    <div>Do the actual reading and decoding of this member<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.NativeType.cdecl">
+    
+  </a>
+  <a name="cdecl">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    cdecl(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.obj.Pointer.html">volatility.obj.Pointer</a>, <a href="volatility.obj.Void.html">volatility.obj.Void</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.NativeType.__repr__">
+    
+  </a>
+  <a name="__repr__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __repr__(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#__repr__">volatility.obj.BaseObject.__repr__</a></div><div class="interfaceinfo">overridden in <a href="volatility.obj.Pointer.html">volatility.obj.Pointer</a>, <a href="volatility.obj.Void.html">volatility.obj.Void</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.NativeType.d">
+    
+  </a>
+  <a name="d">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    d(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#d">volatility.obj.BaseObject.d</a></div><div class="interfaceinfo">overridden in <a href="volatility.obj.Pointer.html">volatility.obj.Pointer</a>, <a href="volatility.obj.Void.html">volatility.obj.Void</a></div>
+    <div>Display diagnostic information<table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for volatility, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-22 21:05:12.
+    </address>
+  </body>
+</html>

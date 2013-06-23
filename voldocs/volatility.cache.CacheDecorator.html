@@ -1,0 +1,183 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.cache.CacheDecorator : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.c.CacheDecorator(<span title="object">object</span>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.cache.html">cache</a></span>
+      
+      <a href="classIndex.html#volatility.cache.CacheDecorator">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="volatility.cache.TestDecorator.html">volatility.cache.TestDecorator</a></p>
+    </div>
+    <div>This decorator will memoise a function in the cache<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1393">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.cache.CacheDecorator.html#__init__">__init__</a></td>
+    <td><span>Wraps a function in a cache decorator.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.cache.CacheDecorator.html#generate">generate</a></td>
+    <td><span>Special handling for generators. We pass each iteration back immediately, and keep it in a list. Note that if the generator is aborted, the cache is not dumped.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.cache.CacheDecorator.html#dump">dump</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.cache.CacheDecorator.html#__call__">__call__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.cache.CacheDecorator.html#_cachewrapper">_cachewrapper</a></td>
+    <td><span>Wrapper for caching function calls</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.cache.CacheDecorator.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, path):
+    
+  </div>
+  <div class="functionBody">
+    
+    <pre>Wraps a function in a cache decorator.
+
+The results of the function will be cached and memoised. Further
+calls to the function will retrieve the result from the
+cache. Cached objects are stored with the specified path as a
+key.
+
+Args:
+   path: Key for storage into the cache. If this is callable,
+   it will be called with the function's args and is expected
+   to return a string which will be used as a path.
+
+Returns:
+   A decorator.
+
+Example: Suppose the calculate function is decorated:
+
+@CacheDecorator(lambda self: "tests/pslist/pid{0}/".format(self._config.PID))
+def calculate(self):
+   ....
+
+Note the use of the callback to finely tune the cache key depending on external variables.</pre>
+  </div>
+</div><div class="function">
+  <a name="volatility.cache.CacheDecorator.generate">
+    
+  </a>
+  <a name="generate">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    generate(self, path, g):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Special handling for generators. We pass each iteration
+back immediately, and keep it in a list. Note that if the
+generator is aborted, the cache is not dumped.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.cache.CacheDecorator.dump">
+    
+  </a>
+  <a name="dump">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    dump(self, path, payload):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.cache.CacheDecorator._cachewrapper">
+    
+  </a>
+  <a name="_cachewrapper">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    _cachewrapper(self, f, s, *args, **kwargs):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Wrapper for caching function calls<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.cache.CacheDecorator.__call__">
+    
+  </a>
+  <a name="__call__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __call__(self, f):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.cache.TestDecorator.html">volatility.cache.TestDecorator</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for volatility, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-22 21:05:12.
+    </address>
+  </body>
+</html>
