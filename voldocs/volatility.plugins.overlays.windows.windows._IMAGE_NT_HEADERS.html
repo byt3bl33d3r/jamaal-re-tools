@@ -1,0 +1,274 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.plugins.overlays.windows.windows._IMAGE_NT_HEADERS : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class private">v.p.o.w.w._IMAGE_NT_HEADERS(<a href="volatility.obj.CType.html">obj.CType</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.plugins.html">plugins</a>.<a href="volatility.plugins.overlays.html">overlays</a>.<a href="volatility.plugins.overlays.windows.html">windows</a>.<a href="volatility.plugins.overlays.windows.windows.html">windows</a></span>
+      
+      <a href="classIndex.html#volatility.plugins.overlays.windows.windows._IMAGE_NT_HEADERS">View In Hierarchy</a>
+    </p>
+    <div>
+      
+    </div>
+    <div>PE header<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id691">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.windows._IMAGE_NT_HEADERS.html#get_sections">get_sections</a></td>
+    <td><span>Get the PE sections</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.obj.CType.html">CType</a>:
+        </p>
+        <table class="children sortable" id="id692">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__init__">__init__</a></td>
+    <td><span>This must be instantiated with a dict of members. The keys are the offsets, the values are Curried Object classes that will be instantiated when accessed.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#size">size</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__repr__">__repr__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#d">d</a></td>
+    <td><span>Display diagnostic information</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#v">v</a></td>
+    <td><span>When a struct is evaluated we just return our offset.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#m">m</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__getattr__">__getattr__</a></td>
+    <td><span>This is only useful for proper methods (not ones that start with __ )</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__setattr__">__setattr__</a></td>
+    <td><span>Change underlying members</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.obj.BaseObject.html">BaseObject</a> (via <a href="volatility.obj.CType.html">CType</a>):
+        </p>
+        <table class="children sortable" id="id693">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_type">obj_type</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_vm">obj_vm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_offset">obj_offset</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_parent">obj_parent</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_name">obj_name</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_native_vm">obj_native_vm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#set_native_vm">set_native_vm</a></td>
+    <td><span>Sets the native_vm</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#rebase">rebase</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#proxied">proxied</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#newattr">newattr</a></td>
+    <td><span>Sets a new attribute after the object has been created</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#write">write</a></td>
+    <td><span>Function for writing the object back to disk</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__nonzero__">__nonzero__</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__eq__">__eq__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__ne__">__ne__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__hash__">__hash__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#is_valid">is_valid</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#dereference">dereference</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#dereference_as">dereference_as</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#cast">cast</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__format__">__format__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__str__">__str__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__getstate__">__getstate__</a></td>
+    <td><span>This controls how we pickle and unpickle the objects</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__setstate__">__setstate__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.plugins.overlays.windows.windows._IMAGE_NT_HEADERS.get_sections">
+    
+  </a>
+  <a name="get_sections">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_sections(self, unsafe):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Get the PE sections<table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for Volatility 2.2, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-24 15:16:10.
+    </address>
+  </body>
+</html>

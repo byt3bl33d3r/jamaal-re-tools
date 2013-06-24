@@ -1,0 +1,502 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.plugins.linux.find_file.linux_find_file : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.p.l.f.linux_find_file(<a href="volatility.plugins.linux.common.AbstractLinuxCommand.html">linux_common.AbstractLinuxCommand</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.plugins.html">plugins</a>.<a href="volatility.plugins.linux.html">linux</a>.<a href="volatility.plugins.linux.find_file.html">find_file</a></span>
+      
+      <a href="classIndex.html#volatility.plugins.linux.find_file.linux_find_file">View In Hierarchy</a>
+    </p>
+    <div>
+      
+    </div>
+    <div>Recovers tmpfs filesystems from memory<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1019">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.find_file.linux_find_file.html#__init__">__init__</a></td>
+    <td><span>Constructor uses args as an initializer. It creates an instance of OptionParser, populates the options, and finally parses the command line. Options are stored in the self.opts attribute.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.find_file.linux_find_file.html#walk_sb">walk_sb</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.find_file.linux_find_file.html#get_sbs">get_sbs</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.find_file.linux_find_file.html#walk_sbs">walk_sbs</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.find_file.linux_find_file.html#calculate">calculate</a></td>
+    <td><span>This function is responsible for performing all calculations</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.find_file.linux_find_file.html#render_text">render_text</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.find_file.linux_find_file.html#radix_tree_is_indirect_ptr">radix_tree_is_indirect_ptr</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.find_file.linux_find_file.html#radix_tree_indirect_to_ptr">radix_tree_indirect_to_ptr</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.find_file.linux_find_file.html#radix_tree_lookup_slot">radix_tree_lookup_slot</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.find_file.linux_find_file.html#SHMEM_I">SHMEM_I</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.find_file.linux_find_file.html#find_get_page">find_get_page</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.find_file.linux_find_file.html#get_page_contents">get_page_contents</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.find_file.linux_find_file.html#get_file_contents">get_file_contents</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.plugins.linux.common.AbstractLinuxCommand.html">AbstractLinuxCommand</a>:
+        </p>
+        <table class="children sortable" id="id1020">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#profile">profile</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#execute">execute</a></td>
+    <td><span>Executes the plugin command.</span></td>
+  </tr><tr class="basestaticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#is_valid_profile">is_valid_profile</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#get_profile_symbol">get_profile_symbol</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#get_per_cpu_symbol">get_per_cpu_symbol</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#get_task_start_time">get_task_start_time</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#online_cpus">online_cpus</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#walk_per_cpu_var">walk_per_cpu_var</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#ACTHZ">ACTHZ</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#SH_DIV">SH_DIV</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#TICK_NSEC">TICK_NSEC</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#get_time_vars">get_time_vars</a></td>
+    <td><span>Sometime in 3.[3-5], Linux switched to a global timekeeper structure This just figures out which is in use and returns the correct variables</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#get_boot_time">get_boot_time</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#is_known_address">is_known_address</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#verify_ops">verify_ops</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.commands.Command.html">Command</a> (via <a href="volatility.plugins.linux.common.AbstractLinuxCommand.html">AbstractLinuxCommand</a>):
+        </p>
+        <table class="children sortable" id="id1021">
+  
+  
+<tr class="basestaticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.commands.Command.html#register_options">register_options</a></td>
+    <td><span>Registers options into a config object provided</span></td>
+  </tr><tr class="baseclassmethod">
+    
+    
+    <td>Class Method</td>
+    <td><a href="volatility.commands.Command.html#help">help</a></td>
+    <td><span>This function returns a string that will be displayed when a user lists available plugins.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#format_value">format_value</a></td>
+    <td><span>Formats an individual field using the table formatting codes</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#table_header">table_header</a></td>
+    <td><span>Table header renders the title row of a table</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#table_row">table_row</a></td>
+    <td><span>Outputs a single row of a table</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#_formatlookup">_formatlookup</a></td>
+    <td><span>Code to turn profile specific values into format specifications</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#_elide">_elide</a></td>
+    <td><span>Adds three dots in the middle of a string if it is longer than length</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.plugins.linux.find_file.linux_find_file.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, config, *args):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.plugins.linux.common.AbstractLinuxCommand.html#__init__">volatility.plugins.linux.common.AbstractLinuxCommand.__init__</a></div>
+    <div>Constructor uses args as an initializer. It creates an instance
+of OptionParser, populates the options, and finally parses the
+command line. Options are stored in the self.opts attribute.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.linux.find_file.linux_find_file.walk_sb">
+    
+  </a>
+  <a name="walk_sb">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    walk_sb(self, dentry, find_file, last_dentry, recursive=0, parent=''):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.linux.find_file.linux_find_file.get_sbs">
+    
+  </a>
+  <a name="get_sbs">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_sbs(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.linux.find_file.linux_find_file.walk_sbs">
+    
+  </a>
+  <a name="walk_sbs">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    walk_sbs(self, find_file):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.linux.find_file.linux_find_file.calculate">
+    
+  </a>
+  <a name="calculate">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    calculate(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.commands.Command.html#calculate">volatility.commands.Command.calculate</a></div>
+    <div>This function is responsible for performing all calculations</p>
+<p>We should not have any output functions (e.g. print) in this
+function at all.</p>
+<p>If this function is expected to take a long time to return
+some data, the function should return a generator.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.linux.find_file.linux_find_file.render_text">
+    
+  </a>
+  <a name="render_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    render_text(self, outfd, data):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.linux.find_file.linux_find_file.radix_tree_is_indirect_ptr">
+    
+  </a>
+  <a name="radix_tree_is_indirect_ptr">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    radix_tree_is_indirect_ptr(self, ptr):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.linux.find_file.linux_find_file.radix_tree_indirect_to_ptr">
+    
+  </a>
+  <a name="radix_tree_indirect_to_ptr">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    radix_tree_indirect_to_ptr(self, ptr):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.linux.find_file.linux_find_file.radix_tree_lookup_slot">
+    
+  </a>
+  <a name="radix_tree_lookup_slot">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    radix_tree_lookup_slot(self, root, index):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.linux.find_file.linux_find_file.SHMEM_I">
+    
+  </a>
+  <a name="SHMEM_I">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    SHMEM_I(self, inode):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.linux.find_file.linux_find_file.find_get_page">
+    
+  </a>
+  <a name="find_get_page">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    find_get_page(self, inode, offset):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.linux.find_file.linux_find_file.get_page_contents">
+    
+  </a>
+  <a name="get_page_contents">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_page_contents(self, inode, idx):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.linux.find_file.linux_find_file.get_file_contents">
+    
+  </a>
+  <a name="get_file_contents">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_file_contents(self, inode):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for Volatility 2.2, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-24 15:16:10.
+    </address>
+  </body>
+</html>

@@ -1,0 +1,197 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.plugins.gui.windowstations.WndScan : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.p.g.w.WndScan(<a href="volatility.plugins.filescan.FileScan.html">filescan.FileScan</a>, <a href="volatility.plugins.gui.sessions.SessionsMixin.html">sessions.SessionsMixin</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.plugins.html">plugins</a>.<a href="volatility.plugins.gui.html">gui</a>.<a href="volatility.plugins.gui.windowstations.html">windowstations</a></span>
+      
+      <a href="classIndex.html#volatility.plugins.gui.windowstations.WndScan">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="volatility.plugins.gui.desktops.DeskScan.html">volatility.plugins.gui.desktops.DeskScan</a>, <a href="volatility.plugins.gui.screenshot.Screenshot.html">volatility.plugins.gui.screenshot.Screenshot</a></p>
+    </div>
+    <div>Pool scanner for tagWINDOWSTATION (window stations)<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id353">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.windowstations.WndScan.html#calculate">calculate</a></td>
+    <td><span>This function is responsible for performing all calculations</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.windowstations.WndScan.html#render_text">render_text</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.plugins.common.AbstractWindowsCommand.html">AbstractWindowsCommand</a> (via <a href="volatility.plugins.filescan.FileScan.html">FileScan</a>):
+        </p>
+        <table class="children sortable" id="id354">
+  
+  
+<tr class="basestaticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.plugins.common.AbstractWindowsCommand.html#is_valid_profile">is_valid_profile</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.commands.Command.html">Command</a> (via <a href="volatility.plugins.filescan.FileScan.html">FileScan</a>, <a href="volatility.plugins.common.AbstractWindowsCommand.html">AbstractWindowsCommand</a>):
+        </p>
+        <table class="children sortable" id="id355">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#__init__">__init__</a></td>
+    <td><span>Constructor uses args as an initializer. It creates an instance of OptionParser, populates the options, and finally parses the command line. Options are stored in the self.opts attribute.</span></td>
+  </tr><tr class="basestaticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.commands.Command.html#register_options">register_options</a></td>
+    <td><span>Registers options into a config object provided</span></td>
+  </tr><tr class="baseclassmethod">
+    
+    
+    <td>Class Method</td>
+    <td><a href="volatility.commands.Command.html#help">help</a></td>
+    <td><span>This function returns a string that will be displayed when a user lists available plugins.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#execute">execute</a></td>
+    <td><span>Executes the plugin command.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#format_value">format_value</a></td>
+    <td><span>Formats an individual field using the table formatting codes</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#table_header">table_header</a></td>
+    <td><span>Table header renders the title row of a table</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#table_row">table_row</a></td>
+    <td><span>Outputs a single row of a table</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#_formatlookup">_formatlookup</a></td>
+    <td><span>Code to turn profile specific values into format specifications</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#_elide">_elide</a></td>
+    <td><span>Adds three dots in the middle of a string if it is longer than length</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.plugins.gui.sessions.SessionsMixin.html">SessionsMixin</a>:
+        </p>
+        <table class="children sortable" id="id356">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.sessions.SessionsMixin.html#session_spaces">session_spaces</a></td>
+    <td><span>Generators unique _MM_SESSION_SPACE objects referenced by active processes.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.sessions.SessionsMixin.html#find_session_space">find_session_space</a></td>
+    <td><span>Get a session address space by its ID.</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.plugins.gui.windowstations.WndScan.calculate">
+    
+  </a>
+  <a name="calculate">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    calculate(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.plugins.filescan.FileScan.html#calculate">volatility.plugins.filescan.FileScan.calculate</a></div>
+    <div>This function is responsible for performing all calculations</p>
+<p>We should not have any output functions (e.g. print) in this
+function at all.</p>
+<p>If this function is expected to take a long time to return
+some data, the function should return a generator.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.gui.windowstations.WndScan.render_text">
+    
+  </a>
+  <a name="render_text">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    render_text(self, outfd, data):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.plugins.filescan.FileScan.html#render_text">volatility.plugins.filescan.FileScan.render_text</a></div><div class="interfaceinfo">overridden in <a href="volatility.plugins.gui.desktops.DeskScan.html">volatility.plugins.gui.desktops.DeskScan</a>, <a href="volatility.plugins.gui.screenshot.Screenshot.html">volatility.plugins.gui.screenshot.Screenshot</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for Volatility 2.2, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-24 15:16:10.
+    </address>
+  </body>
+</html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.plugins.overlays.windows.windows.WinTimeStamp : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.p.o.w.w.WinTimeStamp(<a href="volatility.obj.NativeType.html">obj.NativeType</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.plugins.html">plugins</a>.<a href="volatility.plugins.overlays.html">overlays</a>.<a href="volatility.plugins.overlays.windows.html">windows</a>.<a href="volatility.plugins.overlays.windows.windows.html">windows</a></span>
+      
+      <a href="classIndex.html#volatility.plugins.overlays.windows.windows.WinTimeStamp">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="volatility.plugins.overlays.windows.windows.ThreadCreateTimeStamp.html">volatility.plugins.overlays.windows.windows.ThreadCreateTimeStamp</a></p>
+    </div>
+    <div>Class for handling Windows Time Stamps<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id639">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.windows.WinTimeStamp.html#__init__">__init__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.windows.WinTimeStamp.html#windows_to_unix_time">windows_to_unix_time</a></td>
+    <td><span>Converts Windows 64-bit time to UNIX time</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.windows.WinTimeStamp.html#as_windows_timestamp">as_windows_timestamp</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.windows.WinTimeStamp.html#v">v</a></td>
+    <td><span>Do the actual reading and decoding of this member</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.windows.WinTimeStamp.html#__nonzero__">__nonzero__</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.windows.WinTimeStamp.html#__str__">__str__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.windows.WinTimeStamp.html#as_datetime">as_datetime</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.windows.WinTimeStamp.html#__format__">__format__</a></td>
+    <td><span>Formats the datetime according to the timefmt module</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.obj.NativeType.html">NativeType</a>:
+        </p>
+        <table class="children sortable" id="id640">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.NativeType.html#write">write</a></td>
+    <td><span>Writes the data back into the address space</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.NativeType.html#proxied">proxied</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.NativeType.html#size">size</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.NativeType.html#cdecl">cdecl</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.NativeType.html#__repr__">__repr__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.NativeType.html#d">d</a></td>
+    <td><span>Display diagnostic information</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.obj.BaseObject.html">BaseObject</a> (via <a href="volatility.obj.NativeType.html">NativeType</a>):
+        </p>
+        <table class="children sortable" id="id641">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_type">obj_type</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_vm">obj_vm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_offset">obj_offset</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_parent">obj_parent</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_name">obj_name</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_native_vm">obj_native_vm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#set_native_vm">set_native_vm</a></td>
+    <td><span>Sets the native_vm</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#rebase">rebase</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#newattr">newattr</a></td>
+    <td><span>Sets a new attribute after the object has been created</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__getattr__">__getattr__</a></td>
+    <td><span>This is only useful for proper methods (not ones that start with __ )</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__setattr__">__setattr__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__eq__">__eq__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__ne__">__ne__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__hash__">__hash__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#m">m</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#is_valid">is_valid</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#dereference">dereference</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#dereference_as">dereference_as</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#cast">cast</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__getstate__">__getstate__</a></td>
+    <td><span>This controls how we pickle and unpickle the objects</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__setstate__">__setstate__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.plugins.overlays.windows.windows.WinTimeStamp.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, theType, offset, vm, is_utc=False, **kwargs):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.NativeType.html#__init__">volatility.obj.NativeType.__init__</a></div><div class="interfaceinfo">overridden in <a href="volatility.plugins.overlays.windows.windows.ThreadCreateTimeStamp.html">volatility.plugins.overlays.windows.windows.ThreadCreateTimeStamp</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.overlays.windows.windows.WinTimeStamp.windows_to_unix_time">
+    
+  </a>
+  <a name="windows_to_unix_time">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    windows_to_unix_time(self, windows_time):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Converts Windows 64-bit time to UNIX time</p>
+<p>&#64;type  windows_time:  Integer
+&#64;param windows_time:  Windows time to convert (64-bit number)</p>
+<p>&#64;rtype  Integer
+&#64;return  UNIX time<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.overlays.windows.windows.WinTimeStamp.as_windows_timestamp">
+    
+  </a>
+  <a name="as_windows_timestamp">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    as_windows_timestamp(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.overlays.windows.windows.ThreadCreateTimeStamp.html">volatility.plugins.overlays.windows.windows.ThreadCreateTimeStamp</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.overlays.windows.windows.WinTimeStamp.v">
+    
+  </a>
+  <a name="v">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    v(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.NativeType.html#v">volatility.obj.NativeType.v</a></div>
+    <div>Do the actual reading and decoding of this member<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.overlays.windows.windows.WinTimeStamp.__nonzero__">
+    
+  </a>
+  <a name="__nonzero__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __nonzero__(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#__nonzero__">volatility.obj.BaseObject.__nonzero__</a></div>
+    <pre>This method is called when we test the truth value of an
+Object. In volatility we consider an object to have True truth
+value only when its a valid object. Its possible for example
+to have a Pointer object which is not valid - this will have a
+truth value of False.
+
+You should be testing for validity like this:
+if X:
+   # object is valid
+
+Do not test for validity like this:
+
+if int(X) == 0:
+
+or if X is None: .....
+
+the later form is not going to work when X is a NoneObject. </pre>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.overlays.windows.windows.WinTimeStamp.__str__">
+    
+  </a>
+  <a name="__str__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __str__(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#__str__">volatility.obj.BaseObject.__str__</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.overlays.windows.windows.WinTimeStamp.as_datetime">
+    
+  </a>
+  <a name="as_datetime">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    as_datetime(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.overlays.windows.windows.WinTimeStamp.__format__">
+    
+  </a>
+  <a name="__format__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __format__(self, formatspec):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#__format__">volatility.obj.BaseObject.__format__</a></div>
+    <div>Formats the datetime according to the timefmt module<table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for Volatility 2.2, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-24 15:16:10.
+    </address>
+  </body>
+</html>

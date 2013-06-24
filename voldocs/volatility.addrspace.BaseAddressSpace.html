@@ -1,0 +1,394 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.addrspace.BaseAddressSpace : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.a.BaseAddressSpace(<span title="object">object</span>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.addrspace.html">addrspace</a></span>
+      
+      <a href="classIndex.html#volatility.addrspace.BaseAddressSpace">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="volatility.addrspace.AbstractVirtualAddressSpace.html">volatility.addrspace.AbstractVirtualAddressSpace</a>, <a href="volatility.addrspace.BufferAddressSpace.html">volatility.addrspace.BufferAddressSpace</a>, <a href="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.html">volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace</a>, <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.legacyintel.IA32PagedMemory.html">volatility.plugins.addrspaces.legacyintel.IA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.lime.LimeAddressSpace.html">volatility.plugins.addrspaces.lime.LimeAddressSpace</a>, <a href="volatility.plugins.addrspaces.standard.FileAddressSpace.html">volatility.plugins.addrspaces.standard.FileAddressSpace</a>, <a href="volatility.win32.hive.HiveAddressSpace.html">volatility.win32.hive.HiveAddressSpace</a>, <a href="volatility.win32.hive.HiveFileAddressSpace.html">volatility.win32.hive.HiveFileAddressSpace</a></p>
+    </div>
+    <div>This is the base class of all Address Spaces.<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1399">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__init__">__init__</a></td>
+    <td><span>base is the AS we will be stacking on top of, opts are options which we may use.</span></td>
+  </tr><tr class="staticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#register_options">register_options</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#get_config">get_config</a></td>
+    <td><span>Returns the config object used by the vm for use in other vms</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#is_valid_profile">is_valid_profile</a></td>
+    <td><span>Determines whether a selected profile is compatible with this address space</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#as_assert">as_assert</a></td>
+    <td><span>Duplicate for the assert command (so that optimizations don't disable them)</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__eq__">__eq__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__ne__">__ne__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#read">read</a></td>
+    <td><span>Read some data from a certain offset</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#zread">zread</a></td>
+    <td><span>Read data from a certain offset padded with where data is not available</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#get_available_addresses">get_available_addresses</a></td>
+    <td><span>Return a generator of address ranges as (offset, size) covered by this AS sorted by offset.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#is_valid_address">is_valid_address</a></td>
+    <td><span>Tell us if the address is valid</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#write">write</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__getstate__">__getstate__</a></td>
+    <td><span>Serialise this address space efficiently</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#__setstate__">__setstate__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.addrspace.BaseAddressSpace.html#_set_profile">_set_profile</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.addrspace.BaseAddressSpace.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, base, config, *_args, **_kwargs):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.addrspace.AbstractVirtualAddressSpace.html">volatility.addrspace.AbstractVirtualAddressSpace</a>, <a href="volatility.addrspace.BufferAddressSpace.html">volatility.addrspace.BufferAddressSpace</a>, <a href="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.html">volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace</a>, <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.legacyintel.IA32PagedMemory.html">volatility.plugins.addrspaces.legacyintel.IA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.lime.LimeAddressSpace.html">volatility.plugins.addrspaces.lime.LimeAddressSpace</a>, <a href="volatility.plugins.addrspaces.standard.FileAddressSpace.html">volatility.plugins.addrspaces.standard.FileAddressSpace</a>, <a href="volatility.win32.hive.HiveAddressSpace.html">volatility.win32.hive.HiveAddressSpace</a>, <a href="volatility.win32.hive.HiveFileAddressSpace.html">volatility.win32.hive.HiveFileAddressSpace</a></div>
+    <div>base is the AS we will be stacking on top of, opts are
+options which we may use.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BaseAddressSpace.register_options">
+    
+  </a>
+  <a name="register_options">
+    
+  </a>
+  <div class="functionHeader">
+    @staticmethod<br />
+    def
+    register_options(config):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.legacyintel.IA32PagedMemory.html">volatility.plugins.addrspaces.legacyintel.IA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.legacyintel.IA32PagedMemory.html">volatility.plugins.addrspaces.legacyintel.IA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.standard.FileAddressSpace.html">volatility.plugins.addrspaces.standard.FileAddressSpace</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BaseAddressSpace.get_config">
+    
+  </a>
+  <a name="get_config">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_config(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Returns the config object used by the vm for use in other vms<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BaseAddressSpace._set_profile">
+    
+  </a>
+  <a name="_set_profile">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    _set_profile(self, profile_name):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BaseAddressSpace.is_valid_profile">
+    
+  </a>
+  <a name="is_valid_profile">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    is_valid_profile(self, profile):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.legacyintel.IA32PagedMemory.html">volatility.plugins.addrspaces.legacyintel.IA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.legacyintel.IA32PagedMemory.html">volatility.plugins.addrspaces.legacyintel.IA32PagedMemory</a></div>
+    <div>Determines whether a selected profile is compatible with this address space<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BaseAddressSpace.as_assert">
+    
+  </a>
+  <a name="as_assert">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    as_assert(self, assertion, error=None):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Duplicate for the assert command (so that optimizations don't disable them)</p>
+<p>It had to be called as_assert, since assert is a keyword<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BaseAddressSpace.__eq__">
+    
+  </a>
+  <a name="__eq__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __eq__(self, other):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.addrspaces.standard.FileAddressSpace.html">volatility.plugins.addrspaces.standard.FileAddressSpace</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BaseAddressSpace.__ne__">
+    
+  </a>
+  <a name="__ne__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __ne__(self, other):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BaseAddressSpace.read">
+    
+  </a>
+  <a name="read">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    read(self, addr, length):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.addrspace.BufferAddressSpace.html">volatility.addrspace.BufferAddressSpace</a>, <a href="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.html">volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace</a>, <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.legacyintel.IA32PagedMemory.html">volatility.plugins.addrspaces.legacyintel.IA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.legacyintel.IA32PagedMemory.html">volatility.plugins.addrspaces.legacyintel.IA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.lime.LimeAddressSpace.html">volatility.plugins.addrspaces.lime.LimeAddressSpace</a>, <a href="volatility.plugins.addrspaces.standard.FileAddressSpace.html">volatility.plugins.addrspaces.standard.FileAddressSpace</a>, <a href="volatility.win32.hive.HiveAddressSpace.html">volatility.win32.hive.HiveAddressSpace</a>, <a href="volatility.win32.hive.HiveFileAddressSpace.html">volatility.win32.hive.HiveFileAddressSpace</a></div>
+    <div>Read some data from a certain offset<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BaseAddressSpace.zread">
+    
+  </a>
+  <a name="zread">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    zread(self, addr, length):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.addrspace.BufferAddressSpace.html">volatility.addrspace.BufferAddressSpace</a>, <a href="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.html">volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace</a>, <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.legacyintel.IA32PagedMemory.html">volatility.plugins.addrspaces.legacyintel.IA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.legacyintel.IA32PagedMemory.html">volatility.plugins.addrspaces.legacyintel.IA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.lime.LimeAddressSpace.html">volatility.plugins.addrspaces.lime.LimeAddressSpace</a>, <a href="volatility.plugins.addrspaces.standard.FileAddressSpace.html">volatility.plugins.addrspaces.standard.FileAddressSpace</a>, <a href="volatility.win32.hive.HiveAddressSpace.html">volatility.win32.hive.HiveAddressSpace</a>, <a href="volatility.win32.hive.HiveFileAddressSpace.html">volatility.win32.hive.HiveFileAddressSpace</a></div>
+    <div>Read data from a certain offset padded with where data is not available<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BaseAddressSpace.get_available_addresses">
+    
+  </a>
+  <a name="get_available_addresses">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    get_available_addresses(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.addrspace.BufferAddressSpace.html">volatility.addrspace.BufferAddressSpace</a>, <a href="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.html">volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace</a>, <a href="volatility.plugins.addrspaces.lime.LimeAddressSpace.html">volatility.plugins.addrspaces.lime.LimeAddressSpace</a>, <a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html">volatility.plugins.addrspaces.standard.AbstractPagedMemory</a>, <a href="volatility.plugins.addrspaces.standard.FileAddressSpace.html">volatility.plugins.addrspaces.standard.FileAddressSpace</a></div>
+    <div>Return a generator of address ranges as (offset, size) covered by this AS sorted by offset.</p>
+<p>The address ranges produced must be disjoint (no overlaps) and not be continuous
+(there must be a gap between two ranges).<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BaseAddressSpace.is_valid_address">
+    
+  </a>
+  <a name="is_valid_address">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    is_valid_address(self, _addr):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.addrspace.BufferAddressSpace.html">volatility.addrspace.BufferAddressSpace</a>, <a href="volatility.plugins.addrspaces.lime.LimeAddressSpace.html">volatility.plugins.addrspaces.lime.LimeAddressSpace</a>, <a href="volatility.plugins.addrspaces.standard.AbstractPagedMemory.html">volatility.plugins.addrspaces.standard.AbstractPagedMemory</a>, <a href="volatility.plugins.addrspaces.standard.FileAddressSpace.html">volatility.plugins.addrspaces.standard.FileAddressSpace</a>, <a href="volatility.win32.hive.HiveAddressSpace.html">volatility.win32.hive.HiveAddressSpace</a>, <a href="volatility.win32.hive.HiveFileAddressSpace.html">volatility.win32.hive.HiveFileAddressSpace</a></div>
+    <div>Tell us if the address is valid<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BaseAddressSpace.write">
+    
+  </a>
+  <a name="write">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    write(self, _addr, _buf):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.addrspace.BufferAddressSpace.html">volatility.addrspace.BufferAddressSpace</a>, <a href="volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace.html">volatility.plugins.addrspaces.ieee1394.FirewireAddressSpace</a>, <a href="volatility.plugins.addrspaces.standard.AbstractWritablePagedMemory.html">volatility.plugins.addrspaces.standard.AbstractWritablePagedMemory</a>, <a href="volatility.plugins.addrspaces.standard.FileAddressSpace.html">volatility.plugins.addrspaces.standard.FileAddressSpace</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BaseAddressSpace.__getstate__">
+    
+  </a>
+  <a name="__getstate__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __getstate__(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemory</a>, <a href="volatility.plugins.addrspaces.intel.JKIA32PagedMemory.html">volatility.plugins.addrspaces.intel.JKIA32PagedMemory</a>, <a href="volatility.win32.hive.HiveAddressSpace.html">volatility.win32.hive.HiveAddressSpace</a></div>
+    <div>Serialise this address space efficiently<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.addrspace.BaseAddressSpace.__setstate__">
+    
+  </a>
+  <a name="__setstate__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __setstate__(self, state):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for Volatility 2.2, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-24 15:16:10.
+    </address>
+  </body>
+</html>

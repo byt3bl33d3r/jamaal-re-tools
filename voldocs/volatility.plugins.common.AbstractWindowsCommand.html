@@ -1,0 +1,138 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.plugins.common.AbstractWindowsCommand : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.p.c.AbstractWindowsCommand(<a href="volatility.commands.Command.html">commands.Command</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.plugins.html">plugins</a>.<a href="volatility.plugins.common.html">common</a></span>
+      
+      <a href="classIndex.html#volatility.plugins.common.AbstractWindowsCommand">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="volatility.plugins.bioskbd.BiosKbd.html">volatility.plugins.bioskbd.BiosKbd</a>, <a href="volatility.plugins.connections.Connections.html">volatility.plugins.connections.Connections</a>, <a href="volatility.plugins.connscan.ConnScan.html">volatility.plugins.connscan.ConnScan</a>, <a href="volatility.plugins.crashinfo.CrashInfo.html">volatility.plugins.crashinfo.CrashInfo</a>, <a href="volatility.plugins.evtlogs.EvtLogs.html">volatility.plugins.evtlogs.EvtLogs</a>, <a href="volatility.plugins.filescan.FileScan.html">volatility.plugins.filescan.FileScan</a>, <a href="volatility.plugins.filescan.PSScan.html">volatility.plugins.filescan.PSScan</a>, <a href="volatility.plugins.getservicesids.GetServiceSids.html">volatility.plugins.getservicesids.GetServiceSids</a>, <a href="volatility.plugins.gui.atoms.Atoms.html">volatility.plugins.gui.atoms.Atoms</a>, <a href="volatility.plugins.gui.atoms.AtomScan.html">volatility.plugins.gui.atoms.AtomScan</a>, <a href="volatility.plugins.gui.clipboard.Clipboard.html">volatility.plugins.gui.clipboard.Clipboard</a>, <a href="volatility.plugins.gui.gditimers.GDITimers.html">volatility.plugins.gui.gditimers.GDITimers</a>, <a href="volatility.plugins.gui.sessions.Sessions.html">volatility.plugins.gui.sessions.Sessions</a>, <a href="volatility.plugins.hibinfo.HibInfo.html">volatility.plugins.hibinfo.HibInfo</a>, <a href="volatility.plugins.imagecopy.ImageCopy.html">volatility.plugins.imagecopy.ImageCopy</a>, <a href="volatility.plugins.kdbgscan.KDBGScan.html">volatility.plugins.kdbgscan.KDBGScan</a>, <a href="volatility.plugins.kpcrscan.KPCRScan.html">volatility.plugins.kpcrscan.KPCRScan</a>, <a href="volatility.plugins.malware.callbacks.Callbacks.html">volatility.plugins.malware.callbacks.Callbacks</a>, <a href="volatility.plugins.malware.cmdhistory.CmdScan.html">volatility.plugins.malware.cmdhistory.CmdScan</a>, <a href="volatility.plugins.malware.idt.GDT.html">volatility.plugins.malware.idt.GDT</a>, <a href="volatility.plugins.malware.idt.IDT.html">volatility.plugins.malware.idt.IDT</a>, <a href="volatility.plugins.malware.impscan.ImpScan.html">volatility.plugins.malware.impscan.ImpScan</a>, <a href="volatility.plugins.malware.psxview.PsXview.html">volatility.plugins.malware.psxview.PsXview</a>, <a href="volatility.plugins.malware.svcscan.SvcScan.html">volatility.plugins.malware.svcscan.SvcScan</a>, <a href="volatility.plugins.malware.timers.Timers.html">volatility.plugins.malware.timers.Timers</a>, <a href="volatility.plugins.modules.Modules.html">volatility.plugins.modules.Modules</a>, <a href="volatility.plugins.netscan.Netscan.html">volatility.plugins.netscan.Netscan</a>, <a href="volatility.plugins.pstree.PSTree.html">volatility.plugins.pstree.PSTree</a>, <a href="volatility.plugins.registry.hivescan.HiveScan.html">volatility.plugins.registry.hivescan.HiveScan</a>, <a href="volatility.plugins.registry.lsadump.HashDump.html">volatility.plugins.registry.lsadump.HashDump</a>, <a href="volatility.plugins.registry.lsadump.LSADump.html">volatility.plugins.registry.lsadump.LSADump</a>, <a href="volatility.plugins.registry.printkey.HiveDump.html">volatility.plugins.registry.printkey.HiveDump</a>, <a href="volatility.plugins.sockets.Sockets.html">volatility.plugins.sockets.Sockets</a>, <a href="volatility.plugins.sockscan.SockScan.html">volatility.plugins.sockscan.SockScan</a>, <a href="volatility.plugins.ssdt.SSDT.html">volatility.plugins.ssdt.SSDT</a>, <a href="volatility.plugins.taskmods.DllList.html">volatility.plugins.taskmods.DllList</a>, <a href="volatility.plugins.volshell.volshell.html">volatility.plugins.volshell.volshell</a></p>
+    </div>
+    <div class="undocumented">Undocumented</div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id943">
+  
+  
+<tr class="staticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.plugins.common.AbstractWindowsCommand.html#is_valid_profile">is_valid_profile</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.commands.Command.html">Command</a>:
+        </p>
+        <table class="children sortable" id="id944">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#__init__">__init__</a></td>
+    <td><span>Constructor uses args as an initializer. It creates an instance of OptionParser, populates the options, and finally parses the command line. Options are stored in the self.opts attribute.</span></td>
+  </tr><tr class="basestaticmethod">
+    
+    
+    <td>Static Method</td>
+    <td><a href="volatility.commands.Command.html#register_options">register_options</a></td>
+    <td><span>Registers options into a config object provided</span></td>
+  </tr><tr class="baseclassmethod">
+    
+    
+    <td>Class Method</td>
+    <td><a href="volatility.commands.Command.html#help">help</a></td>
+    <td><span>This function returns a string that will be displayed when a user lists available plugins.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#calculate">calculate</a></td>
+    <td><span>This function is responsible for performing all calculations</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#execute">execute</a></td>
+    <td><span>Executes the plugin command.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#format_value">format_value</a></td>
+    <td><span>Formats an individual field using the table formatting codes</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#table_header">table_header</a></td>
+    <td><span>Table header renders the title row of a table</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#table_row">table_row</a></td>
+    <td><span>Outputs a single row of a table</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#_formatlookup">_formatlookup</a></td>
+    <td><span>Code to turn profile specific values into format specifications</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.commands.Command.html#_elide">_elide</a></td>
+    <td><span>Adds three dots in the middle of a string if it is longer than length</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.plugins.common.AbstractWindowsCommand.is_valid_profile">
+    
+  </a>
+  <a name="is_valid_profile">
+    
+  </a>
+  <div class="functionHeader">
+    @staticmethod<br />
+    def
+    is_valid_profile(profile):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.commands.Command.html#is_valid_profile">volatility.commands.Command.is_valid_profile</a></div><div class="interfaceinfo">overridden in <a href="volatility.plugins.connections.Connections.html">volatility.plugins.connections.Connections</a>, <a href="volatility.plugins.connscan.ConnScan.html">volatility.plugins.connscan.ConnScan</a>, <a href="volatility.plugins.evtlogs.EvtLogs.html">volatility.plugins.evtlogs.EvtLogs</a>, <a href="volatility.plugins.malware.apihooks.ApiHooks.html">volatility.plugins.malware.apihooks.ApiHooks</a>, <a href="volatility.plugins.malware.callbacks.Callbacks.html">volatility.plugins.malware.callbacks.Callbacks</a>, <a href="volatility.plugins.malware.idt.GDT.html">volatility.plugins.malware.idt.GDT</a>, <a href="volatility.plugins.malware.idt.IDT.html">volatility.plugins.malware.idt.IDT</a>, <a href="volatility.plugins.malware.timers.Timers.html">volatility.plugins.malware.timers.Timers</a>, <a href="volatility.plugins.netscan.Netscan.html">volatility.plugins.netscan.Netscan</a>, <a href="volatility.plugins.sockets.Sockets.html">volatility.plugins.sockets.Sockets</a>, <a href="volatility.plugins.sockscan.SockScan.html">volatility.plugins.sockscan.SockScan</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for Volatility 2.2, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-24 15:16:10.
+    </address>
+  </body>
+</html>

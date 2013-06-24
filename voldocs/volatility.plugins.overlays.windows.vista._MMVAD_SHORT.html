@@ -1,0 +1,354 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.plugins.overlays.windows.vista._MMVAD_SHORT : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class private">v.p.o.w.v._MMVAD_SHORT(<a href="volatility.plugins.overlays.windows.windows._MMVAD_SHORT.html">windows._MMVAD_SHORT</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.plugins.html">plugins</a>.<a href="volatility.plugins.overlays.html">overlays</a>.<a href="volatility.plugins.overlays.windows.html">windows</a>.<a href="volatility.plugins.overlays.windows.vista.html">vista</a></span>
+      
+      <a href="classIndex.html#volatility.plugins.overlays.windows.vista._MMVAD_SHORT">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="volatility.plugins.overlays.windows.vista._MMVAD_LONG.html">volatility.plugins.overlays.windows.vista._MMVAD_LONG</a></p>
+    </div>
+    <div class="undocumented">Undocumented</div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id768">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.vista._MMVAD_SHORT.html#Parent">Parent</a></td>
+    <td><span>Returns the Parent of the MMVAD</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.vista._MMVAD_SHORT.html#ControlArea">ControlArea</a></td>
+    <td><span>Returns the ControlArea of the MMVAD</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.vista._MMVAD_SHORT.html#FileObject">FileObject</a></td>
+    <td><span>Returns the FilePointer of the ControlArea of the MMVAD</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.plugins.overlays.windows.windows._MMVAD_SHORT.html">_MMVAD_SHORT</a>:
+        </p>
+        <table class="children sortable" id="id769">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.windows._MMVAD_SHORT.html#is_valid">is_valid</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.windows._MMVAD_SHORT.html#traverse">traverse</a></td>
+    <td><span>Traverse the VAD tree by generating all the left items, then the right items.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.windows._MMVAD_SHORT.html#Start">Start</a></td>
+    <td><span>Get the starting virtual address</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.windows._MMVAD_SHORT.html#End">End</a></td>
+    <td><span>Get the ending virtual address</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.overlays.windows.windows._MMVAD_SHORT.html#Length">Length</a></td>
+    <td><span>Get the length of the VAD memory region</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.obj.CType.html">CType</a> (via <a href="volatility.plugins.overlays.windows.windows._MMVAD_SHORT.html">_MMVAD_SHORT</a>):
+        </p>
+        <table class="children sortable" id="id770">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__init__">__init__</a></td>
+    <td><span>This must be instantiated with a dict of members. The keys are the offsets, the values are Curried Object classes that will be instantiated when accessed.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#size">size</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__repr__">__repr__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#d">d</a></td>
+    <td><span>Display diagnostic information</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#v">v</a></td>
+    <td><span>When a struct is evaluated we just return our offset.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#m">m</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__getattr__">__getattr__</a></td>
+    <td><span>This is only useful for proper methods (not ones that start with __ )</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__setattr__">__setattr__</a></td>
+    <td><span>Change underlying members</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.obj.BaseObject.html">BaseObject</a> (via <a href="volatility.plugins.overlays.windows.windows._MMVAD_SHORT.html">_MMVAD_SHORT</a>, <a href="volatility.obj.CType.html">CType</a>):
+        </p>
+        <table class="children sortable" id="id771">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_type">obj_type</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_vm">obj_vm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_offset">obj_offset</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_parent">obj_parent</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_name">obj_name</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_native_vm">obj_native_vm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#set_native_vm">set_native_vm</a></td>
+    <td><span>Sets the native_vm</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#rebase">rebase</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#proxied">proxied</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#newattr">newattr</a></td>
+    <td><span>Sets a new attribute after the object has been created</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#write">write</a></td>
+    <td><span>Function for writing the object back to disk</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__nonzero__">__nonzero__</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__eq__">__eq__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__ne__">__ne__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__hash__">__hash__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#dereference">dereference</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#dereference_as">dereference_as</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#cast">cast</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__format__">__format__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__str__">__str__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__getstate__">__getstate__</a></td>
+    <td><span>This controls how we pickle and unpickle the objects</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__setstate__">__setstate__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.plugins.overlays.windows.vista._MMVAD_SHORT.Parent">
+    
+  </a>
+  <a name="Parent">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    def
+    Parent(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.plugins.overlays.windows.windows._MMVAD_SHORT.html#Parent">volatility.plugins.overlays.windows.windows._MMVAD_SHORT.Parent</a></div>
+    <div>Returns the Parent of the MMVAD<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.overlays.windows.vista._MMVAD_SHORT.ControlArea">
+    
+  </a>
+  <a name="ControlArea">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    def
+    ControlArea(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.plugins.overlays.windows.windows._MMVAD_SHORT.html#ControlArea">volatility.plugins.overlays.windows.windows._MMVAD_SHORT.ControlArea</a></div>
+    <div>Returns the ControlArea of the MMVAD<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.overlays.windows.vista._MMVAD_SHORT.FileObject">
+    
+  </a>
+  <a name="FileObject">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    def
+    FileObject(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.plugins.overlays.windows.windows._MMVAD_SHORT.html#FileObject">volatility.plugins.overlays.windows.windows._MMVAD_SHORT.FileObject</a></div>
+    <div>Returns the FilePointer of the ControlArea of the MMVAD<table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for Volatility 2.2, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-24 15:16:10.
+    </address>
+  </body>
+</html>

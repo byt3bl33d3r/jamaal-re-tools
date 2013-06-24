@@ -1,0 +1,145 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.scan.PoolScanner : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.s.PoolScanner(<a href="volatility.scan.BaseScanner.html">BaseScanner</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.scan.html">scan</a></span>
+      
+      <a href="classIndex.html#volatility.scan.PoolScanner">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="volatility.plugins.connscan.PoolScanConnFast.html">volatility.plugins.connscan.PoolScanConnFast</a>, <a href="volatility.plugins.filescan.PoolScanFile.html">volatility.plugins.filescan.PoolScanFile</a>, <a href="volatility.plugins.filescan.PoolScanProcess.html">volatility.plugins.filescan.PoolScanProcess</a>, <a href="volatility.plugins.gui.atoms.PoolScanAtom.html">volatility.plugins.gui.atoms.PoolScanAtom</a>, <a href="volatility.plugins.gui.windowstations.PoolScanWind.html">volatility.plugins.gui.windowstations.PoolScanWind</a>, <a href="volatility.plugins.malware.callbacks.AbstractCallbackScanner.html">volatility.plugins.malware.callbacks.AbstractCallbackScanner</a>, <a href="volatility.plugins.modscan.PoolScanModuleFast.html">volatility.plugins.modscan.PoolScanModuleFast</a>, <a href="volatility.plugins.modscan.PoolScanThreadFast.html">volatility.plugins.modscan.PoolScanThreadFast</a>, <a href="volatility.plugins.netscan.PoolScanUdpEndpoint.html">volatility.plugins.netscan.PoolScanUdpEndpoint</a>, <a href="volatility.plugins.registry.hivescan.PoolScanHiveFast2.html">volatility.plugins.registry.hivescan.PoolScanHiveFast2</a>, <a href="volatility.plugins.sockscan.PoolScanSockFast.html">volatility.plugins.sockscan.PoolScanSockFast</a></p>
+    </div>
+    <div class="undocumented">No class docstring</div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id18">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.scan.PoolScanner.html#object_offset">object_offset</a></td>
+    <td><span>The name of this function &quot;object_offset&quot; can be misleading depending on how its used. Even before removing the preambles (r1324), it may not always return the offset of an object. Here are the rules:</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.scan.PoolScanner.html#scan">scan</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.scan.BaseScanner.html">BaseScanner</a>:
+        </p>
+        <table class="children sortable" id="id19">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.scan.BaseScanner.html#__init__">__init__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.scan.BaseScanner.html#check_addr">check_addr</a></td>
+    <td><span>This calls all our constraints on the offset found and returns the number of contraints that matched.</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.scan.PoolScanner.object_offset">
+    
+  </a>
+  <a name="object_offset">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    object_offset(self, found, address_space):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.connscan.PoolScanConnFast.html">volatility.plugins.connscan.PoolScanConnFast</a>, <a href="volatility.plugins.filescan.PoolScanProcess.html">volatility.plugins.filescan.PoolScanProcess</a>, <a href="volatility.plugins.gui.atoms.PoolScanAtom.html">volatility.plugins.gui.atoms.PoolScanAtom</a>, <a href="volatility.plugins.gui.windowstations.PoolScanWind.html">volatility.plugins.gui.windowstations.PoolScanWind</a>, <a href="volatility.plugins.malware.callbacks.AbstractCallbackScanner.html">volatility.plugins.malware.callbacks.AbstractCallbackScanner</a>, <a href="volatility.plugins.modscan.PoolScanModuleFast.html">volatility.plugins.modscan.PoolScanModuleFast</a>, <a href="volatility.plugins.modscan.PoolScanThreadFast.html">volatility.plugins.modscan.PoolScanThreadFast</a>, <a href="volatility.plugins.netscan.PoolScanUdpEndpoint.html">volatility.plugins.netscan.PoolScanUdpEndpoint</a>, <a href="volatility.plugins.registry.hivescan.PoolScanHiveFast2.html">volatility.plugins.registry.hivescan.PoolScanHiveFast2</a>, <a href="volatility.plugins.sockscan.PoolScanSockFast.html">volatility.plugins.sockscan.PoolScanSockFast</a></div>
+    <pre>The name of this function "object_offset" can be misleading depending
+on how its used. Even before removing the preambles (r1324), it may not
+always return the offset of an object. Here are the rules:
+
+If you subclass PoolScanner and do not override this function, it 
+will return the offset of _POOL_HEADER. If you do override this function,
+it should be used to calculate and return the offset of your desired 
+object within the pool. Thus there are two different ways it can be done. 
+
+Example 1. 
+
+For an example of subclassing PoolScanner and not overriding this function, 
+see filescan.PoolScanFile. In this case, the plugin (filescan.FileScan) 
+treats the offset returned by this function as the start of _POOL_HEADER 
+and then works out the object from the bottom up: 
+
+    for offset in PoolScanFile().scan(address_space):
+        pool_obj = obj.Object("_POOL_HEADER", vm = address_space,
+             offset = offset)
+        ##
+        ## Work out objects base here
+        ## 
+
+Example 2. 
+
+For an example of subclassing PoolScanner and overriding this function, 
+see filescan.PoolScanProcess. In this case, the "work" described above is
+done here (in the sublcassed object_offset). Thus in the plugin (filescan.PSScan)
+it can directly instantiate _EPROCESS from the offset we return. 
+
+    for offset in PoolScanProcess().scan(address_space):
+        eprocess = obj.Object('_EPROCESS', vm = address_space,
+                native_vm = kernel_as, offset = offset)</pre>
+  </div>
+</div><div class="function">
+  <a name="volatility.scan.PoolScanner.scan">
+    
+  </a>
+  <a name="scan">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    scan(self, address_space, offset=0, maxlen=None):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.scan.BaseScanner.html#scan">volatility.scan.BaseScanner.scan</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for Volatility 2.2, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-24 15:16:10.
+    </address>
+  </body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.plugins.overlays.windows.win7.Win2008R2SP1x64 : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.p.o.w.w.Win2008R2SP1x64(<a href="volatility.plugins.overlays.windows.win7.Win7SP1x64.html">Win7SP1x64</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.plugins.html">plugins</a>.<a href="volatility.plugins.overlays.html">overlays</a>.<a href="volatility.plugins.overlays.windows.html">windows</a>.<a href="volatility.plugins.overlays.windows.win7.html">win7</a></span>
+      
+      <a href="classIndex.html#volatility.plugins.overlays.windows.win7.Win2008R2SP1x64">View In Hierarchy</a>
+    </p>
+    <div>
+      
+    </div>
+    <div>A Profile for Windows 2008 R2 SP1 x64<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      
+      
+        <p>
+          Inherited from <a href="volatility.obj.Profile.html">Profile</a> (via <a href="volatility.plugins.overlays.windows.win7.Win7SP1x64.html">Win7SP1x64</a>):
+        </p>
+        <table class="children sortable" id="id760">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#__init__">__init__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#applied_modifications">applied_modifications</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#clear">clear</a></td>
+    <td><span>Clears out the input vtypes and object_classes, and only the base object types</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#reset">reset</a></td>
+    <td><span>Resets the profile's vtypes to those automatically loaded</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#load_vtypes">load_vtypes</a></td>
+    <td><span>Identifies the module from which to load the vtypes</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#load_modifications">load_modifications</a></td>
+    <td><span>Find all subclasses of the modification type and applies them</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#compile">compile</a></td>
+    <td><span>Compiles the vtypes, overlays, object_classes, etc into a types dictionary</span></td>
+  </tr><tr class="baseclassmethod">
+    
+    
+    <td>Class Method</td>
+    <td><a href="volatility.obj.Profile.html#metadata">metadata</a></td>
+    <td><span>Returns a read-only dictionary copy of the metadata associated with a profile</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#has_type">has_type</a></td>
+    <td><span>Returns a simple check of whether the type is in the profile</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#get_obj_offset">get_obj_offset</a></td>
+    <td><span>Returns a members offset within the struct</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#get_obj_size">get_obj_size</a></td>
+    <td><span>Returns the size of a struct</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#obj_has_member">obj_has_member</a></td>
+    <td><span>Returns whether an object has a certain member</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#merge_overlay">merge_overlay</a></td>
+    <td><span>Applies an overlay to the profile's vtypes</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#add_types">add_types</a></td>
+    <td><span>Add in a deprecated function that mimics the previous add_types function</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#apply_overlay">apply_overlay</a></td>
+    <td><span>Calls the old apply_overlay function with a deprecation warning</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#_get_subclasses">_get_subclasses</a></td>
+    <td><span>Returns a list of all subclasses</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#_get_dummy_obj">_get_dummy_obj</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#_apply_overlay">_apply_overlay</a></td>
+    <td><span>Update the overlay with the missing information from type.</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#_resolve_mod_dependencies">_resolve_mod_dependencies</a></td>
+    <td><span>Resolves the modification dependencies, providing an ordered list of all modifications whose only dependencies are in earlier lists</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#_list_to_type">_list_to_type</a></td>
+    <td><span>Parses a specification list and returns a VType object.</span></td>
+  </tr><tr class="basemethod private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.Profile.html#_convert_members">_convert_members</a></td>
+    <td><span>Convert the structure named by cname from the c description present in vtypes into a list of members that can be used for later parsing.</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    
+    <address>
+      <a href="index.html">API Documentation</a> for Volatility 2.2, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-24 15:16:10.
+    </address>
+  </body>
+</html>

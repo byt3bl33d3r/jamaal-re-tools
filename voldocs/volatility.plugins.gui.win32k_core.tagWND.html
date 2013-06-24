@@ -1,0 +1,458 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.plugins.gui.win32k_core.tagWND : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.p.g.w.tagWND(<a href="volatility.obj.CType.html">obj.CType</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.plugins.html">plugins</a>.<a href="volatility.plugins.gui.html">gui</a>.<a href="volatility.plugins.gui.win32k_core.html">win32k_core</a></span>
+      
+      <a href="classIndex.html#volatility.plugins.gui.win32k_core.tagWND">View In Hierarchy</a>
+    </p>
+    <div>
+      
+    </div>
+    <div>A class for window structures<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id380">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.win32k_core.tagWND.html#IsClipListener">IsClipListener</a></td>
+    <td><span>Check if this window listens to clipboard changes</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.win32k_core.tagWND.html#ClassAtom">ClassAtom</a></td>
+    <td><span>The class atom for this window</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.win32k_core.tagWND.html#SuperClassAtom">SuperClassAtom</a></td>
+    <td><span>The window's super class</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.win32k_core.tagWND.html#Process">Process</a></td>
+    <td><span>The EPROCESS that owns the window</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.win32k_core.tagWND.html#Thread">Thread</a></td>
+    <td><span>The ETHREAD that owns the window</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.win32k_core.tagWND.html#Visible">Visible</a></td>
+    <td><span>Is this window visible on the desktop</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.win32k_core.tagWND.html#style">style</a></td>
+    <td><span>The basic style flags as a string</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.win32k_core.tagWND.html#ExStyle">ExStyle</a></td>
+    <td><span>The extended style flags as a string</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.win32k_core.tagWND.html#_get_flags">_get_flags</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.obj.CType.html">CType</a>:
+        </p>
+        <table class="children sortable" id="id381">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__init__">__init__</a></td>
+    <td><span>This must be instantiated with a dict of members. The keys are the offsets, the values are Curried Object classes that will be instantiated when accessed.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#size">size</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__repr__">__repr__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#d">d</a></td>
+    <td><span>Display diagnostic information</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#v">v</a></td>
+    <td><span>When a struct is evaluated we just return our offset.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#m">m</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__getattr__">__getattr__</a></td>
+    <td><span>This is only useful for proper methods (not ones that start with __ )</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__setattr__">__setattr__</a></td>
+    <td><span>Change underlying members</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.obj.BaseObject.html">BaseObject</a> (via <a href="volatility.obj.CType.html">CType</a>):
+        </p>
+        <table class="children sortable" id="id382">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_type">obj_type</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_vm">obj_vm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_offset">obj_offset</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_parent">obj_parent</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_name">obj_name</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_native_vm">obj_native_vm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#set_native_vm">set_native_vm</a></td>
+    <td><span>Sets the native_vm</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#rebase">rebase</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#proxied">proxied</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#newattr">newattr</a></td>
+    <td><span>Sets a new attribute after the object has been created</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#write">write</a></td>
+    <td><span>Function for writing the object back to disk</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__nonzero__">__nonzero__</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__eq__">__eq__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__ne__">__ne__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__hash__">__hash__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#is_valid">is_valid</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#dereference">dereference</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#dereference_as">dereference_as</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#cast">cast</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__format__">__format__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__str__">__str__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__getstate__">__getstate__</a></td>
+    <td><span>This controls how we pickle and unpickle the objects</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__setstate__">__setstate__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.plugins.gui.win32k_core.tagWND.IsClipListener">
+    
+  </a>
+  <a name="IsClipListener">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    def
+    IsClipListener(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Check if this window listens to clipboard changes<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.gui.win32k_core.tagWND.ClassAtom">
+    
+  </a>
+  <a name="ClassAtom">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    def
+    ClassAtom(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>The class atom for this window<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.gui.win32k_core.tagWND.SuperClassAtom">
+    
+  </a>
+  <a name="SuperClassAtom">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    def
+    SuperClassAtom(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>The window's super class<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.gui.win32k_core.tagWND.Process">
+    
+  </a>
+  <a name="Process">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    def
+    Process(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>The EPROCESS that owns the window<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.gui.win32k_core.tagWND.Thread">
+    
+  </a>
+  <a name="Thread">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    def
+    Thread(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>The ETHREAD that owns the window<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.gui.win32k_core.tagWND.Visible">
+    
+  </a>
+  <a name="Visible">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    def
+    Visible(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Is this window visible on the desktop<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.gui.win32k_core.tagWND._get_flags">
+    
+  </a>
+  <a name="_get_flags">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    _get_flags(self, member, flags):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.gui.win32k_core.tagWND.style">
+    
+  </a>
+  <a name="style">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    def
+    style(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>The basic style flags as a string<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.gui.win32k_core.tagWND.ExStyle">
+    
+  </a>
+  <a name="ExStyle">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    def
+    ExStyle(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>The extended style flags as a string<table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for Volatility 2.2, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-24 15:16:10.
+    </address>
+  </body>
+</html>

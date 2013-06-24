@@ -1,0 +1,377 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.plugins.registry.registryapi.RegistryApi : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.p.r.r.RegistryApi(<span title="object">object</span>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.plugins.html">plugins</a>.<a href="volatility.plugins.registry.html">registry</a>.<a href="volatility.plugins.registry.registryapi.html">registryapi</a></span>
+      
+      <a href="classIndex.html#volatility.plugins.registry.registryapi.RegistryApi">View In Hierarchy</a>
+    </p>
+    <div>
+      
+    </div>
+    <div>A wrapper several highly used Registry functions<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1302">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.registry.registryapi.RegistryApi.html#__init__">__init__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.registry.registryapi.RegistryApi.html#print_offsets">print_offsets</a></td>
+    <td><span>this is just in case we want to check our offsets and which hive(s) was/were chosen</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.registry.registryapi.RegistryApi.html#populate_offsets">populate_offsets</a></td>
+    <td><span>get all hive offsets so we don't have to scan again...</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.registry.registryapi.RegistryApi.html#reg_get_currentcontrolset">reg_get_currentcontrolset</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.registry.registryapi.RegistryApi.html#set_current">set_current</a></td>
+    <td><span>if we find a hive that fits the given criteria, save its offset so we don't have to scan again.  this can be reset using reset_current if context changes</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.registry.registryapi.RegistryApi.html#reset_current">reset_current</a></td>
+    <td><span>this is in case we switch to a different hive/user/context</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.registry.registryapi.RegistryApi.html#reg_get_key">reg_get_key</a></td>
+    <td><span>Returns a key from a requested hive; assumes this is from a single hive if more than one hive is specified, the hive/key found is returned</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.registry.registryapi.RegistryApi.html#reg_yield_key">reg_yield_key</a></td>
+    <td><span>Use this function if you are collecting keys from more than one hive</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.registry.registryapi.RegistryApi.html#reg_enum_key">reg_enum_key</a></td>
+    <td><span>This function enumerates the requested key</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.registry.registryapi.RegistryApi.html#reg_get_all_subkeys">reg_get_all_subkeys</a></td>
+    <td><span>This function enumerates the subkeys of the requested key</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.registry.registryapi.RegistryApi.html#reg_yield_values">reg_yield_values</a></td>
+    <td><span>This function yields all values for a  requested registry key</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.registry.registryapi.RegistryApi.html#reg_get_value">reg_get_value</a></td>
+    <td><span>This function returns the requested value of a registry key</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.registry.registryapi.RegistryApi.html#reg_get_all_keys">reg_get_all_keys</a></td>
+    <td><span>This function enumerates all keys in specified hives and collects lastwrite times.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.registry.registryapi.RegistryApi.html#reg_get_last_modified">reg_get_last_modified</a></td>
+    <td><span>Wrapper function using reg_get_all_keys. These functions can take a WHILE since all subkeys have to be collected before you can compare lastwrite times.</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.plugins.registry.registryapi.RegistryApi.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, config):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.registry.registryapi.RegistryApi.print_offsets">
+    
+  </a>
+  <a name="print_offsets">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    print_offsets(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>this is just in case we want to check our offsets and which hive(s) was/were chosen<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.registry.registryapi.RegistryApi.populate_offsets">
+    
+  </a>
+  <a name="populate_offsets">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    populate_offsets(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>get all hive offsets so we don't have to scan again...<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.registry.registryapi.RegistryApi.reg_get_currentcontrolset">
+    
+  </a>
+  <a name="reg_get_currentcontrolset">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    reg_get_currentcontrolset(self, fullname=True):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div><dl class="rst-docutils">
+<dt>get the CurrentControlSet</dt>
+<dd>If fullname is not specified, we only get the number like &quot;1&quot; or &quot;2&quot; etc
+The default is ControlSet00{#} so we can append it to the desired key path
+We return None if it fails, so you need to verify before using.</dd>
+</dl><table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.registry.registryapi.RegistryApi.set_current">
+    
+  </a>
+  <a name="set_current">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    set_current(self, hive_name=None, user=None):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>if we find a hive that fits the given criteria, save its offset
+so we don't have to scan again.  this can be reset using reset_current
+if context changes<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.registry.registryapi.RegistryApi.reset_current">
+    
+  </a>
+  <a name="reset_current">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    reset_current(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>this is in case we switch to a different hive/user/context<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.registry.registryapi.RegistryApi.reg_get_key">
+    
+  </a>
+  <a name="reg_get_key">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    reg_get_key(self, hive_name, key, user=None, given_root=None):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Returns a key from a requested hive; assumes this is from a single hive
+if more than one hive is specified, the hive/key found is returned<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.registry.registryapi.RegistryApi.reg_yield_key">
+    
+  </a>
+  <a name="reg_yield_key">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    reg_yield_key(self, hive_name, key, user=None, given_root=None):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Use this function if you are collecting keys from more than one hive<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.registry.registryapi.RegistryApi.reg_enum_key">
+    
+  </a>
+  <a name="reg_enum_key">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    reg_enum_key(self, hive_name, key, user=None):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>This function enumerates the requested key<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.registry.registryapi.RegistryApi.reg_get_all_subkeys">
+    
+  </a>
+  <a name="reg_get_all_subkeys">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    reg_get_all_subkeys(self, hive_name, key, user=None, given_root=None):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>This function enumerates the subkeys of the requested key<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.registry.registryapi.RegistryApi.reg_yield_values">
+    
+  </a>
+  <a name="reg_yield_values">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    reg_yield_values(self, hive_name, key, thetype=None, given_root=None):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>This function yields all values for a  requested registry key<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.registry.registryapi.RegistryApi.reg_get_value">
+    
+  </a>
+  <a name="reg_get_value">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    reg_get_value(self, hive_name, key, value, strcmp=None, given_root=None):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>This function returns the requested value of a registry key<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.registry.registryapi.RegistryApi.reg_get_all_keys">
+    
+  </a>
+  <a name="reg_get_all_keys">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    reg_get_all_keys(self, hive_name, user=None, start=None, end=None, reg=False):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>This function enumerates all keys in specified hives and
+collects lastwrite times.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.registry.registryapi.RegistryApi.reg_get_last_modified">
+    
+  </a>
+  <a name="reg_get_last_modified">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    reg_get_last_modified(self, hive_name, count=1, user=None, start=None, end=None, reg=False):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Wrapper function using reg_get_all_keys. These functions can take a WHILE since all
+subkeys have to be collected before you can compare lastwrite times.<table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for Volatility 2.2, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-24 15:16:10.
+    </address>
+  </body>
+</html>

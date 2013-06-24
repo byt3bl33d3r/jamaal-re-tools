@@ -1,0 +1,380 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.obj.CType : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class">v.o.CType(<a href="volatility.obj.BaseObject.html">BaseObject</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.obj.html">obj</a></span>
+      
+      <a href="classIndex.html#volatility.obj.CType">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="volatility.plugins.evtlogs.EVTRecordStruct.html">volatility.plugins.evtlogs.EVTRecordStruct</a>, <a href="volatility.plugins.gui.win32k_core._HANDLEENTRY.html">volatility.plugins.gui.win32k_core._HANDLEENTRY</a>, <a href="volatility.plugins.gui.win32k_core._MM_SESSION_SPACE.html">volatility.plugins.gui.win32k_core._MM_SESSION_SPACE</a>, <a href="volatility.plugins.gui.win32k_core._RTL_ATOM_TABLE_ENTRY.html">volatility.plugins.gui.win32k_core._RTL_ATOM_TABLE_ENTRY</a>, <a href="volatility.plugins.gui.win32k_core.tagCLIPDATA.html">volatility.plugins.gui.win32k_core.tagCLIPDATA</a>, <a href="volatility.plugins.gui.win32k_core.tagEVENTHOOK.html">volatility.plugins.gui.win32k_core.tagEVENTHOOK</a>, <a href="volatility.plugins.gui.win32k_core.tagHOOK.html">volatility.plugins.gui.win32k_core.tagHOOK</a>, <a href="volatility.plugins.gui.win32k_core.tagRECT.html">volatility.plugins.gui.win32k_core.tagRECT</a>, <a href="volatility.plugins.gui.win32k_core.tagSHAREDINFO.html">volatility.plugins.gui.win32k_core.tagSHAREDINFO</a>, <a href="volatility.plugins.gui.win32k_core.tagWINDOWSTATION.html">volatility.plugins.gui.win32k_core.tagWINDOWSTATION</a>, <a href="volatility.plugins.gui.win32k_core.tagWND.html">volatility.plugins.gui.win32k_core.tagWND</a>, <a href="volatility.plugins.linux.slab_info.kmem_cache.html">volatility.plugins.linux.slab_info.kmem_cache</a>, <a href="volatility.plugins.malware.callbacks._SHUTDOWN_PACKET.html">volatility.plugins.malware.callbacks._SHUTDOWN_PACKET</a>, <a href="volatility.plugins.malware.cmdhistory._COMMAND_HISTORY.html">volatility.plugins.malware.cmdhistory._COMMAND_HISTORY</a>, <a href="volatility.plugins.malware.cmdhistory._CONSOLE_INFORMATION.html">volatility.plugins.malware.cmdhistory._CONSOLE_INFORMATION</a>, <a href="volatility.plugins.malware.cmdhistory._CONSOLE_PROCESS.html">volatility.plugins.malware.cmdhistory._CONSOLE_PROCESS</a>, <a href="volatility.plugins.malware.cmdhistory._EXE_ALIAS_LIST.html">volatility.plugins.malware.cmdhistory._EXE_ALIAS_LIST</a>, <a href="volatility.plugins.malware.cmdhistory._SCREEN_INFORMATION.html">volatility.plugins.malware.cmdhistory._SCREEN_INFORMATION</a>, <a href="volatility.plugins.malware.devicetree._DEVICE_OBJECT.html">volatility.plugins.malware.devicetree._DEVICE_OBJECT</a>, <a href="volatility.plugins.malware.devicetree._DRIVER_OBJECT.html">volatility.plugins.malware.devicetree._DRIVER_OBJECT</a>, <a href="volatility.plugins.malware.idt._KGDTENTRY.html">volatility.plugins.malware.idt._KGDTENTRY</a>, <a href="volatility.plugins.malware.idt._KIDTENTRY.html">volatility.plugins.malware.idt._KIDTENTRY</a>, <a href="volatility.plugins.malware.svcscan._SERVICE_HEADER.html">volatility.plugins.malware.svcscan._SERVICE_HEADER</a>, <a href="volatility.plugins.malware.svcscan._SERVICE_RECORD_LEGACY.html">volatility.plugins.malware.svcscan._SERVICE_RECORD_LEGACY</a>, <a href="volatility.plugins.netscan._TCP_LISTENER.html">volatility.plugins.netscan._TCP_LISTENER</a>, <a href="volatility.plugins.overlays.basic.VOLATILITY_MAGIC.html">volatility.plugins.overlays.basic.VOLATILITY_MAGIC</a>, <a href="volatility.plugins.overlays.linux.linux.desc_struct.html">volatility.plugins.overlays.linux.linux.desc_struct</a>, <a href="volatility.plugins.overlays.linux.linux.files_struct.html">volatility.plugins.overlays.linux.linux.files_struct</a>, <a href="volatility.plugins.overlays.linux.linux.gate_struct64.html">volatility.plugins.overlays.linux.linux.gate_struct64</a>, <a href="volatility.plugins.overlays.linux.linux.hlist_node.html">volatility.plugins.overlays.linux.linux.hlist_node</a>, <a href="volatility.plugins.overlays.linux.linux.kernel_param.html">volatility.plugins.overlays.linux.linux.kernel_param</a>, <a href="volatility.plugins.overlays.linux.linux.kparam_array.html">volatility.plugins.overlays.linux.linux.kparam_array</a>, <a href="volatility.plugins.overlays.linux.linux.linux_file.html">volatility.plugins.overlays.linux.linux.linux_file</a>, <a href="volatility.plugins.overlays.linux.linux.linux_fs_struct.html">volatility.plugins.overlays.linux.linux.linux_fs_struct</a>, <a href="volatility.plugins.overlays.linux.linux.list_head.html">volatility.plugins.overlays.linux.linux.list_head</a>, <a href="volatility.plugins.overlays.linux.linux.module_sect_attr.html">volatility.plugins.overlays.linux.linux.module_sect_attr</a>, <a href="volatility.plugins.overlays.linux.linux.mount.html">volatility.plugins.overlays.linux.linux.mount</a>, <a href="volatility.plugins.overlays.linux.linux.net_device.html">volatility.plugins.overlays.linux.linux.net_device</a>, <a href="volatility.plugins.overlays.linux.linux.page.html">volatility.plugins.overlays.linux.linux.page</a>, <a href="volatility.plugins.overlays.linux.linux.task_struct.html">volatility.plugins.overlays.linux.linux.task_struct</a>, <a href="volatility.plugins.overlays.linux.linux.vfsmount.html">volatility.plugins.overlays.linux.linux.vfsmount</a>, <a href="volatility.plugins.overlays.windows.kdbg_vtypes._KDDEBUGGER_DATA64.html">volatility.plugins.overlays.windows.kdbg_vtypes._KDDEBUGGER_DATA64</a>, <a href="volatility.plugins.overlays.windows.kpcr_vtypes._KPCROnx86.html">volatility.plugins.overlays.windows.kpcr_vtypes._KPCROnx86</a>, <a href="volatility.plugins.overlays.windows.pe_vtypes._IMAGE_EXPORT_DIRECTORY.html">volatility.plugins.overlays.windows.pe_vtypes._IMAGE_EXPORT_DIRECTORY</a>, <a href="volatility.plugins.overlays.windows.pe_vtypes._IMAGE_IMPORT_DESCRIPTOR.html">volatility.plugins.overlays.windows.pe_vtypes._IMAGE_IMPORT_DESCRIPTOR</a>, <a href="volatility.plugins.overlays.windows.pe_vtypes._LDR_DATA_TABLE_ENTRY.html">volatility.plugins.overlays.windows.pe_vtypes._LDR_DATA_TABLE_ENTRY</a>, <a href="volatility.plugins.overlays.windows.win2003._MM_AVL_TABLE.html">volatility.plugins.overlays.windows.win2003._MM_AVL_TABLE</a>, <a href="volatility.plugins.overlays.windows.windows._CM_KEY_BODY.html">volatility.plugins.overlays.windows.windows._CM_KEY_BODY</a>, <a href="volatility.plugins.overlays.windows.windows._EPROCESS.html">volatility.plugins.overlays.windows.windows._EPROCESS</a>, <a href="volatility.plugins.overlays.windows.windows._ETHREAD.html">volatility.plugins.overlays.windows.windows._ETHREAD</a>, <a href="volatility.plugins.overlays.windows.windows._EX_FAST_REF.html">volatility.plugins.overlays.windows.windows._EX_FAST_REF</a>, <a href="volatility.plugins.overlays.windows.windows._FILE_OBJECT.html">volatility.plugins.overlays.windows.windows._FILE_OBJECT</a>, <a href="volatility.plugins.overlays.windows.windows._HANDLE_TABLE.html">volatility.plugins.overlays.windows.windows._HANDLE_TABLE</a>, <a href="volatility.plugins.overlays.windows.windows._IMAGE_DOS_HEADER.html">volatility.plugins.overlays.windows.windows._IMAGE_DOS_HEADER</a>, <a href="volatility.plugins.overlays.windows.windows._IMAGE_NT_HEADERS.html">volatility.plugins.overlays.windows.windows._IMAGE_NT_HEADERS</a>, <a href="volatility.plugins.overlays.windows.windows._IMAGE_SECTION_HEADER.html">volatility.plugins.overlays.windows.windows._IMAGE_SECTION_HEADER</a>, <a href="volatility.plugins.overlays.windows.windows._LIST_ENTRY.html">volatility.plugins.overlays.windows.windows._LIST_ENTRY</a>, <a href="volatility.plugins.overlays.windows.windows._MMVAD.html">volatility.plugins.overlays.windows.windows._MMVAD</a>, <a href="volatility.plugins.overlays.windows.windows._MMVAD_FLAGS.html">volatility.plugins.overlays.windows.windows._MMVAD_FLAGS</a>, <a href="volatility.plugins.overlays.windows.windows._MMVAD_SHORT.html">volatility.plugins.overlays.windows.windows._MMVAD_SHORT</a>, <a href="volatility.plugins.overlays.windows.windows._OBJECT_HEADER.html">volatility.plugins.overlays.windows.windows._OBJECT_HEADER</a>, <a href="volatility.plugins.overlays.windows.windows._POOL_HEADER.html">volatility.plugins.overlays.windows.windows._POOL_HEADER</a>, <a href="volatility.plugins.overlays.windows.windows._TOKEN.html">volatility.plugins.overlays.windows.windows._TOKEN</a>, <a href="volatility.plugins.overlays.windows.windows._UNICODE_STRING.html">volatility.plugins.overlays.windows.windows._UNICODE_STRING</a></p>
+    </div>
+    <div>A CType is an object which represents a c struct<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id1422">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__init__">__init__</a></td>
+    <td><span>This must be instantiated with a dict of members. The keys are the offsets, the values are Curried Object classes that will be instantiated when accessed.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#size">size</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__repr__">__repr__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#d">d</a></td>
+    <td><span>Display diagnostic information</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#v">v</a></td>
+    <td><span>When a struct is evaluated we just return our offset.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#m">m</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__getattr__">__getattr__</a></td>
+    <td><span>This is only useful for proper methods (not ones that start with __ )</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__setattr__">__setattr__</a></td>
+    <td><span>Change underlying members</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.obj.BaseObject.html">BaseObject</a>:
+        </p>
+        <table class="children sortable" id="id1423">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_type">obj_type</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_vm">obj_vm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_offset">obj_offset</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_parent">obj_parent</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_name">obj_name</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_native_vm">obj_native_vm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#set_native_vm">set_native_vm</a></td>
+    <td><span>Sets the native_vm</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#rebase">rebase</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#proxied">proxied</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#newattr">newattr</a></td>
+    <td><span>Sets a new attribute after the object has been created</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#write">write</a></td>
+    <td><span>Function for writing the object back to disk</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__nonzero__">__nonzero__</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__eq__">__eq__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__ne__">__ne__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__hash__">__hash__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#is_valid">is_valid</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#dereference">dereference</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#dereference_as">dereference_as</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#cast">cast</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__format__">__format__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__str__">__str__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__getstate__">__getstate__</a></td>
+    <td><span>This controls how we pickle and unpickle the objects</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__setstate__">__setstate__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.obj.CType.__init__">
+    
+  </a>
+  <a name="__init__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __init__(self, theType, offset, vm, name=None, members=None, struct_size=0, **kwargs):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#__init__">volatility.obj.BaseObject.__init__</a></div><div class="interfaceinfo">overridden in <a href="volatility.plugins.gui.win32k_core._RTL_ATOM_TABLE.html">volatility.plugins.gui.win32k_core._RTL_ATOM_TABLE</a>, <a href="volatility.plugins.overlays.basic.VOLATILITY_MAGIC.html">volatility.plugins.overlays.basic.VOLATILITY_MAGIC</a>, <a href="volatility.plugins.overlays.windows.windows._OBJECT_HEADER.html">volatility.plugins.overlays.windows.windows._OBJECT_HEADER</a></div>
+    <div>This must be instantiated with a dict of members. The keys
+are the offsets, the values are Curried Object classes that
+will be instantiated when accessed.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.CType.size">
+    
+  </a>
+  <a name="size">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    size(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.CType.__repr__">
+    
+  </a>
+  <a name="__repr__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __repr__(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#__repr__">volatility.obj.BaseObject.__repr__</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.CType.d">
+    
+  </a>
+  <a name="d">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    d(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#d">volatility.obj.BaseObject.d</a></div>
+    <div>Display diagnostic information<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.CType.v">
+    
+  </a>
+  <a name="v">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    v(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#v">volatility.obj.BaseObject.v</a></div><div class="interfaceinfo">overridden in <a href="volatility.plugins.overlays.windows.windows._UNICODE_STRING.html">volatility.plugins.overlays.windows.windows._UNICODE_STRING</a></div>
+    <div>When a struct is evaluated we just return our offset.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.CType.m">
+    
+  </a>
+  <a name="m">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    m(self, attr):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#m">volatility.obj.BaseObject.m</a></div>
+    <div class="undocumented">Undocumented</div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.CType.__getattr__">
+    
+  </a>
+  <a name="__getattr__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __getattr__(self, attr):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#__getattr__">volatility.obj.BaseObject.__getattr__</a></div>
+    <div>This is only useful for proper methods (not ones that
+start with __ )<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.obj.CType.__setattr__">
+    
+  </a>
+  <a name="__setattr__">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    __setattr__(self, attr, value):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overrides <a href="volatility.obj.BaseObject.html#__setattr__">volatility.obj.BaseObject.__setattr__</a></div>
+    <div>Change underlying members<table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for Volatility 2.2, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-24 15:16:10.
+    </address>
+  </body>
+</html>

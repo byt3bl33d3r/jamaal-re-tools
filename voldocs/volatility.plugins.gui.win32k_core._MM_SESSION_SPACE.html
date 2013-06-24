@@ -1,0 +1,407 @@
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "DTD/xhtml1-strict.dtd">
+<html>
+  <head>
+    <title>volatility.plugins.gui.win32k_core._MM_SESSION_SPACE : API documentation</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <link href="apidocs.css" type="text/css" rel="stylesheet" />
+    
+    
+  </head>
+  <body>
+    <h1 class="class private">v.p.g.w._MM_SESSION_SPACE(<a href="volatility.obj.CType.html">obj.CType</a>) : class documentation</h1>
+    <p>
+      <span id="part">Part of <a href="volatility.html">volatility</a>.<a href="volatility.plugins.html">plugins</a>.<a href="volatility.plugins.gui.html">gui</a>.<a href="volatility.plugins.gui.win32k_core.html">win32k_core</a></span>
+      
+      <a href="classIndex.html#volatility.plugins.gui.win32k_core._MM_SESSION_SPACE">View In Hierarchy</a>
+    </p>
+    <div>
+      <p>Known subclasses: <a href="volatility.plugins.gui.vtypes.win7._MM_SESSION_SPACE.html">volatility.plugins.gui.vtypes.win7._MM_SESSION_SPACE</a></p>
+    </div>
+    <div>A class for session spaces<table class="fieldTable"></table></div>
+
+    
+    
+    <div id="splitTables">
+      <table class="children sortable" id="id364">
+  
+  
+<tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.win32k_core._MM_SESSION_SPACE.html#processes">processes</a></td>
+    <td><span>Generator for processes in this session.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.win32k_core._MM_SESSION_SPACE.html#Win32KBase">Win32KBase</a></td>
+    <td><span>Get the base address of the win32k.sys as mapped into this session's memory.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.win32k_core._MM_SESSION_SPACE.html#images">images</a></td>
+    <td><span>Generator for images (modules) loaded into this session's space</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.win32k_core._MM_SESSION_SPACE.html#find_gahti">find_gahti</a></td>
+    <td><span>Find this session's gahti.</span></td>
+  </tr><tr class="method">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.win32k_core._MM_SESSION_SPACE.html#find_shared_info">find_shared_info</a></td>
+    <td><span>Find this session's tagSHAREDINFO structure.</span></td>
+  </tr><tr class="method private">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.plugins.gui.win32k_core._MM_SESSION_SPACE.html#_section_chunks">_section_chunks</a></td>
+    <td><span>Get the win32k.sys section as an array of 32-bit unsigned longs.</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.obj.CType.html">CType</a>:
+        </p>
+        <table class="children sortable" id="id365">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__init__">__init__</a></td>
+    <td><span>This must be instantiated with a dict of members. The keys are the offsets, the values are Curried Object classes that will be instantiated when accessed.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#size">size</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__repr__">__repr__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#d">d</a></td>
+    <td><span>Display diagnostic information</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#v">v</a></td>
+    <td><span>When a struct is evaluated we just return our offset.</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#m">m</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__getattr__">__getattr__</a></td>
+    <td><span>This is only useful for proper methods (not ones that start with __ )</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.CType.html#__setattr__">__setattr__</a></td>
+    <td><span>Change underlying members</span></td>
+  </tr>
+  
+</table>
+      
+        <p>
+          Inherited from <a href="volatility.obj.BaseObject.html">BaseObject</a> (via <a href="volatility.obj.CType.html">CType</a>):
+        </p>
+        <table class="children sortable" id="id366">
+  
+  
+<tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_type">obj_type</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_vm">obj_vm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_offset">obj_offset</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_parent">obj_parent</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_name">obj_name</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#obj_native_vm">obj_native_vm</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#set_native_vm">set_native_vm</a></td>
+    <td><span>Sets the native_vm</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#rebase">rebase</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#proxied">proxied</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#newattr">newattr</a></td>
+    <td><span>Sets a new attribute after the object has been created</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#write">write</a></td>
+    <td><span>Function for writing the object back to disk</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__nonzero__">__nonzero__</a></td>
+    <td><span class="undocumented">No summary</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__eq__">__eq__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__ne__">__ne__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__hash__">__hash__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#is_valid">is_valid</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#dereference">dereference</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#dereference_as">dereference_as</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#cast">cast</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__format__">__format__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__str__">__str__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__getstate__">__getstate__</a></td>
+    <td><span>This controls how we pickle and unpickle the objects</span></td>
+  </tr><tr class="basemethod">
+    
+    
+    <td>Method</td>
+    <td><a href="volatility.obj.BaseObject.html#__setstate__">__setstate__</a></td>
+    <td><span class="undocumented">Undocumented</span></td>
+  </tr>
+  
+</table>
+      
+      
+    </div>
+    
+    
+    
+
+    <div class="function">
+  <a name="volatility.plugins.gui.win32k_core._MM_SESSION_SPACE.processes">
+    
+  </a>
+  <a name="processes">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    processes(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Generator for processes in this session.</p>
+<p>A process is always associated with exactly
+one session.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.gui.win32k_core._MM_SESSION_SPACE.Win32KBase">
+    
+  </a>
+  <a name="Win32KBase">
+    
+  </a>
+  <div class="functionHeader">
+    @property<br />
+    def
+    Win32KBase(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Get the base address of the win32k.sys as mapped
+into this session's memory.</p>
+<p>Since win32k.sys is always the first image to be
+mapped, we can just grab the first list entry.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.gui.win32k_core._MM_SESSION_SPACE.images">
+    
+  </a>
+  <a name="images">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    images(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Generator for images (modules) loaded into
+this session's space<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.gui.win32k_core._MM_SESSION_SPACE._section_chunks">
+    
+  </a>
+  <a name="_section_chunks">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    _section_chunks(self, sec_name):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Get the win32k.sys section as an array of
+32-bit unsigned longs.</p>
+<p>&#64;param sec_name: name of the PE section in win32k.sys
+to search for.</p>
+<p>&#64;returns all chunks on a 4-byte boundary.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.gui.win32k_core._MM_SESSION_SPACE.find_gahti">
+    
+  </a>
+  <a name="find_gahti">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    find_gahti(self):
+    
+  </div>
+  <div class="functionBody">
+    
+    <div>Find this session's gahti.</p>
+<p>This can potentially be much faster by searching for
+'' * sizeof(tagHANDLETYPEINFO) instead
+of moving on a dword aligned boundary through
+the section.<table class="fieldTable"></table></div>
+  </div>
+</div><div class="function">
+  <a name="volatility.plugins.gui.win32k_core._MM_SESSION_SPACE.find_shared_info">
+    
+  </a>
+  <a name="find_shared_info">
+    
+  </a>
+  <div class="functionHeader">
+    
+    def
+    find_shared_info(self):
+    
+  </div>
+  <div class="functionBody">
+    <div class="interfaceinfo">overridden in <a href="volatility.plugins.gui.vtypes.win7._MM_SESSION_SPACE.html">volatility.plugins.gui.vtypes.win7._MM_SESSION_SPACE</a></div>
+    <div>Find this session's tagSHAREDINFO structure.</p>
+<p>This structure is embedded in win32k's .data section,
+(i.e. not in dynamically allocated memory). Thus we
+iterate over each DWORD-aligned possibility and treat
+it as a tagSHAREDINFO until the sanity checks are met.<table class="fieldTable"></table></div>
+  </div>
+</div>
+    <address>
+      <a href="index.html">API Documentation</a> for Volatility 2.2, generated by <a href="http://codespeak.net/~mwh/pydoctor/">pydoctor</a> at 2013-06-24 15:16:10.
+    </address>
+  </body>
+</html>
