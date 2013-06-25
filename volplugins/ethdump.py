@@ -36,9 +36,7 @@ class EthDump(common.AbstractWindowsCommand):
                               help = 'Directory in which to dump executable files')
     
 
-################################################################################
-#######checksum appears to be completely different fromt wireshark####################################
-        
+        #computes the packets ip checksum to find valid ethernet frames 
         def ip_checksum(self, data):
             x = 0 
             y = 0 
