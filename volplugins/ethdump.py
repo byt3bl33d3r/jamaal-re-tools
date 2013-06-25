@@ -53,7 +53,7 @@ class EthDump(common.AbstractWindowsCommand):
             config.add_option('DUMP-DIR', short_option = 'D', default = None,
                               cache_invalidator = False,
                               help = 'Directory in which to dump executable files')
-    
+
 
         #computes the packets ip checksum to find valid ethernet frames 
         def ip_checksum(self, data):
@@ -223,8 +223,14 @@ class EthDump(common.AbstractWindowsCommand):
             }            
             kernel_space = utils.load_as(self._config)
             
+            
                 
-            #this entire section needs to be moved to render 
+            #this entire section needs to be moved to render
+            if self._config.DUMP_DIR == None:
+                debug.error("Please specify a dump directory (--dump-dir)")
+            if not os.path.isdir(self._config.DUMP_DIR):
+                debug.error(self._config.DUMP_DIR + " is not a directory")
+
             apath = os.path.abspath(self._config.DUMP_DIR)
             pcapfile = os.path.join(apath, 'out.pcap')
             pcapfile = open(pcapfile, 'wb')
