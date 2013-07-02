@@ -113,8 +113,9 @@ class EthScan(commands.Command):
     def render_text(self, outfd, data):
         counter = 0
         for objct,  source, dest,  plen in data:
-
-            psize = struct.unpack("<H",unhexlify(hex(int(plen))[2:]))[0]
+            plen = '%04x'% int(plen)
+            plen = unhexlify(plen)
+            psize = struct.unpack("<H",plen)[0]
             pdata = objct.obj_vm.read(objct.ethVer.obj_offset, psize)
             pheader = objct.obj_vm.read(objct.ethSrc.obj_offset, 0xe)
             macsrc =  objct.obj_vm.read(objct.ethSrc.obj_offset, objct.ethSrc.size())    
