@@ -24,6 +24,10 @@ import volatility.utils as utils
 import volatility.scan as scan
 import volatility.obj as obj
 import volatility.debug as debug
+import volatility.plugins.taskmods as taskmods
+import volatility.cache as cache
+
+
 from binascii import hexlify
 from binascii import unhexlify
 
@@ -249,7 +253,55 @@ class PacketType(object):
         ptype = "Unknown"
         ptype = self.protocols.get(lookup, "UnKnown")
         return ptype                        
-    
+
+
+
+#class FindMemoryProcess(taskmods.MemMap):
+#    """Resolve Process from Address"""
+#
+#    def __init__(self, config, *args, **kwargs):
+#        DllList.__init__(self, config, *args, **kwargs)
+#        config.add_option("PHYSICAL-OFFSET", short_option = 'P', default = False,
+#                          cache_invalidator = False, help = "Physical Offset", action = "store_true")
+#
+
+#        config.add_option("PHYSICAL-OFFSET", short_option = 'P', default = False,
+#                          cache_invalidator = False, help = "Physical Offset", action = "store_true")
+                          
+#    def __init__(self, config, *args, **kwargs):
+#        taskmods.MemMap.__init__(self, config, *args, **kwargs)
+#        config.remove_option("PID")
+#        config.remove_option("OFFSET")
+#    
+#    def render_text(self, outfd, data):
+#        first = True
+#        for pid, task, pagedata in data:
+#            if not first:
+#                outfd.write("*" * 72 + "\n")
+#
+#            task_space = task.get_process_address_space()
+#            outfd.write("{0} pid: {1:6}\n".format(task.ImageFileName, pid))
+#            first = False
+#
+#            offset = 0
+#            if pagedata:
+#                self.table_header(outfd,
+#                                  [("Virtual", "[addrpad]"),
+#                                   ("Physical", "[addrpad]"),
+#                                   ("Size", "[addr]"),
+#                                   ("DumpFileOffset", "[addr]")])
+#
+#                for p in pagedata:
+#                    pa = task_space.vtop(p[0])
+#                    # pa can be 0, according to the old memmap, but can't == None(NoneObject)
+#                    if pa != None:
+#                        self.table_row(outfd, p[0], pa, p[1], offset)
+#                    #else:
+#                    #    outfd.write("0x{0:10x} 0x000000     0x{1:12x}\n".format(p[0], p[1]))
+#                        offset += p[1]
+#            else:
+#                outfd.write("Unable to read pages for task.\n")
+
 class EthScanVTypes(obj.ProfileModification):
     """ EthScanVTypes packet structure """
     
@@ -266,7 +318,7 @@ class EthScanVTypes(obj.ProfileModification):
             'ipVer': [0x0e, ['unsigned char']], 
             'ipCheckSum': [ 0x0e, ['array', 20,  ['unsigned char']]],            
             'ipDSF': [0xf, ['unsigned char']], 
-            'ipTotalLen': [0x10, ['unsigned short']], 
+            'ipTotalLen': [0x10, ['unsigned be short']], 
             'ipIDENT': [0x12, ['unsigned short']], 
             'ipFLAG': [0x14, ['unsigned char']],
             'ipOffSet': [0x14, ['unsigned short']],         # // ipOffSet = ipFLAG offset + size of 2 bytes
@@ -309,7 +361,7 @@ class FindEthFrame(scan.ScannerCheck):
         # // Checks the IP version becase the Ethernet type is used in the skip() function below 
         # // 4 = IPv4, 5 is (5 * 20).  The 5 in the combined  to produce the number 0x45 
         # // Note the 5 in 0x45 is not constant.  0x4 is so we check just for 0x4 
-        if eth.ipVer >= 0x40 and eth.ipVer <= 0x49:
+        if eth.ipVer & 0xF0 == 0x40: 
             counterA += 1
             checksum = ""
             
@@ -322,11 +374,10 @@ class FindEthFrame(scan.ScannerCheck):
             if checksum == 0:
                 return eth
             
-        # //IPv6 Check 
-        #  print "DEBUG",  hex(int(eth.ethType))
-        #  //!! UNITY! - convert eth.ethType from long to int with int(eth.ethType)
-        #  if int(eth.ethType) == 0x86dd: 
-        #  print "DEBUG IPV6"
+        # //TODO IPv6 Check  
+        #  //convert eth.ethType from long to int with int(eth.ethType)
+        #  // if int(eth.ethType) == 0x86dd: 
+        
     
     #// Skip bytes based upon ethertypes from the PacketType Class 
     def skip(self, data, offset):
@@ -334,7 +385,7 @@ class FindEthFrame(scan.ScannerCheck):
             # !this goes through all the ethertypes and searchers for the return key header in the ethertypes dictionary 
             # !probably a cleanerly way of doing this
             for ethHeader in PacketType.ethertypes.keys():
-                nstep = struct.pack('>H', ethHeader)
+                nstep = struct.pack('>H', ethHeader)   
                 nextval = data.index(nstep, offset + 1)
                 return (nextval-len(nstep)-0xC) - offset
         except ValueError:
@@ -344,11 +395,14 @@ class FindEthFrame(scan.ScannerCheck):
 class EthScanner(scan.BaseScanner):
     checks = [('FindEthFrame', {})]
 
-class EthScan(commands.Command):
+class EthScan(taskmods.DllList):
+    
     """Scans for TCP/UDP packet fragments in memory"""
     
     def __init__(self, config, *args, **kwargs):
-        commands.Command.__init__(self, config, *args, **kwargs)
+        taskmods.DllList.__init__(self, config, *args, **kwargs)
+        #commands.Command.__init__(self, config, *args, **kwargs)
+        config.remove_option("OFFSET")
         config.add_option('DUMP-DIR', short_option = 'D', default = None,
                           cache_invalidator = False,
                           help = 'Directory in which to dump executable files')
@@ -360,8 +414,8 @@ class EthScan(commands.Command):
                         
     def calculate(self):       
 
-        # // sum what redundant method for checking what options have been set easily 
-        oplist = ["dump_dir","save_pcap", "save_raw", "ass_cap"]
+        # // some what redundant method for checking what options have been set easily 
+        oplist = ["dump_dir","save_pcap", "save_raw"]
         dumpDir = 0
         for opkeys in self._config.opts.keys():
             if opkeys in oplist:
@@ -387,8 +441,11 @@ class EthScan(commands.Command):
         for offset in EthScanner().scan(address_space):
             objct = obj.Object('ethFrame', vm = address_space, offset = offset)
             yield  objct
+                
 
     def render_text(self, outfd, data):
+        
+        ptpobj = self.getPTP()
         
         # // dump directory check 
         if self._config.DUMP_DIR and not os.path.isdir(self._config.DUMP_DIR):
@@ -404,21 +461,33 @@ class EthScan(commands.Command):
                 
         counter = 0
         for objct in data:
+            # // Find packet process, pid, and address range 
+            pktoffset = objct.ethDst.obj_offset
+            mapAddrList = self.mapOffsetToAddr(outfd, pktoffset, ptpobj)
+            # // mapAddrList: Proc Name, PID, START ADDR, END ADDR 
+            # // just to be safe we set all values to "" 
+            # // That way we can still use them even if they don't carry a value 
+            if mapAddrList:
+                procName = ""
+                pid = ""
+                base_addr = ""
+                end_addr = ""
+                if mapAddrList[0] != None:
+                    procName = mapAddrList[0]
+                if mapAddrList[1] != None:
+                    pid = mapAddrList[1]
+                if mapAddrList[2] != None:
+                    base_addr = hex(mapAddrList[2])
+                if mapAddrList[3] != None:
+                    end_addr = hex(mapAddrList[2] + mapAddrList[3])
+
             source = objct.ipSource.v()
             dest = objct.ipDest.v()
             srcport = str(objct.ipSrcPort.v())
             destport = str(objct.ipDstPort.v())
 
             #// Packet Size 
-            #/ ! ? What is the best way to flip endies from an int 
-            #/ ! ? The best solution I found was to conver the int into a hex string 
-            #/ ! ? 1) '%04x'% int(objct.ipTotalLen.v())
-            #/ ! ? Converts from 0x4e00L to 4e00(str)  
-            #/ ! ? 2) struct.unpack("<H",unhexlify(plen)) 
-            #/ ! ? Converts raw data as 0x4e <type 'int'>
-            #/ ! ? 0x4e00L converts to 0x004e 
-            psize = '%04x'% int(objct.ipTotalLen.v())
-            psize = struct.unpack("<H",unhexlify(psize))[0]
+            psize = objct.ipTotalLen.v()
             pdata = objct.obj_vm.read(objct.ipVer.obj_offset, psize)
             
             # // 0xE the size of 
@@ -454,6 +523,7 @@ class EthScan(commands.Command):
             fullpacket = pheader+pdata
 
             # // Text Output 
+            outfd.write("ProcName: {0} PID: {1}  Base Address: {2}  End Address: {3}\n".format(procName, pid, base_addr, end_addr))
             outfd.write(ethname + " (" + ethnum + ") " + "\n")
             outfd.write("Protocol "+ protoStr + " " + "("+str(proto)+")" + "\n")
             outfd.write("Src: " + source +":" + srcport + " (" +macsrc+"), " + "Dst: " + dest +":" + destport + " (" +macdst+")" +"\n""")            
@@ -469,9 +539,9 @@ class EthScan(commands.Command):
 
             # // Raw Packets saved to --dump-dir 
             # //Format is PACKET NUM __ visual reminded __ IPSRC __ IP SRCPORT __ DST __IP DESTPORT __ PROTOCOL . BIN  
-            # // Example: 0__pktnum__SRC_210.146.64.4_20480__DST_81.131.67.131_42762__TCP.bin
+            # // Example: ProcName_PID__0__pktnum__SRC_210.146.64.4_20480__DST_81.131.67.131_42762__TCP.bin
             if self._config.SAVE_RAW:
-                filename =  str(counter) + "__pktnum" + "__SRC_" + source +"_" + srcport  +"__DST_" + dest +"_" + destport + "__" + protoStr + ".bin"
+                filename =  procName + "__"+ pid+ "__"+str(counter) + "__pktnum" + "__SRC_" + source +"_" + srcport  +"__DST_" + dest +"_" + destport + "__" + protoStr + ".bin"
                 fh = open(os.path.join(self._config.DUMP_DIR, filename), 'wb')
                 fh.write(fullpacket)
                 fh.close()
@@ -483,3 +553,29 @@ class EthScan(commands.Command):
         if self._config.SAVE_PCAP:
             pcw.close()
         
+    #FindMemoryProcess
+    #def findMemoryProcess(self, addr_space, tasks, verbfd = None):
+    def getPTP(self):    
+        tasks = taskmods.DllList.calculate(self)
+        for task in tasks:
+            if task.UniqueProcessId:
+                pid = task.UniqueProcessId
+                task_space = task.get_process_address_space()
+                pages = task_space.get_available_pages()
+                yield pid, task, pages
+                
+
+    def mapOffsetToAddr(self, outfd, pktoffset, ptpobj):
+        for pid, task, pagedata in ptpobj:
+            task_space = task.get_process_address_space()
+            currentProc = ("{0} pid: {1:6}\n".format(task.ImageFileName, pid))
+            offset = 0 
+            for p in pagedata:
+                pa = task_space.vtop(p[0])
+                if pa != None:
+                    if pktoffset >= pa and pktoffset <= pa+p[1]: 
+                        mapAddrList = [str(task.ImageFileName), int(pid), pa, p[1]]
+                        return mapAddrList
+                    else:
+                        offset += p[1]
+        return None 
