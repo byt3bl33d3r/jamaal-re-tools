@@ -277,9 +277,6 @@ class PacketType(object):
 class EthScanVTypes(obj.ProfileModification):
     """ EthScanVTypes packet structure """
     
-    # //!!  This isn't required
-    #conditions = {'os': lambda x: x == 'windows'}
-
     def modification(self, profile):        
         
         ethVtype = {
@@ -512,7 +509,7 @@ class EthScan(taskmods.DllList):
             # //Format is PACKET NUM __ visual reminded __ IPSRC __ IP SRCPORT __ DST __IP DESTPORT __ PROTOCOL . BIN  
             # // Example: ProcName_PID__0__pktnum__SRC_210.146.64.4_20480__DST_81.131.67.131_42762__TCP.bin
             if self._config.SAVE_RAW:
-                filename =  procName + "__"+ pid+ "__"+str(counter) + "__pktnum" + "__SRC_" + source +"_" + srcport  +"__DST_" + dest +"_" + destport + "__" + protoStr + ".bin"
+                filename =  procName + "__"+ str(pid)+ "__"+str(counter) + "__pktnum" + "__SRC_" + source +"_" + srcport  +"__DST_" + dest +"_" + destport + "__" + protoStr + ".bin"
                 fh = open(os.path.join(self._config.DUMP_DIR, filename), 'wb')
                 fh.write(fullpacket)
                 fh.close()
