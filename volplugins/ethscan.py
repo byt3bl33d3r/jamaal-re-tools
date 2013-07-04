@@ -14,7 +14,24 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA 
+
+# ethscan 
+# This plugin will attempt to recovere packets from memory. 
+# Packets found in memory can be saved as individual raw binary files or 
+# each packet will be saved to a pcap file. 
 #
+#ProcName: VMip.exe PID: 180  Base Address: 0x162000  End Address: 0x163000
+#IPv4 (0x0800) 
+#Protocol UDP (17)
+#Src: 172.16.176.1:31982 (00:50:56:c0:00:08), Dst: 172.16.176.255:35072 (ff:ff:ff:ff:ff:ff)
+#Data (92 Bytes)
+#0x00000000  ff ff ff ff ff ff 00 50 56 c0 00 08 08 00 45 00   .......PV.....E.
+#0x00000010  00 4e 97 dc 00 00 40 11 29 a1 ac 10 b0 01 ac 10   .N....@.).......
+#0x00000020  b0 ff ee 7c 00 89 00 3a 6d 90 67 45 01 10 00 01   ...|...:m.gE....
+#0x00000030  00 00 00 00 00 00 20 46 48 45 50 46 43 45 4c 45   .......FHEPFCELE
+#0x00000040  48 46 43 45 50 46 46 46 41 43 41 43 41 43 41 43   HFCEPFFFACACACAC
+#0x00000050  41 43 41 43 41 42 4e 00 00 20 00 01               ACACABN.....
+
 
 
 import struct
@@ -553,8 +570,8 @@ class EthScan(taskmods.DllList):
         if self._config.SAVE_PCAP:
             pcw.close()
         
-    #FindMemoryProcess
-    #def findMemoryProcess(self, addr_space, tasks, verbfd = None):
+    # // Make Physical to Process translation 
+    # // First get pid, task and pages
     def getPTP(self):    
         tasks = taskmods.DllList.calculate(self)
         for task in tasks:
@@ -565,6 +582,10 @@ class EthScan(taskmods.DllList):
                 yield pid, task, pages
                 
 
+    # // Find the ProcName/PID by searching the pagedata.  
+    # // pktoffset = physical packet offset.
+    # // If this is between a page address base address + size 
+    # // Return the last process associated with this loop
     def mapOffsetToAddr(self, outfd, pktoffset, ptpobj):
         for pid, task, pagedata in ptpobj:
             task_space = task.get_process_address_space()
