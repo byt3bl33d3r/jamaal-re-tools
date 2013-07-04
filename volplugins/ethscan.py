@@ -449,7 +449,6 @@ class EthScan(taskmods.DllList):
                 debug.error(self._config.DUMP_DIR + " is not a directory")
 
             if self._config.SAVE_PCAP != None:
-                ## Just grab the AS and scan it using our scanner
                 if not has_dpkt:
                     debug.error("Install dpkt http://code.google.com/p/dpkt/")
 
