@@ -15,10 +15,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA 
 
-# ethscan 
+# ETHSCAN - Recover ethernet packets from memory 
+# 
 # This plugin will attempt to recovere packets from memory. 
 # Packets found in memory can be saved as individual raw binary files or 
-# each packet will be saved to a pcap file. 
+# each packet will be saved to a pcap file.  
 #
 #ProcName: VMip.exe PID: 180  Base Address: 0x162000  End Address: 0x163000
 #IPv4 (0x0800) 
@@ -272,52 +273,6 @@ class PacketType(object):
         return ptype                        
 
 
-
-#class FindMemoryProcess(taskmods.MemMap):
-#    """Resolve Process from Address"""
-#
-#    def __init__(self, config, *args, **kwargs):
-#        DllList.__init__(self, config, *args, **kwargs)
-#        config.add_option("PHYSICAL-OFFSET", short_option = 'P', default = False,
-#                          cache_invalidator = False, help = "Physical Offset", action = "store_true")
-#
-
-#        config.add_option("PHYSICAL-OFFSET", short_option = 'P', default = False,
-#                          cache_invalidator = False, help = "Physical Offset", action = "store_true")
-                          
-#    def __init__(self, config, *args, **kwargs):
-#        taskmods.MemMap.__init__(self, config, *args, **kwargs)
-#        config.remove_option("PID")
-#        config.remove_option("OFFSET")
-#    
-#    def render_text(self, outfd, data):
-#        first = True
-#        for pid, task, pagedata in data:
-#            if not first:
-#                outfd.write("*" * 72 + "\n")
-#
-#            task_space = task.get_process_address_space()
-#            outfd.write("{0} pid: {1:6}\n".format(task.ImageFileName, pid))
-#            first = False
-#
-#            offset = 0
-#            if pagedata:
-#                self.table_header(outfd,
-#                                  [("Virtual", "[addrpad]"),
-#                                   ("Physical", "[addrpad]"),
-#                                   ("Size", "[addr]"),
-#                                   ("DumpFileOffset", "[addr]")])
-#
-#                for p in pagedata:
-#                    pa = task_space.vtop(p[0])
-#                    # pa can be 0, according to the old memmap, but can't == None(NoneObject)
-#                    if pa != None:
-#                        self.table_row(outfd, p[0], pa, p[1], offset)
-#                    #else:
-#                    #    outfd.write("0x{0:10x} 0x000000     0x{1:12x}\n".format(p[0], p[1]))
-#                        offset += p[1]
-#            else:
-#                outfd.write("Unable to read pages for task.\n")
 
 class EthScanVTypes(obj.ProfileModification):
     """ EthScanVTypes packet structure """
