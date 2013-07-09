@@ -49,6 +49,8 @@ import volatility.cache as cache
 from binascii import hexlify
 from binascii import unhexlify
 
+#This section needs to be moved to another area 
+#or we need to add this check to the options more specifically has_dpkt
 try:
     import dpkt 
     from dpkt import pcap 
@@ -304,6 +306,18 @@ class EthScanVTypes(obj.ProfileModification):
 
 class FindEthFrame(scan.ScannerCheck):
     """ ScannerCheck to verify the IPv4 protocol, standard header length and protocol """
+    
+    def __init__(self, address_space, needles = None):
+        scan.ScannerCheck.__init__(self, address_space)
+        if not needles:
+            needles = []
+        self.needles = needles
+        self.maxlen = 0
+        for needle in needles:
+            self.maxlen = max(self.maxlen, len(needle))
+        if not self.maxlen:
+            raise RuntimeError("No needles of any length were found for the " + self.__class__.__name__)
+    
 
     def ip_checksum(self, data):
         x = 0 
@@ -320,49 +334,60 @@ class FindEthFrame(scan.ScannerCheck):
 
     # // Finds valid packets 
     def check(self, offset):
-        
         global counterA 
-        global counterB 
+        global counterB         
         
         eth = obj.Object('ethFrame', vm = self.address_space, offset = offset)
+                
+        #print "check offset is ---------->",  offset,  "data len is ",  len(data)
         
         # // IPv4 Check   
         # // Checks the IP version becase the Ethernet type is used in the skip() function below 
         # // 4 = IPv4, 5 is (5 * 20).  The 5 in the combined  to produce the number 0x45 
         # // Note the 5 in 0x45 is not constant.  0x4 is so we check just for 0x4 
         if eth.ipVer & 0xF0 == 0x40: 
-            counterA += 1
-            checksum = ""
+            if eth.ipTotalLen <= 1500:
             
-            # // build the checksum string ipCheckSum is currently an Array 
-            for cs in eth.ipCheckSum:
-                checksum += chr(cs)
-        # // checksum() is used to compute if a packet is vaild based upon the packets header 
-        # // The checksum will return 0 if it is a valid packet                 
-            checksum = self.ip_checksum(checksum)
-            if checksum == 0:
-                return eth
-            
-        # //TODO IPv6 Check  
-        #  //convert eth.ethType from long to int with int(eth.ethType)
-        #  // if int(eth.ethType) == 0x86dd: 
-        
-    
-    #// Skip bytes based upon ethertypes from the PacketType Class 
+                counterA += 1
+                checksum = ""
+                
+                # // build the checksum string ipCheckSum is currently an Array 
+                for cs in eth.ipCheckSum:
+                    checksum += chr(cs)
+            # // checksum() is used to compute if a packet is vaild based upon the packets header 
+            # // The checksum will return 0 if it is a valid packet                 
+                checksum = self.ip_checksum(checksum)
+                if checksum == 0:
+                        return eth
+                
+
     def skip(self, data, offset):
+        nlist = []
         try:
             # !this goes through all the ethertypes and searchers for the return key header in the ethertypes dictionary 
             # !probably a cleanerly way of doing this
-            for ethHeader in PacketType.ethertypes.keys():
-                nstep = struct.pack('>H', ethHeader)   
-                nextval = data.index(nstep, offset + 1)
-                return (nextval-len(nstep)-0xC) - offset
+            for needle in self.needles:
+                nextval = data.index(needle, offset + 1)
+                nlist.append(nextval)
+            if len(nlist) == 2:
+                nextval = min(nlist)
+            return (nextval-len(needle)-0xC) - offset
         except ValueError:
             ## Substring is not found - skip to the end of this data buffer
-            return len(data) - offset            
-            
+            return len(data) - offset       
+
 class EthScanner(scan.BaseScanner):
-    checks = [('FindEthFrame', {})]
+    #checks = [('FindEthFrame', {})]
+    
+    def __init__(self, needles = None):
+        self.needles = needles
+        self.checks = [ ("FindEthFrame", {'needles':needles})]
+        scan.BaseScanner.__init__(self)    
+
+    # /?  Do we need this?
+    def scan(self, address_space, offset = 0, maxlen = None):
+        for offset in scan.BaseScanner.scan(self, address_space, offset, maxlen):
+            yield offset
 
 class EthScan(taskmods.DllList):
     
@@ -406,10 +431,20 @@ class EthScan(taskmods.DllList):
 
         address_space = utils.load_as(self._config, astype = 'physical')
 
-        for offset in EthScanner().scan(address_space):
+        # fix this later 
+        ethHeaderIPV4 = 0x0800
+        ethHeaderIPV6 = 0x86DD
+        
+        nstepv4 = struct.pack('>H', ethHeaderIPV4)
+        nstepv6 = struct.pack('>H', ethHeaderIPV6)
+
+        scanner = EthScanner(needles = [nstepv6,nstepv4])
+
+        for offset in scanner.scan(address_space):
             objct = obj.Object('ethFrame', vm = address_space, offset = offset)
             yield  objct
                 
+
 
     def render_text(self, outfd, data):
         
@@ -526,6 +561,7 @@ class EthScan(taskmods.DllList):
     def getPTP(self):    
         tasks = taskmods.DllList.calculate(self)
         for task in tasks:
+            print "task",  task
             if task.UniqueProcessId:
                 pid = task.UniqueProcessId
                 task_space = task.get_process_address_space()
