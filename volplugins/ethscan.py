@@ -1,4 +1,4 @@
-# Volatility
+# Volatility    
 # Copyright (c) 2010, 2011, 2012, 2013 Jamaal Speights <jamaal.speights@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
@@ -21,6 +21,7 @@
 # Packets found in memory can be saved as individual raw binary files or 
 # each packet will be saved to a pcap file.  
 #
+#
 #ProcName: VMip.exe PID: 180  Base Address: 0x162000  End Address: 0x163000
 #IPv4 (0x0800) 
 #Protocol UDP (17)
@@ -34,9 +35,11 @@
 #0x00000050  41 43 41 43 41 42 4e 00 00 20 00 01               ACACABN.....
 
 
-
+import pprint 
 import struct
 import os 
+import volatility.plugins.common as common 
+
 import volatility.commands as commands
 import volatility.utils as utils
 import volatility.scan as scan
@@ -44,13 +47,11 @@ import volatility.obj as obj
 import volatility.debug as debug
 import volatility.plugins.taskmods as taskmods
 import volatility.cache as cache
-
-
 from binascii import hexlify
 from binascii import unhexlify
 
-#This section needs to be moved to another area 
-#or we need to add this check to the options more specifically has_dpkt
+#compair command line option to has_dpkt
+#-p pcap.out  if has_dpkt == True: 
 try:
     import dpkt 
     from dpkt import pcap 
@@ -59,531 +60,720 @@ try:
 except ImportError:
     has_dpkt = False
 
-global counterA 
-global counterB 
-counterA = 0 
-counterB = 0
-        
-class PacketType(object):
-    """PacketType Class returns Ethernet and Protocol types by get_ethtype and get_prototye methods"""
-    protocols = {
-                            0x00: ['HOPOPT', 0],
-                            0x01: ['ICMP', 0],
-                            0x02: ['IGMP', 0],
-                            0x03: ['GGP', 0],
-                            0x04: ['IPv4', 0],
-                            0x05: ['ST', 0],
-                            0x06: ['TCP', 0],
-                            0x07: ['CBT', 0],
-                            0x08: ['EGP', 0],
-                            0x09: ['IGP', 0],
-                            0x0A: ['BBN-RCC-MON', 0],
-                            0x0B: ['NVP-II', 0],
-                            0x0C: ['PUP', 0],
-                            0x0D: ['ARGUS', 0],
-                            0x0E: ['EMCON', 0],
-                            0x0F: ['XNET', 0],
-                            0x10: ['CHAOS', 0],
-                            0x11: ['UDP', 0],
-                            0x12: ['MUX', 0],
-                            0x13: ['DCN-MEAS', 0],
-                            0x14: ['HMP', 0],
-                            0x15: ['PRM', 0],
-                            0x16: ['XNS-IDP', 0],
-                            0x17: ['TRUNK-1', 0],
-                            0x18: ['TRUNK-2', 0],
-                            0x19: ['LEAF-1', 0],
-                            0x1A: ['LEAF-2', 0],
-                            0x1B: ['RDP', 0],
-                            0x1C: ['IRTP', 0],
-                            0x1D: ['ISO-TP4', 0],
-                            0x1E: ['NETBLT', 0],
-                            0x1F: ['MFE-NSP', 0],
-                            0x20: ['MERIT-INP', 0],
-                            0x21: ['DCCP', 0],
-                            0x22: ['3PC', 0],
-                            0x23: ['IDPR', 0],
-                            0x24: ['XTP', 0],
-                            0x25: ['DDP', 0],
-                            0x26: ['IDPR-CMTP', 0],
-                            0x27: ['TP++', 0],
-                            0x28: ['IL', 0],
-                            0x29: ['IPv6', 0],
-                            0x2A: ['SDRP', 0],
-                            0x2B: ['IPv6-Route', 0],
-                            0x2C: ['IPv6-Frag', 0],
-                            0x2D: ['IDRP', 0],
-                            0x2E: ['RSVP', 0],
-                            0x2F: ['GRE', 0],
-                            0x30: ['MHRP', 0],
-                            0x31: ['BNA', 0],
-                            0x32: ['ESP', 0],
-                            0x33: ['AH', 0],
-                            0x34: ['I-NLSP', 0],
-                            0x35: ['SWIPE', 0],
-                            0x36: ['NARP', 0],
-                            0x37: ['MOBILE', 0],
-                            0x38: ['TLSP', 0],
-                            0x39: ['SKIP', 0],
-                            0x3A: ['IPv6-ICMP', 0],
-                            0x3B: ['IPv6-NoNxt', 0],
-                            0x3C: ['IPv6-Opts', 0],
-                            0x3D: ['Any host internal protocol', 0],
-                            0x3E: ['CFTP', 0],
-                            0x3F: ['Any local network', 0],
-                            0x40: ['SAT-EXPAK', 0],
-                            0x41: ['KRYPTOLAN', 0],
-                            0x42: ['RVD MIT', 0],
-                            0x43: ['IPPC', 0],
-                            0x44: ['Any distributed file system ', 0],
-                            0x45: ['SAT-MON SATNET', 0],
-                            0x46: ['VISA', 0],
-                            0x47: ['IPCV', 0],
-                            0x48: ['CPNX', 0],
-                            0x49: ['CPHB', 0],
-                            0x4A: ['WSN', 0],
-                            0x4B: ['PVP', 0],
-                            0x4C: ['BR-SAT-MON', 0],
-                            0x4D: ['SUN-ND', 0],
-                            0x4E: ['WB-MON', 0],
-                            0x4F: ['WB-EXPAK', 0],
-                            0x50: ['ISO-IP', 0],
-                            0x51: ['VMTP', 0],
-                            0x52: ['SECURE-VMTP', 0],
-                            0x53: ['VINES', 0],
-                            0x54: ['TTP', 0],
-                            0x54: ['IPTM', 0],
-                            0x55: ['NSFNET-IGP', 0],
-                            0x56: ['DGP', 0],
-                            0x57: ['TCF', 0],
-                            0x58: ['EIGRP', 0],
-                            0x59: ['OSPF', 0],
-                            0x5A: ['Sprite-RPC', 0],
-                            0x5B: ['LARP', 0],
-                            0x5C: ['MTP Multicast Transport Protocol', 0],
-                            0x5D: ['AX.25', 0],
-                            0x5E: ['IPIP', 0],
-                            0x5F: ['MICP', 0],
-                            0x60: ['SCC-SP', 0],
-                            0x61: ['ETHERIP', 0],
-                            0x62: ['ENCAP', 0],
-                            0x63: ['Any private encryption scheme', 0],
-                            0x64: ['GMTP', 0],
-                            0x65: ['IFMP', 0],
-                            0x66: ['PNNI', 0],
-                            0x67: ['PIM', 0],
-                            0x68: ['ARIS', 0],
-                            0x69: ['SCPS', 0],
-                            0x6A: ['QNX', 0],
-                            0x6B: ['A/N', 0],
-                            0x6C: ['IPComp', 0],
-                            0x6D: ['SNP', 0],
-                            0x6E: ['Compaq-Peer', 0],
-                            0x6F: ['IPX-in-IP', 0],
-                            0x70: ['VRRP', 0],
-                            0x71: ['PGM', 0],
-                            0x72: ['Any 0-hop protocol', 0],
-                            0x73: ['L2TP', 0],
-                            0x74: ['DDX', 0],
-                            0x75: ['IATP', 0],
-                            0x76: ['STP', 0],
-                            0x77: ['SRP', 0],
-                            0x78: ['UTI', 0],
-                            0x79: ['SMP', 0],
-                            0x7A: ['SM', 0],
-                            0x7B: ['PTP', 0],
-                            0x7C: ['IS-IS over IPv4', 0],
-                            0x7D: ['FIRE', 0],
-                            0x7E: ['CRTP', 0],
-                            0x7F: ['CRUDP', 0],
-                            0x80: ['SSCOPMCE', 0],
-                            0x81: ['IPLT', 0],
-                            0x82: ['SPS', 0],
-                            0x83: ['PIPE', 0],
-                            0x84: ['SCTP', 0],
-                            0x85: ['FC', 0],
-                            0x86: ['RSVP-E2E-IGNORE', 0],
-                            0x87: ['Mobility Header', 0],
-                            0x88: ['UDP Lite', 0],
-                            0x89: ['MPLS-in-IP', 0],
-                            0x8A: ['manet', 0],
-                            0x8B: ['HIP', 0],
-                            0x8C: ['Shim6', 0],
-                            0xFE: ['Unknown', 0],
+protocols = {
+        0x00:  'HOPOPT', 
+        0x01:  'ICMP', 
+        0x02:  'IGMP', 
+        0x03:  'GGP', 
+        0x04:  'IPv4', 
+        0x05:  'ST', 
+        0x06:  'TCP', 
+        0x07:  'CBT', 
+        0x08:  'EGP', 
+        0x09:  'IGP', 
+        0x0A:  'BBN-RCC-MON', 
+        0x0B:  'NVP-II', 
+        0x0C:  'PUP', 
+        0x0D:  'ARGUS', 
+        0x0E:  'EMCON', 
+        0x0F:  'XNET', 
+        0x10:  'CHAOS', 
+        0x11:  'UDP', 
+        0x12:  'MUX', 
+        0x13:  'DCN-MEAS', 
+        0x14:  'HMP', 
+        0x15:  'PRM', 
+        0x16:  'XNS-IDP', 
+        0x17:  'TRUNK-1', 
+        0x18:  'TRUNK-2', 
+        0x19:  'LEAF-1', 
+        0x1A:  'LEAF-2', 
+        0x1B:  'RDP', 
+        0x1C:  'IRTP', 
+        0x1D:  'ISO-TP4', 
+        0x1E:  'NETBLT', 
+        0x1F:  'MFE-NSP', 
+        0x20:  'MERIT-INP', 
+        0x21:  'DCCP', 
+        0x22:  '3PC', 
+        0x23:  'IDPR', 
+        0x24:  'XTP', 
+        0x25:  'DDP', 
+        0x26:  'IDPR-CMTP', 
+        0x27:  'TP++', 
+        0x28:  'IL', 
+        0x29:  'IPv6', 
+        0x2A:  'SDRP', 
+        0x2B:  'IPv6-Route', 
+        0x2C:  'IPv6-Frag', 
+        0x2D:  'IDRP', 
+        0x2E:  'RSVP', 
+        0x2F:  'GRE', 
+        0x30:  'MHRP', 
+        0x31:  'BNA', 
+        0x32:  'ESP', 
+        0x33:  'AH', 
+        0x34:  'I-NLSP', 
+        0x35:  'SWIPE', 
+        0x36:  'NARP', 
+        0x37:  'MOBILE', 
+        0x38:  'TLSP', 
+        0x39:  'SKIP', 
+        0x3A:  'IPv6-ICMP', 
+        0x3B:  'IPv6-NoNxt', 
+        0x3C:  'IPv6-Opts', 
+        0x3D:  'Any host internal protocol', 
+        0x3E:  'CFTP', 
+        0x3F:  'Any local network', 
+        0x40:  'SAT-EXPAK', 
+        0x41:  'KRYPTOLAN', 
+        0x42:  'RVD MIT', 
+        0x43:  'IPPC', 
+        0x44:  'Any distributed file system ', 
+        0x45:  'SAT-MON SATNET', 
+        0x46:  'VISA', 
+        0x47:  'IPCV', 
+        0x48:  'CPNX', 
+        0x49:  'CPHB', 
+        0x4A:  'WSN', 
+        0x4B:  'PVP', 
+        0x4C:  'BR-SAT-MON', 
+        0x4D:  'SUN-ND', 
+        0x4E:  'WB-MON', 
+        0x4F:  'WB-EXPAK', 
+        0x50:  'ISO-IP', 
+        0x51:  'VMTP', 
+        0x52:  'SECURE-VMTP', 
+        0x53:  'VINES', 
+        0x54:  'TTP', 
+        0x54:  'IPTM', 
+        0x55:  'NSFNET-IGP', 
+        0x56:  'DGP', 
+        0x57:  'TCF', 
+        0x58:  'EIGRP', 
+        0x59:  'OSPF', 
+        0x5A:  'Sprite-RPC', 
+        0x5B:  'LARP', 
+        0x5C:  'MTP Multicast Transport Protocol', 
+        0x5D:  'AX.25', 
+        0x5E:  'IPIP', 
+        0x5F:  'MICP', 
+        0x60:  'SCC-SP', 
+        0x61:  'ETHERIP', 
+        0x62:  'ENCAP', 
+        0x63:  'Any private encryption scheme', 
+        0x64:  'GMTP', 
+        0x65:  'IFMP', 
+        0x66:  'PNNI', 
+        0x67:  'PIM', 
+        0x68:  'ARIS', 
+        0x69:  'SCPS', 
+        0x6A:  'QNX', 
+        0x6B:  'A/N', 
+        0x6C:  'IPComp', 
+        0x6D:  'SNP', 
+        0x6E:  'Compaq-Peer', 
+        0x6F:  'IPX-in-IP', 
+        0x70:  'VRRP', 
+        0x71:  'PGM', 
+        0x72:  'Any 0-hop protocol', 
+        0x73:  'L2TP', 
+        0x74:  'DDX', 
+        0x75:  'IATP', 
+        0x76:  'STP', 
+        0x77:  'SRP', 
+        0x78:  'UTI', 
+        0x79:  'SMP', 
+        0x7A:  'SM', 
+        0x7B:  'PTP', 
+        0x7C:  'IS-IS over IPv4', 
+        0x7D:  'FIRE', 
+        0x7E:  'CRTP', 
+        0x7F:  'CRUDP', 
+        0x80:  'SSCOPMCE', 
+        0x81:  'IPLT', 
+        0x82:  'SPS', 
+        0x83:  'PIPE', 
+        0x84:  'SCTP', 
+        0x85:  'FC', 
+        0x86:  'RSVP-E2E-IGNORE', 
+        0x87:  'Mobility Header', 
+        0x88:  'UDP Lite', 
+        0x89:  'MPLS-in-IP', 
+        0x8A:  'manet', 
+        0x8B:  'HIP', 
+        0x8C:  'Shim6', 
+        0xFE:  'Unknown'
+}
+
+
+# // <ethernet future eth types > // 
+ethertypes = {
+    0x0800:  'IPv4', 
+    0x0806:  'ARP', 
+    0x0842:  'Wake-on-LAN', 
+    0x22F3:  'IETF TRILL Protocol', 
+    0x6003:  'DECnet Phase IV', 
+    0x8035:  'Reverse ARP', 
+    0x809B:  'AppleTalk', 
+    0x80F3:  'AppleTalk ARP', 
+    0x8100:  'VLAN-tagged', 
+    0x8137:  'IPX', 
+    0x8138:  'IPX', 
+    0x8204:  'QNX Qnet', 
+    0x86DD:  'IPv6', 
+    0x8808:  'Ethernet flow control', 
+    0x8809:  'Slow Protocols (IEEE 802.3)', 
+    0x8819:  'CobraNet', 
+    0x8847:  'MPLS unicast', 
+    0x8848:  'MPLS multicast', 
+    0x8863:  'PPPoE Discovery Stage', 
+    0x8864:  'PPPoE Session Stage', 
+    0x8870:  'Jumbo Frames', 
+    0x887B:  'HomePlug 1.0 MME', 
+    0x888E:  'IEEE 802.1X', 
+    0x8892:  'PROFINET Protocol', 
+    0x889A:  'SCSI over Ethernet', 
+    0x88A2:  'ATA over Ethernet', 
+    0x88A4:  'EtherCAT', 
+    0x88A8:  '802.1ad & IEEE 802.1aq', 
+    0x88AB:  'Ethernet Powerlink', 
+    0x88CC:  'LLDP', 
+    0x88CD:  'SERCOS', 
+    0x88E1:  'HomePlug AV MME', 
+    0x88E3:  'Media Redundancy Protocol (IEC62439-2)', 
+    0x88E5:  'MAC security (IEEE 802.1AE)', 
+    0x88F7:  'Precision Time Protocol (IEEE 1588)', 
+    0x8902:  'IEEE 802.1ag', 
+    0x8906:  'FCoE', 
+    0x8914:  'FCoE Initialization Protocol', 
+    0x8915:  'RDMA over Converged Ethernet (RoCE)', 
+    0x9000:  'Ethernet Configuration Testing Protocol', 
+    0x9100:  'Q-in-Q', 
+    0xCAFE:  'Veritas Low Latency Transport (LLT)'
+}             
+
+ether_current_types = {
+    0x0800:  'IPv4', 
+    0x86DD:  'IPv6', 
+}             
+
+ipv4pkt = {
+            'ethDst' :'',
+            'ethSrc': '',     
+            'ethType': '',
+            'ipv4Ver': '',
+            'ipv4DSF':'',
+            'ipv4TotalLen': '',
+            'ipv4IDENT': '',
+            'ipv4FLAG': '',
+            'ipv4TTL': '', 
+            'ipv4ProtoType': '',
+            'ipv4Checksum': '',
+            'ipv4Source': '',
+            'ipv4Dest': '',
+             'ipv4SrcPort': '',
+             'ipv4DstPort': ''  
     }
-                        
-    ethertypes = {
-                            0x0800: ['IPv4', 0, None],
-                            0x0806: ['ARP', 0, None],
-                            0x0842: ['Wake-on-LAN', 0, None],
-                            0x22F3: ['IETF TRILL Protocol', 0, None],
-                            0x6003: ['DECnet Phase IV', 0, None],
-                            0x8035: ['Reverse ARP', 0, None],
-                            0x809B: ['AppleTalk', 0, None],
-                            0x80F3: ['AppleTalk ARP', 0, None],
-                            0x8100: ['VLAN-tagged', 0, None],
-                            0x8137: ['IPX', 0, None],
-                            0x8138: ['IPX', 0, None],
-                            0x8204: ['QNX Qnet', 0, None],
-                            0x86DD: ['IPv6', 0, None],
-                            0x8808: ['Ethernet flow control', 0, None],
-                            0x8809: ['Slow Protocols (IEEE 802.3)', 0, None],
-                            0x8819: ['CobraNet', 0, None],
-                            0x8847: ['MPLS unicast', 0, None],
-                            0x8848: ['MPLS multicast', 0, None],
-                            0x8863: ['PPPoE Discovery Stage', 0, None],
-                            0x8864: ['PPPoE Session Stage', 0, None],
-                            0x8870: ['Jumbo Frames', 0, None],
-                            0x887B: ['HomePlug 1.0 MME', 0, None],
-                            0x888E: ['IEEE 802.1X', 0, None],
-                            0x8892: ['PROFINET Protocol', 0, None],
-                            0x889A: ['SCSI over Ethernet', 0, None],
-                            0x88A2: ['ATA over Ethernet', 0, None],
-                            0x88A4: ['EtherCAT', 0, None],
-                            0x88A8: ['802.1ad & IEEE 802.1aq', 0, None],
-                            0x88AB: ['Ethernet Powerlink', 0, None],
-                            0x88CC: ['LLDP', 0, None],
-                            0x88CD: ['SERCOS', 0, None],
-                            0x88E1: ['HomePlug AV MME', 0, None],
-                            0x88E3: ['Media Redundancy Protocol (IEC62439-2)', 0, None],
-                            0x88E5: ['MAC security (IEEE 802.1AE)', 0, None],
-                            0x88F7: ['Precision Time Protocol (IEEE 1588)', 0, None],
-                            0x8902: ['IEEE 802.1ag', 0, None],
-                            0x8906: ['FCoE', 0, None],
-                            0x8914: ['FCoE Initialization Protocol', 0, None],
-                            0x8915: ['RDMA over Converged Ethernet (RoCE)', 0, None],
-                            0x9000: ['Ethernet Configuration Testing Protocol', 0, None],
-                            0x9100: ['Q-in-Q', 0, None],
-                            0xCAFE: ['Veritas Low Latency Transport (LLT)', 0, None],
-                            #0x0000: ['Unknown', 0, None],
-        }                       
+
+ipv6pkt = {
+             'ethv6Dst':'',                 # //<IPV6  Frame & Packet Structure
+             'ethv6Src': '',                 
+             'ipv6Ver': '',
+            'ipv6TotalLen':'',
+            'ipv6NextHeader': '',
+            'ipv6CheckSumUDP': '',
+            'ipv6CheckSumTCP': '',
+            'ipv6Src': '',
+            'ipv6Dst':''
+    }
+      
         
+class PacketDataClass(object):
+    """PacketDataClass Class returns Ethernet and Protocol types by get_ethtype and get_prototye methods"""
+    def __init__(self):
+        self.MTU = 1500
+        self.checksum = ""
+        self.checksumValue = 0 
+        self.IPv4Header = 0x0800
+        self.IPv6Header = 0x86DD        
+        self.IPv4 =  struct.pack('>H', self.IPv4Header)   
+        self.IPv6 =  struct.pack('>H', self.IPv6Header)   
+        self.ethertypes = ethertypes
+        self.protocols = protocols
+              
+    def checksum_ipv4(self, data):
+        """checksum vlidation for ipv4,  Returns zero on success"""
+        z=0 
+        carry_byte=rbytes=""
+        for i in range(0, len(data) - 1, 2):
+            z += struct.unpack('>H', data[i:i+2])[0]
+        checksum = hex(z)[2:]
+        carry_byte = checksum[0]
+        rbytes= checksum[1:] #remainder_bytes
+        checksum = int(rbytes, 0x10)+int(carry_byte, 0x10)
+        return (~checksum & 0xFFFF)   #verified bytes   
+        
+    def ipv6_ispktValid(self, eth):
+        """ Checks last 3 bytes of Src/Dst Addr to last 6 bytes of Src/Dst Mac address 
+              Bytes should be equal validing the packet as IPv6 """
+                
+        ethsrcbytes = eth.obj_vm.read(eth.ethv6Src.obj_offset, 6)
+        ethdstbytes = eth.obj_vm.read(eth.ethv6Dst.obj_offset, 6)
+
+        ipsrcbytes = eth.obj_vm.read(eth.ipv6Src.obj_offset,  eth.ipv6Src.size())
+        ipdstbytes = eth.obj_vm.read(eth.ipv6Dst.obj_offset,  eth.ipv6Dst.size())
+        
+        return any((ethsrcbytes[-3:], ethdstbytes[-3:], ipsrcbytes[-3:], ipdstbytes[-3:]))
+    
     
     def get_ethtype(self, lookup):
-        # ! There has to be a better way.  
-        #unpack binary data 
-        ethstr = struct.unpack('>h',lookup)[0]
-        #convert it to 0x0800 format 
-        ethstr =  "{0:#0{1}x}".format(ethstr,6)
-        #look up string as int 
-        etype = self.ethertypes.get(int(ethstr, 0x10), "Unkown")[0]
-        return etype,ethstr
+        """ returns the ethernet type from lookup (int) returning (Pv4(str)  2048(int) 0x0800(str))"""
+        ethnum = lookup
+        ethstr = self.ethertypes.get(ethnum, "Unknown")
+        ethnumstr = "0x%04X" % ethnum
+        return ethstr, ethnum, ethnumstr  
         
     def get_prototye(self, lookup):
-        ptype = "Unknown"
-        ptype = self.protocols.get(lookup, "UnKnown")
-        return ptype                        
+        """ returns the protocol type from lookup (int) returning (TCP(str), 6(int) 0x6(str))"""
+        protonum = lookup
+        protostr = self.protocols.get(protonum, "Unknown")
+        protonumstr = "0x%04X" % protonum        
+        return protostr,protonum, protonumstr
 
+    def check_IPV4(self, eth):
+        """returns True if frame has valid IPv4 packet"""
+        if eth.ipv4Ver & 0xF0 == 0x40: 
+            if eth.ipv4TotalLen <= self.MTU:
+                self.checksum = ''.join([chr(cs) for cs in eth.ipv4CheckSumArray])
+                self.checksumValue = self.checksum_ipv4(self.checksum)
 
-
+                if self.checksumValue == 0:
+                    return True 
+                else:
+                    return False 
+                    
+    def check_IPV6(self, eth):
+        """returns True if frame has valid IPv4 packet"""
+        
+        if eth.ipv6Ver == 0x60:  # //<fix this 
+            if eth.ethType ==  0x86dd:
+                self.ipv6_ispktValid(eth)
+                return True
+            else:
+                return False
+            
+            
 class EthScanVTypes(obj.ProfileModification):
     """ EthScanVTypes packet structure """
     
     def modification(self, profile):        
-        
+        """updates profile with ethVtype which helps define frame/packet data structure for ethernet/ipv4/ipv6 """
         ethVtype = {
         'ethFrame': [ 0x0, {
             'ethDst' : [ 0x0, ['array', 6,  ['unsigned char']]],
-            'ethSrc': [ 0x6, ['array', 6,  ['unsigned char']]],
-            'ethType': [ 0x0c, ['unsigned short']],
-            'ipVer': [0x0e, ['unsigned char']], 
-            'ipCheckSum': [ 0x0e, ['array', 20,  ['unsigned char']]],            
-            'ipDSF': [0xf, ['unsigned char']], 
-            'ipTotalLen': [0x10, ['unsigned be short']], 
-            'ipIDENT': [0x12, ['unsigned short']], 
-            'ipFLAG': [0x14, ['unsigned char']],
-            'ipOffSet': [0x14, ['unsigned short']],         # // ipOffSet = ipFLAG offset + size of 2 bytes
-            'ipTTL': [0x16, ['unsigned char']],  
-            'ipProtoType': [0x17, ['unsigned char']],  
-            'ipChecksum': [0x18, ['unsigned short']],  
-            'ipSource': [0x1a, ['IpAddress']],  
-            'ipDest': [0x1e, ['IpAddress']],  
-             'ipSrcPort' : [0x22, ['unsigned short']],  
-             'ipDstPort' : [0x24, ['unsigned short']],  
+            'ethSrc': [ 0x6, ['array', 6,  ['unsigned char']]],       
+            'ethType': [ 0x0c, ['unsigned be short']],         
+            'ipv4Ver': [0x0e, ['unsigned char']], 
+            'ipv4CheckSumArray': [ 0x0e, ['array', 20,  ['unsigned char']]],            
+            'ipv4DSF': [0xf, ['unsigned char']], 
+            'ipv4TotalLen': [0x10, ['unsigned be short']], 
+            'ipv4IDENT': [0x12, ['unsigned be short']], 
+            'ipv4FLAG': [0x14, ['unsigned char']],
+            'ipv4OffSet': [0x14, ['unsigned short']],         # //<ipv4OffSet = ipv4FLAG offset + size of 2 bytes >//
+            'ipv4TTL': [0x16, ['unsigned char']],  
+            'ipv4ProtoType': [0x17, ['unsigned char']],  
+            'ipv4Checksum': [0x18, ['unsigned be short']],  
+            'ipv4Source': [0x1a, ['IpAddress']],  
+            'ipv4Dest': [0x1e, ['IpAddress']],  
+             'ipv4SrcPort' : [0x22, ['unsigned short']],  
+             'ipv4DstPort' : [0x24, ['unsigned short']],  
+             'ethv6Dst': [0x0, ['Ipv6Address']],                 # //<IPV6  Frame & Packet Structure
+             'ethv6Src': [0x6, ['Ipv6Address']],                 
+             'ipv6Ver': [0x0e, ['unsigned char']], 
+            'ipv6TotalLen': [0x12, ['unsigned be short']],             
+            'ipv6NextHeader': [0x13, ['unsigned char']], 
+            'ipv6CheckSumUDP': [0x38, ['unsigned short']],     
+            'ipv6CheckSumTCP': [0x46, ['unsigned short']],          
+            'ipv6Src': [0x16, ['Ipv6Address']],  
+            'ipv6Dst': [0x26, ['Ipv6Address']],  
                             }], 
         }
         profile.vtypes.update(ethVtype)
 
 class FindEthFrame(scan.ScannerCheck):
     """ ScannerCheck to verify the IPv4 protocol, standard header length and protocol """
-    
     def __init__(self, address_space, needles = None):
-        scan.ScannerCheck.__init__(self, address_space)
-        if not needles:
-            needles = []
-        self.needles = needles
-        self.maxlen = 0
-        for needle in needles:
-            self.maxlen = max(self.maxlen, len(needle))
-        if not self.maxlen:
-            raise RuntimeError("No needles of any length were found for the " + self.__class__.__name__)
-    
+        scan.ScannerCheck.__init__(self, address_space) 
+        self.packet =  PacketDataClass()
+        self.ipv4 = self.packet.IPv4    # //<0x0800 (bin)
+        self.ipv6 = self.packet.IPv6    # //<0x86dd (bin)
+        self.ipv4Header = self.packet.IPv4Header    #0x0800 (int)
+        self.ipv6Header = self.packet.IPv6Header    #0x86dd (int)
+        self.MTU = self.packet.MTU
+        self.nextvalv4 = 0 
+        self.nextvalv6  = 0 
+        self.nextValue = 0 
+        
 
-    def ip_checksum(self, data):
-        x = 0 
-        y = 0 
-        for i in range(0, len(data) - 1, 2):
-            y = hexlify(data[i:i+2])
-            x+=int(y, 0x10)
-        checksum =  hex(x)[2:]
-        carry_byte = checksum[0]
-        rbytes= checksum[1:] #remainder_bytes
-        checksum = int(rbytes, 0x10)+int(carry_byte, 0x10)
-        return (~checksum & 0xFFFF)   #verified bytes       
-
-
-    # // Finds valid packets 
     def check(self, offset):
-        global counterA 
-        global counterB         
-        
+        """checks for valid ipv4/ipv6 packets"""    
+
         eth = obj.Object('ethFrame', vm = self.address_space, offset = offset)
-                
-        #print "check offset is ---------->",  offset,  "data len is ",  len(data)
         
-        # // IPv4 Check   
-        # // Checks the IP version becase the Ethernet type is used in the skip() function below 
-        # // 4 = IPv4, 5 is (5 * 20).  The 5 in the combined  to produce the number 0x45 
-        # // Note the 5 in 0x45 is not constant.  0x4 is so we check just for 0x4 
-        if eth.ipVer & 0xF0 == 0x40: 
-            if eth.ipTotalLen <= 1500:
-            
-                counterA += 1
-                checksum = ""
-                
-                # // build the checksum string ipCheckSum is currently an Array 
-                for cs in eth.ipCheckSum:
-                    checksum += chr(cs)
-            # // checksum() is used to compute if a packet is vaild based upon the packets header 
-            # // The checksum will return 0 if it is a valid packet                 
-                checksum = self.ip_checksum(checksum)
-                if checksum == 0:
-                        return eth
-                
+        # //<IPv4 header check so check_IPV4() method isnt called needlesssly 
+        if eth.ethType == self.ipv4Header:
+            if self.packet.check_IPV4(eth):
+                return eth
 
+        if eth.ethType == self.ipv6Header:
+            if self.packet.check_IPV6(eth):
+                return eth
+
+    # //<Skip bytes based upon ethertypes from the PacketDataClass Class 
     def skip(self, data, offset):
-        nlist = []
         try:
-            # !this goes through all the ethertypes and searchers for the return key header in the ethertypes dictionary 
-            # !probably a cleanerly way of doing this
-            for needle in self.needles:
-                nextval = data.index(needle, offset + 1)
-                nlist.append(nextval)
-            if len(nlist) == 2:
-                nextval = min(nlist)
-            return (nextval-len(needle)-0xC) - offset
-        except ValueError:
-            ## Substring is not found - skip to the end of this data buffer
-            return len(data) - offset       
-
-class EthScanner(scan.BaseScanner):
-    #checks = [('FindEthFrame', {})]
-    
-    def __init__(self, needles = None):
-        self.needles = needles
-        self.checks = [ ("FindEthFrame", {'needles':needles})]
-        scan.BaseScanner.__init__(self)    
-
-    # /?  Do we need this?
-    def scan(self, address_space, offset = 0, maxlen = None):
-        for offset in scan.BaseScanner.scan(self, address_space, offset, maxlen):
-            yield offset
-
-class EthScan(taskmods.DllList):
-    
-    """Scans for TCP/UDP packet fragments in memory"""
-    
-    def __init__(self, config, *args, **kwargs):
-        taskmods.DllList.__init__(self, config, *args, **kwargs)
-        #commands.Command.__init__(self, config, *args, **kwargs)
-        config.remove_option("OFFSET")
-        config.add_option('DUMP-DIR', short_option = 'D', default = None,
-                          cache_invalidator = False,
-                          help = 'Directory in which to dump executable files')
-        config.add_option('SAVE-PCAP', short_option = 'P', default = None,
-                          cache_invalidator = False,
-                          help = 'Create a pcap file from recovered packets of given name: "Example: -p out.pcap" (requires dpkt)')
-        config.add_option("SAVE-RAW", short_option = 'r', default = False, action = 'store_true',
-                        help = 'Create binary files of each pcap found in memory based off the packet counter: ')
-                        
-    def calculate(self):       
-
-        # // some what redundant method for checking what options have been set easily 
-        oplist = ["dump_dir","save_pcap", "save_raw"]
-        dumpDir = 0
-        for opkeys in self._config.opts.keys():
-            if opkeys in oplist:
-                dumpDir = 1 
+            self.nextvalv4 = data.index(self.ipv4, offset + 1)
+            self.nextvalv6 = data.index(self.ipv6, offset + 1)
+            
+            if self.nextvalv4 != self.nextvalv6:
+                self.nextValue = min(self.nextvalv4, self.nextvalv6)
             else:
-                pass  
+                self.nextValue = max(self.nextvalv4, self.nextvalv6)
+            
+            # //<return() 
+            # //<len(self.ipv4) == 2 
+            # //<0xC = ethFrame start 
+            return (self.nextValue-len(self.ipv4)-0xC)-offset 
+            
+        except ValueError:
+            print "Checking next buffer",  hex(len(data) - offset)
+            # //<Substring is not found - skip to the end of this data buffer
+            return len(data) - offset            
+            
+class EthScanner(scan.BaseScanner):
+    checks = [('FindEthFrame', {})]
 
-        # // Check to make sure our dumpdir is real and set 
-        # // Check to make sure we have dpkt installed 
-        if dumpDir:
-            if self._config.DUMP_DIR == None:
+class EthDisplayControl(taskmods.DllList):
+    """Controls data, options and text formatting"""    
+    def __init__(self, config, address_space, *args, **kwargs):
+        taskmods.DllList.__init__(self, config, *args, **kwargs)
+        self.config = config         
+        self.config.remove_option("OFFSET")        
+        self.address_space = address_space
+        self.IPv4Header = 0x0800
+        self.IPv6Header = 0x86DD           
+        self.ipv4pkt = ipv4pkt
+        self.ipv6pkt = ipv6pkt
+        self.pktbuilt = False 
+        self.etype = None 
+        self.protocols = protocols
+        self.ethertypes = ether_current_types
+        self.filterset = 0 
+        self.tmppkt = ""
+        self.pkt_string = "" 
+        self.counter = 1
+        
+        # //< self.taskobj = self.get_tasks() >//
+        # //<self.get_task() returns either a task object or False  >//
+        # //<if it returns a task object, we know we're on a windows system >//
+        # //<[ self.windows = 1 means windows system] >//
+        # //<else [ self.windows = 0 ] which means non windows system >
+        # //<this allows ethscan to know if it should call get_packet_process()  >//
+        # //<get_packet_process() finds the associated process per packet  >//
+        # //<without this check ethscan would not work on none windows images  >//
+        
+        self.taskobj = self.get_tasks()
+        if self.taskobj.next() == False  or self.config.ENABLE_PROC == False:
+            self.windows = 0 
+        else:
+            self.windows = 1 
+            self.ptpobj = self.get_tasks() 
+            #// self.templist = list(self.ptpobj)
+            #// this will not work as effective as self.templist = list(self.ptpobj) becase of the object being iterated 
+            self.templist = list(self.ptpobj)
+            
+        # //<Calling run_config() manually gives us more flexability for future options  > //
+        # //<self.run_config() > //
+
+    def run_config(self):
+        """check and setup configuration options upon initlization"""
+        self.keylist = []
+        self.protokeylist = []
+        self.ethkeylist = []
+        
+        # //<Check if SAVE_PCAP or SAVE_RAW is True > //
+        if any((self.config.SAVE_PCAP, self.config.SAVE_RAW)):
+        
+            # //<Test if SAVE_PCAP or SAVE_RAW options are set:  > //
+            # //<Make sure the dump directory is set else generate error and exit > //
+            if self.config.DUMP_DIR == None:
                 debug.error("Please specify a dump directory (--dump-dir)")
-            if not os.path.isdir(self._config.DUMP_DIR):
-                debug.error(self._config.DUMP_DIR + " is not a directory")
-
-            if self._config.SAVE_PCAP != None:
+                
+            # //<Make sure the output directory is real, if not exit 
+            if not os.path.isdir(self.config.DUMP_DIR):
+                debug.error(self.config.DUMP_DIR + " is not a directory")
+                
+            # //<Check if Save Pcap option was set 
+            if self.config.SAVE_PCAP != None:
+                
+                # //<Make sure dpkt is installed if not exit 
                 if not has_dpkt:
                     debug.error("Install dpkt http://code.google.com/p/dpkt/")
+                    
+                # //<If dpkt is install, check filename to make sure it ends with cap > //
+                else:
+                    self.pcapfile = self.config.SAVE_PCAP
+                    if self.pcapfile[-3:].lower() != "cap":
+                        self.pcapfile = self.pcapfile + ".pcap"
+                    # //<define output file path and filename plus initial pcw file descriptor > //
+                    self.pcapfile = open(os.path.join(self.config.DUMP_DIR, self.pcapfile), 'wb')
+                    self.pcw = dpkt.pcap.Writer(self.pcapfile)
+                    
 
-        address_space = utils.load_as(self._config, astype = 'physical')
-
-        # fix this later 
-        ethHeaderIPV4 = 0x0800
-        ethHeaderIPV6 = 0x86DD
+        if self.config.FILTER_PACKET:
+            temp_list = self.config.FILTER_PACKET.replace(" ", "")
+            temp_list = temp_list.split(',')            
+            for filtername in  temp_list:
+                refval = eval(filtername)
+                protoitem= self.protocols.get(refval)
+                if protoitem:
+                    self.protokeylist.append(filtername)
+                etheritem = self.ethertypes.get(refval)
+                if etheritem:
+                    self.ethkeylist.append(filtername)
+                # // Rut Roh
+                if len(self.ethkeylist or self.protokeylist) == 0:
+                    estr = "Ethernet Types:\n"
+                    pstr = "Protocols:\n"
+                    pitems = self.protocols.items()
+                    ethItems = self.ethertypes.items()
+                    for p in pitems:
+                        pstr += '0x%04X' % p[0] + " : " + str(p[1]) + "\n"
+                    pstr += "\n"
+                    for e in ethItems:
+                        estr += '0x%04X' % e[0] + " : " + str(e[1]) + "\n"
+                    dbgstr = "Invalid filter type or format.  Available options are:\n%s\n\nExample: \"-F 0x0800,0x86DD\"" % (pstr+estr)
+                    debug.error('%s' % dbgstr)
+                else:
+                    self.filterset = 1
+        return True    
         
-        nstepv4 = struct.pack('>H', ethHeaderIPV4)
-        nstepv6 = struct.pack('>H', ethHeaderIPV6)
-
-        scanner = EthScanner(needles = [nstepv6,nstepv4])
-
-        for offset in scanner.scan(address_space):
-            objct = obj.Object('ethFrame', vm = address_space, offset = offset)
-            yield  objct
-                
-
-
-    def render_text(self, outfd, data):
+    def buildpkt(self, objct, counter):
+        """builds the packet found in memory as a dictionary"""
         
-        ptpobj = self.getPTP()
-        
-        # // dump directory check 
-        if self._config.DUMP_DIR and not os.path.isdir(self._config.DUMP_DIR):
-            debug.error(self._config.DUMP_DIR + " is not a directory")
-            
-        # // Set pcap file name
-        if self._config.DUMP_DIR and os.path.isdir(self._config.DUMP_DIR) and self._config.SAVE_PCAP:
-            pcapfile = self._config.SAVE_PCAP
-            if pcapfile[-3:].lower() != "cap":
-                pcapfile = pcapfile + ".pcap"
-            pcapfile = open(os.path.join(self._config.DUMP_DIR, pcapfile), 'wb')
-            pcw = dpkt.pcap.Writer(pcapfile)
-                
-        counter = 0
-        for objct in data:
-            # // Find packet process, pid, and address range 
-            pktoffset = objct.ethDst.obj_offset
-            mapAddrList = self.mapOffsetToAddr(outfd, pktoffset, ptpobj)
-            # // mapAddrList: Proc Name, PID, START ADDR, END ADDR 
-            # // just to be safe we set all values to "" 
-            # // That way we can still use them even if they don't carry a value 
-            if mapAddrList:
-                procName = ""
-                pid = ""
-                base_addr = ""
-                end_addr = ""
-                if mapAddrList[0] != None:
-                    procName = mapAddrList[0]
-                if mapAddrList[1] != None:
-                    pid = mapAddrList[1]
-                if mapAddrList[2] != None:
-                    base_addr = hex(mapAddrList[2])
-                if mapAddrList[3] != None:
-                    end_addr = hex(mapAddrList[2] + mapAddrList[3])
+        #//< determin type > // 
+        self.etype = objct.ethType.v()
+        self.pktoffset =  objct.ethDst.obj_offset
+        self.counter = counter 
 
-            source = objct.ipSource.v()
-            dest = objct.ipDest.v()
-            srcport = str(objct.ipSrcPort.v())
-            destport = str(objct.ipDstPort.v())
-
-            #// Packet Size 
-            psize = objct.ipTotalLen.v()
-            pdata = objct.obj_vm.read(objct.ipVer.obj_offset, psize)
-            
-            # // 0xE the size of 
-            # // DST MAC ADDR + SRC MAC ADDR + PACKET TYPE (0x0800 for example)
-            # // The IP header starts at 0xE offset which is normally 0x45 (Version + header length) 
-            pheader = objct.obj_vm.read(objct.ethDst.obj_offset, 0xe)
-            
-            #Mac Addr 
-            macdst =  objct.obj_vm.read(objct.ethDst.obj_offset, objct.ethSrc.size())       
-            macsrc =  objct.obj_vm.read(objct.ethSrc.obj_offset, objct.ethSrc.size())    
-
-            # // Packet ID  (0x800 for example)
-            etype = objct.obj_vm.read(objct.ethType.obj_offset, objct.ethType.size())
-            
-            # // Convert Mac Address by unpacking into fmt string 
+        if self.etype == self.IPv4Header:
+            # //< build mac addresses > // 
+            macsrc =  objct.obj_vm.read(objct.ethSrc.obj_offset, objct.ethSrc.size())               
+            macdst =  objct.obj_vm.read(objct.ethDst.obj_offset, objct.ethDst.size())       
             macsrc = "%02x:%02x:%02x:%02x:%02x:%02x" % struct.unpack("6B",macsrc)
             macdst = "%02x:%02x:%02x:%02x:%02x:%02x" % struct.unpack("6B",macdst)
             
-            # // ProtoType Number [17 (0x11) = UDP, 0x6 = TCP] for example
-            proto = objct.ipProtoType.v()
-                        
-            # // Packet Types Class instance to lookup either Ethernet Frame Type or Protocol Type 
-            # // Methods: get_prototye(int value) | returns Protocol string description 
-            # // Methods: get_ethtype(int value) | returns Frame Type string description 
-            ptypes =  PacketType()
-            
-            # // Gets Protocol String 
-            protoStr = ptypes.get_prototye(proto)[0]
-            # // Get Ethernet Frame Name and Numeric representation
-            ethname,ethnum = ptypes.get_ethtype(etype)
-            
-            # // create a full packet 
-            fullpacket = pheader+pdata
-
-            # // Text Output 
-            outfd.write("ProcName: {0} PID: {1}  Base Address: {2}  End Address: {3}\n".format(procName, pid, base_addr, end_addr))
-            outfd.write(ethname + " (" + ethnum + ") " + "\n")
-            outfd.write("Protocol "+ protoStr + " " + "("+str(proto)+")" + "\n")
-            outfd.write("Src: " + source +":" + srcport + " (" +macsrc+"), " + "Dst: " + dest +":" + destport + " (" +macdst+")" +"\n""")            
-            outfd.write("Data " + "(" + str(len(pheader+pdata)) + " Bytes" +")" + "\n" )
-            
-            for offset, hextext, chars in utils.Hexdump(fullpacket):
-                outfd.write("{0:#010x}  {1:<48}  {2}\n".format(offset, hextext, ''.join(chars)))
-                
-            # // Build and save to the pcap file 
-            if self._config.SAVE_PCAP:
-                eth = dpkt.ethernet.Ethernet(fullpacket)
-                pcw.writepkt(eth)
-
-            # // Raw Packets saved to --dump-dir 
-            # //Format is PACKET NUM __ visual reminded __ IPSRC __ IP SRCPORT __ DST __IP DESTPORT __ PROTOCOL . BIN  
-            # // Example: ProcName_PID__0__pktnum__SRC_210.146.64.4_20480__DST_81.131.67.131_42762__TCP.bin
-            if self._config.SAVE_RAW:
-                filename =  procName + "__"+ str(pid)+ "__"+str(counter) + "__pktnum" + "__SRC_" + source +"_" + srcport  +"__DST_" + dest +"_" + destport + "__" + protoStr + ".bin"
-                fh = open(os.path.join(self._config.DUMP_DIR, filename), 'wb')
-                fh.write(fullpacket)
-                fh.close()
-                
-            outfd.write("\n")
-            counter += 1
-            
-        outfd.write("Packets Found: " + str(counter) + "\n")
-        if self._config.SAVE_PCAP:
-            pcw.close()
+            self.ipv4pkt.update({
+            'ethDst' :macdst,
+            'ethSrc': macsrc,     
+            'ethType': self.etype,
+            'ipv4Ver': objct.ipv4Ver.v(), 
+            'ipv4DSF': objct.ipv4DSF.v(), 
+            'ipv4TotalLen': objct.ipv4TotalLen.v(),
+            'ipv4IDENT': objct.ipv4IDENT.v(), 
+            'ipv4FLAG': objct.ipv4FLAG.v(), 
+            'ipv4TTL': objct.ipv4TTL.v(), 
+            'ipv4ProtoType':  objct.ipv4ProtoType.v(),
+            'ipv4Checksum':  objct.ipv4Checksum.v(), 
+            'ipv4Source': objct.ipv4Source.v(),
+            'ipv4Dest': objct.ipv4Dest.v(),
+             'ipv4SrcPort': str(objct.ipv4SrcPort.v()),
+             'ipv4DstPort': str(objct.ipv4DstPort.v()), 
+              'pheader': objct.obj_vm.read(objct.ethDst.obj_offset, 0xe), 
+              'pdata':  objct.obj_vm.read(objct.ipv4Ver.obj_offset, objct.ipv4TotalLen.v())  # 
+                })
+            self.pktbuilt = True  
         
-    # // Make Physical to Process translation 
-    # // First get pid, task and pages
-    def getPTP(self):    
-        tasks = taskmods.DllList.calculate(self)
-        for task in tasks:
-            print "task",  task
-            if task.UniqueProcessId:
-                pid = task.UniqueProcessId
-                task_space = task.get_process_address_space()
-                pages = task_space.get_available_pages()
-                yield pid, task, pages
+            return True
+        
+        if self.etype == self.IPv6Header:
+            self.IPv6Header = 0x86DD        
+            # //<default_data.update({'item3': 3})
+            self.pktbuilt = True  
+            return True 
+        
+        # // Just in case we process a packet type we havent built yet 
+        return False 
+            
+    # // < buildpkt
+    def displaypkt(self):
+        
+        # // If we have a packet 
+        if self.pktbuilt:
+            
+            # // Process IPv4 
+            if self.etype == self.IPv4Header:
                 
+                # // No Filter, just set packet to self.tmppkt 
+                # // Redundent for clearity 
+                if self.filterset == 0:
+                    self.tmppkt = self.ipv4pkt
+            
+                # // Packet Filter 
+                if self.filterset == 1:            
+                    # // Ethernet Filter 
+                    if self.ethkeylist:
+                        for eref in self.ethkeylist:
+                            if self.ipv4pkt.get("ethType") == eval(eref):
+                                self.tmppkt = self.ipv4pkt
+                            else:
+                                pass 
+                    # // Procotol Filter 
+                    if self.protokeylist:
+                        for pref in self.protokeylist:
+                            if self.ipv4pkt.get("ipv4ProtoType") == eval(pref):
+                                self.tmppkt = self.ipv4pkt
+                        else:
+                            pass      
+            # // if we have a packet 
+            if self.tmppkt:  
+                # // return the build packet string function which provides text output while also processing 
+                # // file output for binary and pcap options if selected 
+                return self.buildpkt_string()
 
-    # // Find the ProcName/PID by searching the pagedata.  
-    # // pktoffset = physical packet offset.
-    # // If this is between a page address base address + size 
-    # // Return the last process associated with this loop
-    def mapOffsetToAddr(self, outfd, pktoffset, ptpobj):
-        for pid, task, pagedata in ptpobj:
+
+    def buildpkt_string(self):
+        # // create the packet string from the dictionary created in displaypkt
+        self.pdiddy =  PacketDataClass()
+        pktstring = ""
+        lp = "("
+        rp = ")"
+        fmtSrc = "Src:"
+        fmtDst = "Dst:"
+        fmtSpacer = "__"
+        
+        source = self.tmppkt.get('ipv4Source')
+        srcport = self.tmppkt.get('ipv4SrcPort')
+        macsrc = self.tmppkt.get('ethSrc')
+        dst = self.tmppkt.get('ipv4Dest')
+        dstport = self.tmppkt.get('ipv4DstPort')
+        macdst = self.tmppkt.get('ethDst')
+        pdata = self.tmppkt.get('pdata')
+        pheader = self.tmppkt.get('pheader')
+        
+        ethname,ethnum, ethnumstr  = self.pdiddy.get_ethtype(self.tmppkt.get('ethType'))
+        protostr,protonum, protonumstr = self.pdiddy.get_prototye(self.tmppkt.get('ipv4ProtoType') )
+        
+        pktstring+="Packets Found: " + str(self.counter) + "\n"
+        if self.windows:
+            #mapAddrList = self.get_packet_process(self.pktoffset, self.templist)
+            mapAddrList = self.get_packet_process()
+            if mapAddrList:
+                pktstring += "ProcName: {0} PID: {1} Base Address: {2}  End Address: {3}\n".format(mapAddrList[0], mapAddrList[1], hex(mapAddrList[2]), hex(mapAddrList[3]))
+            
+        pktstring += "Ethernet: %s %s %s %s\n" % (fmtSrc.rjust(7),  lp+macsrc+rp,  fmtDst.rjust(10),    lp+macdst+rp)
+        pktstring += "Type: %s %s\n" % (ethname.rjust(11), lp+ethnumstr+rp)
+        pktstring += "IPv4: %s %s:%s %s %s:%s\n" % (fmtSrc.rjust(11),  source, srcport,fmtDst.rjust(10),  dst,  dstport)
+        pktstring += "Protocol: %s %s\n" % (protostr.rjust(6), lp+str(protonum)+rp)
+        pktstring += "Packet Size: %s Bytes\n" %(lp+str(len(pheader+pdata))+rp)
+        for offset, hextext, chars in utils.Hexdump(pheader+pdata):
+            pktstring += "{0:#010x}  {1:<48}  {2}\n".format(offset, hextext, ''.join(chars))
+        pktstring += "\n"
+        
+
+        if self.config.SAVE_PCAP:
+            eth = dpkt.ethernet.Ethernet(pheader+pdata)
+            self.pcw.writepkt(eth)
+            
+        if self._config.SAVE_RAW:
+            filename = str(self.counter) + fmtSpacer+source+fmtSpacer+srcport+fmtSpacer+dst+fmtSpacer+dstport+fmtSpacer+protostr+'.bin'
+            fh = open(os.path.join(self._config.DUMP_DIR, filename), 'wb')
+            fh.write(pheader+pdata)
+            fh.close()  
+    
+        return pktstring
+        
+    def cleanup(self):
+        """place things that need to be closed such as file handles here"""
+        if self.config.SAVE_PCAP:
+            self.pcw.close()
+
+    def get_tasks(self):
+        """ yield task object (pid, task, pages) also checks if image is windows based upon return """
+        try:
+            tasks = taskmods.DllList.calculate(self)            
+            for task in tasks:
+                if task.UniqueProcessId:
+                    pid = task.UniqueProcessId
+                    task_space = task.get_process_address_space()
+                    pages = task_space.get_available_pages()
+                yield pid, task, pages            
+        except:
+            yield False 
+            
+    def get_packet_process(self):
+        """simple method to finding pid from physical offset"""
+        for pid, task, pagedata in self.templist:
             task_space = task.get_process_address_space()
             currentProc = ("{0} pid: {1:6}\n".format(task.ImageFileName, pid))
             offset = 0 
             for p in pagedata:
                 pa = task_space.vtop(p[0])
                 if pa != None:
-                    if pktoffset >= pa and pktoffset <= pa+p[1]: 
+                    if  pa <= self.pktoffset and self.pktoffset <= (pa+p[1]): 
                         mapAddrList = [str(task.ImageFileName), int(pid), pa, p[1]]
                         return mapAddrList
                     else:
                         offset += p[1]
-        return None 
+        return None         
+
+            
+class EthScan(common.AbstractWindowsCommand):
+    """Scans and dumps complete ethernet frames from memory while vildating legitmate ipv4/ipv6 packets"""
+    def __init__(self, config, *args, **kwargs):
+        commands.Command.__init__(self, config, *args, **kwargs)
+        config.remove_option("OFFSET")
+        config.add_option('DUMP-DIR', short_option = 'D', default = None,           
+                          cache_invalidator = False,
+                          help = 'Directory in which to dump executable files')
+        config.add_option('SAVE-PCAP', short_option = 'C', default = None,
+                          cache_invalidator = False,
+                          help = 'Create a pcap file from recovered packets of given name: "Example: -C out.pcap" (requires dpkt)')
+        config.add_option("SAVE-RAW", short_option = 'R', default = False, action = 'store_true',
+                        help = 'Create binary files of each packet found in memory')
+        config.add_option("ENABLE-PROC", short_option = 'P', default = False, action = 'store_true',
+                        help = 'Enable Packet to Process Association: Windows Only (SLOW)')                        
+        config.add_option("FILTER-PACKET", short_option= 'F',  default=None,  type="string",
+                        cache_invalidator = False, 
+                        help = 'Filter packets based off of Protocol and Ethernet types.  '
+                       'Example: " -F 0x0800,0x11 " - searches only for TCP,UDP type packets.')
+        # //         config.add_option("DISABLE-CHECKSUM", short_option = 'S', default = False, action = 'store_true',
+        #//                  help = 'Disable packet checksum validation')  -  future option
+                        
+        self.config = config 
+        self.taskobj = ""     
+        self.pktstring = ""
+        self.counter = 1
+        
+    def calculate(self):       
+        
+        address_space = utils.load_as(self._config, astype = 'physical')
+        self.ethcontrol = EthDisplayControl(self.config,  address_space)
+        self.ethcontrol.run_config()
+
+        for offset in EthScanner().scan(address_space):
+            objct = obj.Object('ethFrame', vm = address_space, offset = offset)
+            yield  objct
+    
+    def render_text(self, outfd, data):
+        """output collected data as text while processing options and saving output data to disk"""
+        for objct in data:
+            buildpkt = self.ethcontrol.buildpkt(objct, self.counter)
+            self.pktstring = self.ethcontrol.displaypkt()
+            if self.pktstring:
+                self.counter +=1 
+                outfd.write(self.pktstring)
+                
+        self.ethcontrol.cleanup()
+        
