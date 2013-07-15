@@ -49,9 +49,7 @@ import volatility.plugins.taskmods as taskmods
 import volatility.cache as cache
 from binascii import hexlify
 from binascii import unhexlify
-
-#compair command line option to has_dpkt
-#-p pcap.out  if has_dpkt == True: 
+ 
 try:
     import dpkt 
     from dpkt import pcap 
