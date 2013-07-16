@@ -34,12 +34,9 @@
 #0x00000040  48 46 43 45 50 46 46 46 41 43 41 43 41 43 41 43   HFCEPFFFACACACAC
 #0x00000050  41 43 41 43 41 42 4e 00 00 20 00 01               ACACABN.....
 
-
-import pprint 
 import struct
 import os 
 import volatility.plugins.common as common 
-
 import volatility.commands as commands
 import volatility.utils as utils
 import volatility.scan as scan
@@ -269,7 +266,7 @@ ipv4pkt = {
             'ipv4ProtoType': '',
             'ipv4Checksum': '',
             'ipv4Source': '',
-            'ipv4Dest': '',
+            'ipv4Dst': '',
              'ipv4SrcPort': '',
              'ipv4DstPort': ''  
     }
@@ -383,22 +380,24 @@ class EthScanVTypes(obj.ProfileModification):
             'ipv4ProtoType': [0x17, ['unsigned char']],  
             'ipv4Checksum': [0x18, ['unsigned be short']],  
             'ipv4Source': [0x1a, ['IpAddress']],  
-            'ipv4Dest': [0x1e, ['IpAddress']],  
+            'ipv4Dst': [0x1e, ['IpAddress']],  
              'ipv4SrcPort' : [0x22, ['unsigned short']],  
              'ipv4DstPort' : [0x24, ['unsigned short']],  
              'ethv6Dst': [0x0, ['Ipv6Address']],                 # //<IPV6  Frame & Packet Structure
              'ethv6Src': [0x6, ['Ipv6Address']],                 
              'ipv6Ver': [0x0e, ['unsigned char']], 
             'ipv6TotalLen': [0x12, ['unsigned be short']],             
-            'ipv6NextHeader': [0x13, ['unsigned char']], 
-            'ipv6CheckSumUDP': [0x38, ['unsigned short']],     
-            'ipv6CheckSumTCP': [0x46, ['unsigned short']],          
+            'ipv6NextHeader': [0x14, ['unsigned char']], 
+            'ipv6CheckSumUDP': [0x38, ['unsigned be short']],     
+            'ipv6CheckSumTCP': [0x46, ['unsigned be short']],          
             'ipv6Src': [0x16, ['Ipv6Address']],  
             'ipv6Dst': [0x26, ['Ipv6Address']],  
+            'ipv6SrcPort': [0x36, ['unsigned be short']],     
+            'ipv6DstPort': [0x38, ['unsigned be short']],     
                             }], 
         }
         profile.vtypes.update(ethVtype)
-
+        
 class FindEthFrame(scan.ScannerCheck):
     """ ScannerCheck to verify the IPv4 protocol, standard header length and protocol """
     def __init__(self, address_space, needles = None):
@@ -585,7 +584,7 @@ class EthDisplayControl(taskmods.DllList):
             'ipv4ProtoType':  objct.ipv4ProtoType.v(),
             'ipv4Checksum':  objct.ipv4Checksum.v(), 
             'ipv4Source': objct.ipv4Source.v(),
-            'ipv4Dest': objct.ipv4Dest.v(),
+            'ipv4Dst': objct.ipv4Dst.v(),
              'ipv4SrcPort': str(objct.ipv4SrcPort.v()),
              'ipv4DstPort': str(objct.ipv4DstPort.v()), 
               'pheader': objct.obj_vm.read(objct.ethDst.obj_offset, 0xe), 
@@ -596,9 +595,24 @@ class EthDisplayControl(taskmods.DllList):
             return True
         
         if self.etype == self.IPv6Header:
-            self.IPv6Header = 0x86DD        
-            # //<default_data.update({'item3': 3})
-            self.pktbuilt = True  
+            self.ipv6pkt.update({
+            'ethv6Dst' : objct.ethv6Dst.v(),#macdst,
+            'ethv6Src': objct.ethv6Src.v(),#macsrc,     
+            'ethType': self.etype,  
+            'ipv6Ver': objct.ipv6Ver.v() ,#objct.ipv4Ver.v(), 
+            'ipv6TotalLen': objct.ipv6TotalLen.v(),# objct.ipv4DSF.v(), 
+            'ipv6NextHeader': objct.ipv6NextHeader.v(), 
+            'ipv6CheckSumUDP': objct.ipv6CheckSumUDP.v(),#objct.ipv4TotalLen.v(),
+            'ipv6CheckSumTCP': objct.ipv6CheckSumTCP.v(),#objct.ipv4IDENT.v(), 
+            'ipv6Src': objct.ipv6Src.v(),#objct.ipv4FLAG.v(), 
+            'ipv6Dst': objct.ipv6Dst.v(),#objct.ipv4TTL.v(), 
+            'ipv6SrcPort':objct.ipv6SrcPort.v(),   #objct.ipv4ProtoType.v(),
+            'ipv6DstPort': objct.ipv6DstPort.v(),  #objct.ipv4Checksum.v(), 
+             'pheader': objct.obj_vm.read(objct.ethv6Dst.obj_offset, 0x35), 
+              'pdata':  objct.obj_vm.read(objct.ipv6SrcPort.obj_offset, objct.ipv6TotalLen.v())  # 
+                })      
+            self.pktbuilt = True          
+            print self.ipv6pkt 
             return True 
         
         # // Just in case we process a packet type we havent built yet 
@@ -606,6 +620,7 @@ class EthDisplayControl(taskmods.DllList):
             
     # // < buildpkt
     def displaypkt(self):
+        """verifies packet types also filters packets based upon packet before sending the packet to buildpktv4_string()"""
         
         # // If we have a packet 
         if self.pktbuilt:
@@ -638,11 +653,58 @@ class EthDisplayControl(taskmods.DllList):
             if self.tmppkt:  
                 # // return the build packet string function which provides text output while also processing 
                 # // file output for binary and pcap options if selected 
-                return self.buildpkt_string()
-
-
-    def buildpkt_string(self):
-        # // create the packet string from the dictionary created in displaypkt
+                return self.buildpktv4_string()            
+            
+            # // Process IPv6
+            if self.etype == self.IPv6Header:
+                
+                # // No Filter, just set packet to self.tmppkt 
+                # // Redundent for clearity 
+                if self.filterset == 0:
+                    self.tmppkt = self.ipv6pkt
+            
+                # // Packet Filter 
+                if self.filterset == 1:            
+                    # // Ethernet Filter 
+                    if self.ethkeylist:
+                        for eref in self.ethkeylist:
+                            if self.ipv6pkt.get("ethType") == eval(eref):
+                                self.tmppkt = self.ipv6pkt
+                            else:
+                                pass 
+                    # // Procotol Filter 
+                    if self.protokeylist:
+                        for pref in self.protokeylist:
+                            if self.ipv6pkt.get("ipv6ProtoType") == eval(pref):
+                                self.tmppkt = self.ipv6pkt
+                        else:
+                            pass      
+            if self.tmppkt:  
+                # // return the build packet string function which provides text output while also processing 
+                # // file output for binary and pcap options if selected 
+                return self.buildpktv6_string()       
+                
+    def buildpktv6_string(self):
+        self.pdiddy =  PacketDataClass()
+        pktstring = ""
+        lp = "("
+        rp = ")"
+        fmtSrc = "Src:"
+        fmtDst = "Dst:"
+        fmtSpacer = "__"
+        #{'ipv6Src': '3ffe:507::1:200:86ff:fe05:80da', 'ipv6NextHeader': 36L, 'ethv6Src': '::8605:80da:86dd:6000:0:24:1140', 
+        #'pdata': '\t\\\x005\x00$\xf0\t\x00\x06\x01\x00\x00\x01\x00\x00\x00\x00\x00\x00\x06itojun\x03org\x00\x00\xff\x00\x01', 
+        #'ethType': 34525L, 'ipv6TotalLen': 36L, 'ipv6Dst': '3ffe:501:4819::42', 'ipv6CheckSumUDP': 53L, 
+        #'pheader': '\x00`\x97\x07i\xea\x00\x00\x86\x05\x80\xda\x86\xdd`\x00\x00\x00\x00$\x11@?\xfe\x05\x07\x00\x00\x00\x01\x02\x00\x86\xff\xfe\x05\x80\xda?\xfe\x05\x01H\x19\x00\x00\x00\x00\x00\x00\x00\x00\x00', 
+        #'ipv6DstPort': 53L, 'ipv6Ver': 96L, 'ethv6Dst': '60:9707:69ea::8605:80da:86dd:6000', 'ipv6SrcPort': 2396L, 'ipv6CheckSumTCP': 0L}
+        
+        ethname,ethnum, ethnumstr  = self.pdiddy.get_ethtype(self.tmppkt.get('ethType'))        
+        protostr,protonum, protonumstr = self.pdiddy.get_prototye(self.tmppkt.get('ipv6NextHeader') )
+        
+        print protostr,protonum, protonumstr
+        return False  
+    def buildpktv4_string(self):
+        """create the packet string from the dictionary created in displaypkt"""
         self.pdiddy =  PacketDataClass()
         pktstring = ""
         lp = "("
@@ -654,7 +716,7 @@ class EthDisplayControl(taskmods.DllList):
         source = self.tmppkt.get('ipv4Source')
         srcport = self.tmppkt.get('ipv4SrcPort')
         macsrc = self.tmppkt.get('ethSrc')
-        dst = self.tmppkt.get('ipv4Dest')
+        dst = self.tmppkt.get('ipv4Dst')
         dstport = self.tmppkt.get('ipv4DstPort')
         macdst = self.tmppkt.get('ethDst')
         pdata = self.tmppkt.get('pdata')
@@ -665,7 +727,6 @@ class EthDisplayControl(taskmods.DllList):
         
         pktstring+="Packets Found: " + str(self.counter) + "\n"
         if self.windows:
-            #mapAddrList = self.get_packet_process(self.pktoffset, self.templist)
             mapAddrList = self.get_packet_process()
             if mapAddrList:
                 pktstring += "ProcName: {0} PID: {1} Base Address: {2}  End Address: {3}\n".format(mapAddrList[0], mapAddrList[1], hex(mapAddrList[2]), hex(mapAddrList[3]))
@@ -755,7 +816,7 @@ class EthScan(common.AbstractWindowsCommand):
         self.counter = 1
         
     def calculate(self):       
-        
+        """calculate and extract frames from memory"""
         address_space = utils.load_as(self._config, astype = 'physical')
         self.ethcontrol = EthDisplayControl(self.config,  address_space)
         self.ethcontrol.run_config()
