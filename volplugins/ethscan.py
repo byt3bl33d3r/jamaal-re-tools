@@ -612,7 +612,6 @@ class EthDisplayControl(taskmods.DllList):
               'pdata':  objct.obj_vm.read(objct.ipv6SrcPort.obj_offset, objct.ipv6TotalLen.v())  # 
                 })      
             self.pktbuilt = True          
-            print self.ipv6pkt 
             return True 
         
         # // Just in case we process a packet type we havent built yet 
@@ -650,11 +649,11 @@ class EthDisplayControl(taskmods.DllList):
                         else:
                             pass      
             # // if we have a packet 
-            if self.tmppkt:  
-                # // return the build packet string function which provides text output while also processing 
-                # // file output for binary and pcap options if selected 
-                return self.buildpktv4_string()            
-            
+                if self.tmppkt:  
+                    # // return the build packet string function which provides text output while also processing 
+                    # // file output for binary and pcap options if selected 
+                    return self.buildpktv4_string()            
+                
             # // Process IPv6
             if self.etype == self.IPv6Header:
                 
@@ -679,10 +678,10 @@ class EthDisplayControl(taskmods.DllList):
                                 self.tmppkt = self.ipv6pkt
                         else:
                             pass      
-            if self.tmppkt:  
-                # // return the build packet string function which provides text output while also processing 
-                # // file output for binary and pcap options if selected 
-                return self.buildpktv6_string()       
+                if self.tmppkt:  
+                    # // return the build packet string function which provides text output while also processing 
+                    # // file output for binary and pcap options if selected 
+                    return self.buildpktv6_string()       
                 
     def buildpktv6_string(self):
         self.pdiddy =  PacketDataClass()
@@ -692,17 +691,46 @@ class EthDisplayControl(taskmods.DllList):
         fmtSrc = "Src:"
         fmtDst = "Dst:"
         fmtSpacer = "__"
-        #{'ipv6Src': '3ffe:507::1:200:86ff:fe05:80da', 'ipv6NextHeader': 36L, 'ethv6Src': '::8605:80da:86dd:6000:0:24:1140', 
-        #'pdata': '\t\\\x005\x00$\xf0\t\x00\x06\x01\x00\x00\x01\x00\x00\x00\x00\x00\x00\x06itojun\x03org\x00\x00\xff\x00\x01', 
-        #'ethType': 34525L, 'ipv6TotalLen': 36L, 'ipv6Dst': '3ffe:501:4819::42', 'ipv6CheckSumUDP': 53L, 
-        #'pheader': '\x00`\x97\x07i\xea\x00\x00\x86\x05\x80\xda\x86\xdd`\x00\x00\x00\x00$\x11@?\xfe\x05\x07\x00\x00\x00\x01\x02\x00\x86\xff\xfe\x05\x80\xda?\xfe\x05\x01H\x19\x00\x00\x00\x00\x00\x00\x00\x00\x00', 
-        #'ipv6DstPort': 53L, 'ipv6Ver': 96L, 'ethv6Dst': '60:9707:69ea::8605:80da:86dd:6000', 'ipv6SrcPort': 2396L, 'ipv6CheckSumTCP': 0L}
         
+        source = self.tmppkt.get('ipv6Src')
+        srcport = self.tmppkt.get('ipv6SrcPort')
+        macsrc = self.tmppkt.get('ethv6Src')
+        dst = self.tmppkt.get('ipv6Dst')
+        dstport = self.tmppkt.get('ipv6DstPort')
+        macdst = self.tmppkt.get('ethv6Dst')
+        pdata = self.tmppkt.get('pdata')
+        pheader = self.tmppkt.get('pheader')
+    
         ethname,ethnum, ethnumstr  = self.pdiddy.get_ethtype(self.tmppkt.get('ethType'))        
         protostr,protonum, protonumstr = self.pdiddy.get_prototye(self.tmppkt.get('ipv6NextHeader') )
+
+        pktstring+="Packets Found: " + str(self.counter) + "\n"
+        if self.windows:
+            mapAddrList = self.get_packet_process()
+            if mapAddrList:
+                pktstring += "ProcName: {0} PID: {1} Base Address: {2}  End Address: {3}\n".format(mapAddrList[0], mapAddrList[1], hex(mapAddrList[2]), hex(mapAddrList[3]))
+
+        pktstring += "Ethernet: %s %s %s %s\n" % (fmtSrc.rjust(7),  lp+macsrc+rp,  fmtDst.rjust(10),    lp+macdst+rp)
+        pktstring += "Type: %s %s\n" % (ethname.rjust(11), lp+ethnumstr+rp)
+        pktstring += "IPv4: %s %s:%s %s %s:%s\n" % (fmtSrc.rjust(11),  source, srcport,fmtDst.rjust(10),  dst,  dstport)
+        pktstring += "Protocol: %s %s\n" % (protostr.rjust(6), lp+str(protonum)+rp)
+        pktstring += "Packet Size: %s Bytes\n" %(lp+str(len(pheader+pdata))+rp)
+        for offset, hextext, chars in utils.Hexdump(pheader+pdata):
+            pktstring += "{0:#010x}  {1:<48}  {2}\n".format(offset, hextext, ''.join(chars))
+        pktstring += "\n"
         
-        print protostr,protonum, protonumstr
-        return False  
+        if self.config.SAVE_PCAP:
+            eth = dpkt.ethernet.Ethernet(pheader+pdata)
+            self.pcw.writepkt(eth)
+            
+        if self._config.SAVE_RAW:
+            filename = str(self.counter) + fmtSpacer+source+fmtSpacer+srcport+fmtSpacer+dst+fmtSpacer+dstport+fmtSpacer+protostr+'.bin'
+            fh = open(os.path.join(self._config.DUMP_DIR, filename), 'wb')
+            fh.write(pheader+pdata)
+            fh.close()  
+    
+        return pktstring
+        
     def buildpktv4_string(self):
         """create the packet string from the dictionary created in displaypkt"""
         self.pdiddy =  PacketDataClass()
