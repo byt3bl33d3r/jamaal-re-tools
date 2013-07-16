@@ -1,5 +1,5 @@
 
-Ethscan: volatility memory forensics framework plugin for recovers ethernet frames from memory.
+Ethscan: volatility memory forensics framework plugin for recovering ethernet frames from memory.
 
 Options:
 
