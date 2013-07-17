@@ -1,4 +1,4 @@
-# Volatility    
+# Volatility    -00
 # Copyright (c) 2010, 2011, 2012, 2013 Jamaal Speights <jamaal.speights@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
@@ -719,12 +719,19 @@ class EthDisplayControl(taskmods.DllList):
             pktstring += "{0:#010x}  {1:<48}  {2}\n".format(offset, hextext, ''.join(chars))
         pktstring += "\n"
         
+        # // IPv6 packet writing with dpkt still has some bugs/features
         if self.config.SAVE_PCAP:
-            eth = dpkt.ethernet.Ethernet(pheader+pdata)
-            self.pcw.writepkt(eth)
-            
+            # //   File "/usr/lib/pymodules/python2.7/dpkt/ip6.py", line 47, in __str__
+            # // not self.data.sum:
+            # // AttributeError: 'str' object has no attribute 'sum'
+            try:
+                eth = dpkt.ethernet.Ethernet(pheader+pdata)
+                self.pcw.writepkt(eth)
+            except:
+                pass 
+                
         if self._config.SAVE_RAW:
-            filename = str(self.counter) + fmtSpacer+source+fmtSpacer+srcport+fmtSpacer+dst+fmtSpacer+dstport+fmtSpacer+protostr+'.bin'
+            filename = str(self.counter) + fmtSpacer+str(source)+fmtSpacer+str(srcport)+fmtSpacer+str(dst)+fmtSpacer+str(dstport)+fmtSpacer+protostr+'.bin'
             fh = open(os.path.join(self._config.DUMP_DIR, filename), 'wb')
             fh.write(pheader+pdata)
             fh.close()  
