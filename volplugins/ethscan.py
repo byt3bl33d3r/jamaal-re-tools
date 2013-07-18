@@ -1,4 +1,4 @@
-# Volatility    -00
+# Volatility 
 # Copyright (c) 2010, 2011, 2012, 2013 Jamaal Speights <jamaal.speights@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
