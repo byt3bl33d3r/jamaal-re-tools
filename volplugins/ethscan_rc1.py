@@ -34,9 +34,6 @@
 #0x00000040  48 46 43 45 50 46 46 46 41 43 41 43 41 43 41 43   HFCEPFFFACACACAC
 #0x00000050  41 43 41 43 41 42 4e 00 00 20 00 01               ACACABN.....
 
-# // TOFIX: fix filter options so only selected options are printed
-
-
 import struct
 import os 
 import volatility.plugins.common as common 
@@ -290,9 +287,7 @@ ipv6pkt = {
 class PacketDataClass(object):
     """PacketDataClass Class returns Ethernet and Protocol types by get_ethtype and get_prototye methods"""
     def __init__(self):
-        global setmtu 
-        global disablechecksum
-        self.MTU = setmtu
+        self.MTU = 1500
         self.checksum = ""
         self.checksumValue = 0 
         self.IPv4Header = 0x0800
@@ -345,28 +340,23 @@ class PacketDataClass(object):
         """returns True if frame has valid IPv4 packet"""
         if eth.ipv4Ver & 0xF0 == 0x40: 
             if eth.ipv4TotalLen <= self.MTU:
-                if  disablechecksum == False:  # // if disablechecksum is not True 
-                    self.checksum = ''.join([chr(cs) for cs in eth.ipv4CheckSumArray])
-                    self.checksumValue = self.checksum_ipv4(self.checksum)
-                    if self.checksumValue == 0:
-                        return True 
-                    else:
-                        return False
-                else:  # // checksum is disabled always return true 
+                self.checksum = ''.join([chr(cs) for cs in eth.ipv4CheckSumArray])
+                self.checksumValue = self.checksum_ipv4(self.checksum)
+
+                if self.checksumValue == 0:
                     return True 
-                        
+                else:
+                    return False 
+                    
     def check_IPV6(self, eth):
         """returns True if frame has valid IPv4 packet"""
         
-        if eth.ipv6Ver == 0x60:  
+        if eth.ipv6Ver == 0x60:  # //<fix this 
             if eth.ethType ==  0x86dd:
-                 if disablechecksum == False:
-                    self.ipv6_ispktValid(eth)
-                    return True
-                 else:
-                    return False
+                self.ipv6_ispktValid(eth)
+                return True
             else:
-                return True 
+                return False
             
             
 class EthScanVTypes(obj.ProfileModification):
@@ -508,25 +498,23 @@ class EthDisplayControl(taskmods.DllList):
         self.keylist = []
         self.protokeylist = []
         self.ethkeylist = []
-
+        
         # //<Check if SAVE_PCAP or SAVE_RAW is True > //
         if any((self.config.SAVE_PCAP, self.config.SAVE_RAW)):
         
             # //<Test if SAVE_PCAP or SAVE_RAW options are set:  > //
             # //<Make sure the dump directory is set else generate error and exit > //
             if self.config.DUMP_DIR == None:
-                debug.error("Please specify a dump directory (--dump-dir)\nExample: -C out.bal --dump-dir outdir")
+                debug.error("Please specify a dump directory (--dump-dir)")
                 
             # //<Make sure the output directory is real, if not exit 
             if not os.path.isdir(self.config.DUMP_DIR):
                 debug.error(self.config.DUMP_DIR + " is not a directory")
                 
             # //<Check if Save Pcap option was set 
-            
             if self.config.SAVE_PCAP != None:
                 
                 # //<Make sure dpkt is installed if not exit 
-                
                 if not has_dpkt:
                     debug.error("Install dpkt http://code.google.com/p/dpkt/")
                     
@@ -545,9 +533,9 @@ class EthDisplayControl(taskmods.DllList):
             temp_list = temp_list.split(',')            
             for filtername in  temp_list:
                 refval = eval(filtername)
-                protoitem= self.protocols.get(filtername)
+                protoitem= self.protocols.get(refval)
                 if protoitem:
-                    self.protokeylist.append(refval)
+                    self.protokeylist.append(filtername)
                 etheritem = self.ethertypes.get(refval)
                 if etheritem:
                     self.ethkeylist.append(filtername)
@@ -647,8 +635,6 @@ class EthDisplayControl(taskmods.DllList):
                 # // Packet Filter 
                 if self.filterset == 1:            
                     # // Ethernet Filter 
-                    # // next rev: Right now either Ethernet or Procotol is being evaluated 
-                    # // This needs to be Ethernet & Protocol combined and not just either or                    
                     if self.ethkeylist:
                         for eref in self.ethkeylist:
                             if self.ipv4pkt.get("ethType") == eval(eref):
@@ -656,8 +642,6 @@ class EthDisplayControl(taskmods.DllList):
                             else:
                                 pass 
                     # // Procotol Filter 
-                    # // next rev: Right now either Ethernet or Procotol is being evaluated 
-                    # // This needs to be Ethernet & Protocol combined and not just either or
                     if self.protokeylist:
                         for pref in self.protokeylist:
                             if self.ipv4pkt.get("ipv4ProtoType") == eval(pref):
@@ -698,8 +682,7 @@ class EthDisplayControl(taskmods.DllList):
                     # // return the build packet string function which provides text output while also processing 
                     # // file output for binary and pcap options if selected 
                     return self.buildpktv6_string()       
-    
-    # // keep'n it simple since 1979            
+                
     def buildpktv6_string(self):
         self.pdiddy =  PacketDataClass()
         pktstring = ""
@@ -755,7 +738,6 @@ class EthDisplayControl(taskmods.DllList):
     
         return pktstring
         
-    # // keep'n it simple since 1979    
     def buildpktv4_string(self):
         """create the packet string from the dictionary created in displaypkt"""
         self.pdiddy =  PacketDataClass()
@@ -846,31 +828,28 @@ class EthScan(common.AbstractWindowsCommand):
     def __init__(self, config, *args, **kwargs):
         commands.Command.__init__(self, config, *args, **kwargs)
         config.remove_option("OFFSET")
-        config.add_option('DUMP-DIR', short_option = 'D', default = None,       
+        config.add_option('DUMP-DIR', short_option = 'D', default = None,           
                           cache_invalidator = False,
                           help = 'Directory in which to dump executable files')
-        config.add_option('SAVE-PCAP', short_option = 'C', default = None, type="string",
+        config.add_option('SAVE-PCAP', short_option = 'C', default = None,
+                          cache_invalidator = False,
                           help = 'Create a pcap file from recovered packets of given name: "Example: -C out.pcap" (requires dpkt)')
-        config.add_option("SAVE-RAW", short_option = 'R', default = False, action = 'store_true', 
+        config.add_option("SAVE-RAW", short_option = 'R', default = False, action = 'store_true',
                         help = 'Create binary files of each packet found in memory')
         config.add_option("ENABLE-PROC", short_option = 'P', default = False, action = 'store_true',
                         help = 'Enable Packet to Process Association: Windows Only (SLOW)')                        
         config.add_option("FILTER-PACKET", short_option= 'F',  default=None,  type="string",
+                        cache_invalidator = False, 
                         help = 'Filter packets based off of Protocol and Ethernet types.  '
                        'Example: " -F 0x0800,0x11 " - searches only for TCP,UDP type packets.')
-        config.add_option("SET-MTU", short_option= 'M',  default=1500,  type="int",
-                        help = 'Set a new MTU size, default is 1500 ')                       
-        config.add_option("DISABLE-CHECKSUM", short_option = 'S', default = False, action = 'store_true',
-                           help = 'Disable packet checksum validation, this option is best used with -F (WARNING: LOTS OF FALSE POSITIVES)') 
+        # //         config.add_option("DISABLE-CHECKSUM", short_option = 'S', default = False, action = 'store_true',
+        #//                  help = 'Disable packet checksum validation')  -  future option
+                        
         self.config = config 
         self.taskobj = ""     
         self.pktstring = ""
         self.counter = 1
-        global setmtu    # // globals aren't so bad when used properly :)  (used in PacketDataClass)
-        global disablechecksum # // globals aren't so bad when used properly :) (used in PacketDataClass)
-        setmtu = self.config.SET_MTU
-        disablechecksum = self.config.DISABLE_CHECKSUM 
-
+        
     def calculate(self):       
         """calculate and extract frames from memory"""
         address_space = utils.load_as(self._config, astype = 'physical')

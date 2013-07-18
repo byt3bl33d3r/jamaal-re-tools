@@ -14,9 +14,16 @@ Options:
                         types.  Example: " -F 0x0800,0x11 " - searches only
                         for TCP,UDP type packets.
 
+  -M 1500, --set-mtu=1500
+                        Set a new MTU size, default is 1500
+  -S, --disable-checksum
+                        Disable packet checksum validation, this option is
+                        best used with -F (WARNING: LOTS OF FALSE POSITIVES)
+
+
 
 Example:
-vol.py ethscan -f be2.vmem -R --dump-dir outputfiles -C out.pcap -P 
+vol.py ethscan -f be2.vmem -R --dump-dir outputfiles -C out.pcap -P -S 
 
   -R, --save-raw # packets are saved to binary files in the directory "outputfiles" 
 	
@@ -38,7 +45,32 @@ vol.py ethscan -f be2.vmem -R --dump-dir outputfiles -C out.pcap -P
 	0x00000020  b0 8f 01 bb 04 0d 79 7e 45 77 d8 8d 3f 5e 50 10   ......y~Ew..?^P.
 	0x00000030  fa f0 84 30 00 00                                 ...0..
 
-	-C SAVE_PCAP  #saves all packets to the dump directory as out.pcap
+  -C SAVE_PCAP  #saves all packets to the dump directory as out.pcap
+
+  -S, --disable-checksum 
+	Disabling checksums will produce more false positive, but it will also find fragemented valid packets
+  	Example: 
+
+	Packets Found: 4
+	ProcName: smss.exe PID: 544 Base Address: 0xc3000  End Address: 0x1000
+	Ethernet:    Src: (10:0e:00:ff:28:18)       Dst: (00:00:00:00:00:00)
+	Type:        IPv4 (0x0800)
+	IPv4:        Src: 191.31.0.193:0       Dst: 0.0.0.0:36508
+	Protocol: Unknown (144)
+	Packet Size: (782) Bytes
+	0x00000000  00 00 00 00 00 00 10 0e 00 ff 28 18 08 00 40 09   ..........(...@.
+	0x00000010  03 00 02 63 2d 27 28 90 2b 80 bf 1f 00 c1 00 00   ...c-'(.+.......
+	0x00000020  00 00 00 00 9c 8e 8f 14 00 96 b9 a2 ff 00 13 15   ................
+	0x00000030  17 02 04 06 07 10 11 12 13 14 15 16 17 01 00 03   ................
+	0x00000040  00 00 00 00 00 00 30 0f 00 ff 28 18 08 00 40 09   ......0...(...@.
+	0x00000050  03 00 02 63 2d 27 28 90 2b 80 bf 1f 00 c1 00 00   ...c-'(.+.......
+	0x00000060  00 00 00 00 9c 8e 8f 14 00 96 b9 a2 ff 00 13 15   ................
+	0x00000070  17 02 04 06 07 10 11 12 13 14 15 16 17 01 00 03   ................
+	0x00000080  00 00 00 00 00 00 30 0f 00 ff 50 18 08 00 40 01   ......0...P...@.
+	0x00000090  01 00 06 63 5f 4f 50 82 54 80 bf 1f 00 c1 00 00   ...c_OP.T.......
+	0x000000a0  00 00 00 00 9c 8e 8f 28 00 96 b9 c2 ff 00 17 17   .......(........
+	0x000000b0  17 17 17 17 17 17 17 17 17 17 17 17 17 01 00 01   ................
+
 
 
 Example Outputs:
