@@ -37,23 +37,22 @@
 # 0x00000040  4e 46 44 45 43 46 43 45 50 46 48 46 44 45 46 46   NFDECFCEPFHFDEFF
 # 0x00000050  50 46 50 41 43 41 42 00 00 20 00 01               PFPACAB.....
 #
-#
 # $ ls -la ethscan_dump/
 # total 2480
-# drwxrwxr-x  2 ff ff 57344 Jul 30 00:15 .
-# drwxr-xr-x 15 ff ff 12288 Jul 29 16:14 ..
-# -rw-rw-r--  1 ff ff   150 Jul 29 23:59 100__3ffe:507::1:200:86ff:fe05:80da__2403__3ffe:501:4819::42__53__UDP.bin
-# -rw-rw-r--  1 ff ff    73 Jul 30 00:02 100__3ffe:507::1:200:86ff:fe05:80da__41077__3ffe:501:410::2c0:dfff:fe47:33e__33441__UDP.bin
-# -rw-rw-r--  1 ff ff    58 Jul 30 00:15 10__131.107.115.254__47873__172.16.176.143__3332__TCP.bin
-# -rw-rw-r--  1 ff ff   121 Jul 30 00:02 101__3ffe:501:1800:2345::2__768__3ffe:507::1:200:86ff:fe05:80da__48740__IPv6-ICMP.bin
-# -rw-rw-r--  1 ff ff   324 Jul 29 23:59 101__3ffe:501:4819::42__53__3ffe:507::1:200:86ff:fe05:80da__2403__UDP.bin
+# 100__3ffe:507::1:200:86ff:fe05:80da__2403__3ffe:501:4819::42__53__UDP.bin
+# 100__3ffe:507::1:200:86ff:fe05:80da__41077__3ffe:501:410::2c0:dfff:fe47:33e__33441__UDP.bin
+# 10__131.107.115.254__47873__172.16.176.143__3332__TCP.bin
+# 101__3ffe:501:1800:2345::2__768__3ffe:507::1:200:86ff:fe05:80da__48740__IPv6-ICMP.bin
+# 101__3ffe:501:4819::42__53__3ffe:507::1:200:86ff:fe05:80da__2403__UDP.bin
 # ################################################################################
 
-# ^ UPDATES ^:
-# // 7/30/13: Bug Fixes  
+# ###############################################################################
+# //^UPDATES
+# - 7/30/13: Bug Fixes  
 #  // Filter options not filtering only selected items if selection list is larger than 1 Example: -F 0x0800,0x86DD (fixed)
 #  // Checksum Options for IPv6 not working completely (fixed)
 #  // EthDisplayControl displayed as a vol pluging because of  taskmods.DllList inherent (fixed) 
+# ###############################################################################
 
 import struct
 import os 
@@ -927,7 +926,7 @@ class EthScan(taskmods.DllList):
         for objct in data:
             buildpkt = self.ethcontrol.buildpkt(objct, self.counter)
             self.pktstring = self.ethcontrol.displaypkt()
-            if self.pktstring:
+            if self.pktstring:      
                 self.counter +=1 
                 outfd.write(self.pktstring)
                 
