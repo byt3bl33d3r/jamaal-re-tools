@@ -1,4 +1,4 @@
-# Volatility    -00
+# Volatility  
 # Copyright (c) 2010, 2011, 2012, 2013 Jamaal Speights <jamaal.speights@gmail.com>
 #
 # This program is free software; you can redistribute it and/or modify
@@ -290,9 +290,6 @@ ipv6pkt = {
 class PacketDataClass(object):
     """PacketDataClass Class returns Ethernet and Protocol types by get_ethtype and get_prototye methods"""
     def __init__(self):
-        global setmtu 
-        global disablechecksum
-        self.MTU = setmtu
         self.checksum = ""
         self.checksumValue = 0 
         self.IPv4Header = 0x0800
@@ -301,6 +298,10 @@ class PacketDataClass(object):
         self.IPv6 =  struct.pack('>H', self.IPv6Header)   
         self.ethertypes = ethertypes
         self.protocols = protocols
+        # // from ethscan config options 
+        global setmtu 
+        global disablechecksum
+        self.MTU = setmtu        
               
     def checksum_ipv4(self, data):
         """checksum vlidation for ipv4,  Returns zero on success"""
@@ -461,12 +462,10 @@ class FindEthFrame(scan.ScannerCheck):
 class EthScanner(scan.BaseScanner):
     checks = [('FindEthFrame', {})]
 
-class EthDisplayControl(taskmods.DllList):
+class EthDisplayControl(object):
     """Controls data, options and text formatting"""    
-    def __init__(self, config, address_space, *args, **kwargs):
-        taskmods.DllList.__init__(self, config, *args, **kwargs)
+    def __init__(self, config, address_space, windows, templist, *args, **kwargs):
         self.config = config         
-        self.config.remove_option("OFFSET")        
         self.address_space = address_space
         self.IPv4Header = 0x0800
         self.IPv6Header = 0x86DD           
@@ -481,29 +480,14 @@ class EthDisplayControl(taskmods.DllList):
         self.pkt_string = "" 
         self.counter = 1
         
-        # //< self.taskobj = self.get_tasks() >//
-        # //<self.get_task() returns either a task object or False  >//
-        # //<if it returns a task object, we know we're on a windows system >//
-        # //<[ self.windows = 1 means windows system] >//
-        # //<else [ self.windows = 0 ] which means non windows system >
-        # //<this allows ethscan to know if it should call get_packet_process()  >//
-        # //<get_packet_process() finds the associated process per packet  >//
-        # //<without this check ethscan would not work on none windows images  >//
+        # // passed from ethscan 
+        # // windows = 1 [windows based system]
+        # // windows = 0 [none windows] 
+        # // templist  = list(pid,task,pagedata) 
+        self.windows = windows
+        self.templist = templist        
         
-        self.taskobj = self.get_tasks()
-        if self.taskobj.next() == False  or self.config.ENABLE_PROC == False:
-            self.windows = 0 
-        else:
-            self.windows = 1 
-            self.ptpobj = self.get_tasks() 
-            #// self.templist = list(self.ptpobj)
-            #// this will not work as effective as self.templist = list(self.ptpobj) becase of the object being iterated 
-            self.templist = list(self.ptpobj)
-            
-        # //<Calling run_config() manually gives us more flexability for future options  > //
-        # //<self.run_config() > //
-
-    def run_config(self):
+    def runconfig(self):
         """check and setup configuration options upon initlization"""
         self.keylist = []
         self.protokeylist = []
@@ -544,13 +528,13 @@ class EthDisplayControl(taskmods.DllList):
             temp_list = self.config.FILTER_PACKET.replace(" ", "")
             temp_list = temp_list.split(',')            
             for filtername in  temp_list:
-                refval = eval(filtername)
-                protoitem= self.protocols.get(filtername)
+                refval = eval(str(filtername))
+                protoitem= self.protocols.get(refval)
+                etheritem = self.ethertypes.get(refval)                
                 if protoitem:
-                    self.protokeylist.append(refval)
-                etheritem = self.ethertypes.get(refval)
+                    self.protokeylist.append(str(refval))
                 if etheritem:
-                    self.ethkeylist.append(filtername)
+                    self.ethkeylist.append(str(refval))
                 # // Rut Roh
                 if len(self.ethkeylist or self.protokeylist) == 0:
                     estr = "Ethernet Types:\n"
@@ -632,13 +616,14 @@ class EthDisplayControl(taskmods.DllList):
     # // < buildpkt
     def displaypkt(self):
         """verifies packet types also filters packets based upon packet before sending the packet to buildpktv4_string()"""
-        
+
         # // If we have a packet 
         if self.pktbuilt:
-            
+            # // set tmppkt to None 
+            self.tmppkt = None 
+                
             # // Process IPv4 
             if self.etype == self.IPv4Header:
-                
                 # // No Filter, just set packet to self.tmppkt 
                 # // Redundent for clearity 
                 if self.filterset == 0:
@@ -646,24 +631,32 @@ class EthDisplayControl(taskmods.DllList):
             
                 # // Packet Filter 
                 if self.filterset == 1:            
-                    # // Ethernet Filter 
-                    # // next rev: Right now either Ethernet or Procotol is being evaluated 
-                    # // This needs to be Ethernet & Protocol combined and not just either or                    
-                    if self.ethkeylist:
+                    # // Ethernet and Protocol filter types are set. 
+                    if self.ethkeylist and self.protokeylist:
                         for eref in self.ethkeylist:
                             if self.ipv4pkt.get("ethType") == eval(eref):
-                                self.tmppkt = self.ipv4pkt
-                            else:
-                                pass 
-                    # // Procotol Filter 
-                    # // next rev: Right now either Ethernet or Procotol is being evaluated 
-                    # // This needs to be Ethernet & Protocol combined and not just either or
-                    if self.protokeylist:
-                        for pref in self.protokeylist:
-                            if self.ipv4pkt.get("ipv4ProtoType") == eval(pref):
-                                self.tmppkt = self.ipv4pkt
-                        else:
-                            pass      
+                                for pref in self.protokeylist:
+                                        if self.ipv4pkt.get("ipv4ProtoType") == eval(pref):     #///issue 
+                                            self.tmppkt = self.ipv4pkt                      
+                    # // evalulate Packet or Ethernet 
+                    else:
+                        if (len(self.ethkeylist) + len(self.protokeylist)) == 1:
+                            # // Ethernet Filter 
+                            # // next rev: Right now either Ethernet or Procotol is being evaluated 
+                            # // This needs to be Ethernet & Protocol combined and not just either or                        
+                            if self.ethkeylist:
+                                for eref in self.ethkeylist:
+                                    if self.ipv4pkt.get("ethType") == eval(eref):
+                                        self.tmppkt = self.ipv4pkt
+                            # // Procotol Filter 
+                            # // next rev: Right now either Ethernet or Procotol is being evaluated 
+                            # // This needs to be Ethernet & Protocol combined and not just either or
+                            if self.protokeylist:
+                                for pref in self.protokeylist:
+                                    if self.ipv4pkt.get("ipv4ProtoType") == eval(pref):
+                                        self.tmppkt = self.ipv4pkt
+                                   
+                           
             # // if we have a packet 
                 if self.tmppkt:  
                     # // return the build packet string function which provides text output while also processing 
@@ -679,27 +672,36 @@ class EthDisplayControl(taskmods.DllList):
                     self.tmppkt = self.ipv6pkt
             
                 # // Packet Filter 
-                if self.filterset == 1:            
-                    # // Ethernet Filter 
-                    if self.ethkeylist:
+                if self.filterset == 1:                                
+                    if self.ethkeylist and self.protokeylist:
                         for eref in self.ethkeylist:
                             if self.ipv6pkt.get("ethType") == eval(eref):
-                                self.tmppkt = self.ipv6pkt
-                            else:
-                                pass 
-                    # // Procotol Filter 
-                    if self.protokeylist:
-                        for pref in self.protokeylist:
-                            if self.ipv6pkt.get("ipv6ProtoType") == eval(pref):
-                                self.tmppkt = self.ipv6pkt
-                        else:
-                            pass      
+                                for pref in self.protokeylist:
+                                        if self.ipv6pkt.get("ipv6NextHeader") == eval(pref):     #///issue 
+                                            self.tmppkt = self.ipv6pkt         
+                        
+                    else:
+                        if (len(self.ethkeylist) + len(self.protokeylist)) == 1:
+                            # // Ethernet Filter 
+                            # // next rev: Right now either Ethernet or Procotol is being evaluated 
+                            # // This needs to be Ethernet & Protocol combined and not just either or                        
+                            if self.ethkeylist:
+                                for eref in self.ethkeylist:
+                                    if self.ipv6pkt.get("ethType") == eval(eref):
+                                        self.tmppkt = self.ipv6pkt
+                            # // Procotol Filter 
+                            # // next rev: Right now either Ethernet or Procotol is being evaluated 
+                            # // This needs to be Ethernet & Protocol combined and not just either or
+                            if self.protokeylist:
+                                for pref in self.protokeylist:
+                                    if self.ipv6pkt.get("ipv6NextHeader") == eval(pref):
+                                        self.tmppkt = self.ipv6pkt                        
                 if self.tmppkt:  
                     # // return the build packet string function which provides text output while also processing 
                     # // file output for binary and pcap options if selected 
                     return self.buildpktv6_string()       
     
-    # // keep'n it simple since 1979            
+    # // make output strings for v6 packets 
     def buildpktv6_string(self):
         self.pdiddy =  PacketDataClass()
         pktstring = ""
@@ -747,15 +749,15 @@ class EthDisplayControl(taskmods.DllList):
             except:
                 pass 
                 
-        if self._config.SAVE_RAW:
+        if self.config.SAVE_RAW:
             filename = str(self.counter) + fmtSpacer+str(source)+fmtSpacer+str(srcport)+fmtSpacer+str(dst)+fmtSpacer+str(dstport)+fmtSpacer+protostr+'.bin'
-            fh = open(os.path.join(self._config.DUMP_DIR, filename), 'wb')
+            fh = open(os.path.join(self.config.DUMP_DIR, filename), 'wb')
             fh.write(pheader+pdata)
             fh.close()  
     
         return pktstring
         
-    # // keep'n it simple since 1979    
+    # // make output strings for v4 packets 
     def buildpktv4_string(self):
         """create the packet string from the dictionary created in displaypkt"""
         self.pdiddy =  PacketDataClass()
@@ -798,9 +800,9 @@ class EthDisplayControl(taskmods.DllList):
             eth = dpkt.ethernet.Ethernet(pheader+pdata)
             self.pcw.writepkt(eth)
             
-        if self._config.SAVE_RAW:
+        if self.config.SAVE_RAW:
             filename = str(self.counter) + fmtSpacer+source+fmtSpacer+srcport+fmtSpacer+dst+fmtSpacer+dstport+fmtSpacer+protostr+'.bin'
-            fh = open(os.path.join(self._config.DUMP_DIR, filename), 'wb')
+            fh = open(os.path.join(self.config.DUMP_DIR, filename), 'wb')
             fh.write(pheader+pdata)
             fh.close()  
     
@@ -810,19 +812,6 @@ class EthDisplayControl(taskmods.DllList):
         """place things that need to be closed such as file handles here"""
         if self.config.SAVE_PCAP:
             self.pcw.close()
-
-    def get_tasks(self):
-        """ yield task object (pid, task, pages) also checks if image is windows based upon return """
-        try:
-            tasks = taskmods.DllList.calculate(self)            
-            for task in tasks:
-                if task.UniqueProcessId:
-                    pid = task.UniqueProcessId
-                    task_space = task.get_process_address_space()
-                    pages = task_space.get_available_pages()
-                yield pid, task, pages            
-        except:
-            yield False 
             
     def get_packet_process(self):
         """simple method to finding pid from physical offset"""
@@ -841,10 +830,10 @@ class EthDisplayControl(taskmods.DllList):
         return None         
 
             
-class EthScan(common.AbstractWindowsCommand):
+class EthScan(taskmods.DllList):
     """Scans and dumps complete ethernet frames from memory while vildating legitmate ipv4/ipv6 packets"""
     def __init__(self, config, *args, **kwargs):
-        commands.Command.__init__(self, config, *args, **kwargs)
+        taskmods.DllList.__init__(self, config, *args, **kwargs)        
         config.remove_option("OFFSET")
         config.add_option('DUMP-DIR', short_option = 'D', default = None,       
                           cache_invalidator = False,
@@ -866,16 +855,49 @@ class EthScan(common.AbstractWindowsCommand):
         self.taskobj = ""     
         self.pktstring = ""
         self.counter = 1
-        global setmtu    # // globals aren't so bad when used properly :)  (used in PacketDataClass)
-        global disablechecksum # // globals aren't so bad when used properly :) (used in PacketDataClass)
+        self.templist  = []
+        global setmtu    # // global command line option used in PacketDataClass
+        global disablechecksum # // global command line option used in PacketDataClass
         setmtu = self.config.SET_MTU
         disablechecksum = self.config.DISABLE_CHECKSUM 
-
+        
+        # //< self.taskobj = self.get_tasks() >//
+        # //<self.get_task() returns either a task object or False  >//
+        # //<if it returns a task object, we know we're on a windows system >//
+        # //<[ self.windows = 1 means windows system] >//
+        # //<else [ self.windows = 0 ] which means non windows system >
+            # //<this allows ethscan to know if it should call get_packet_process()  >//
+        # //<get_packet_process() finds the associated process per packet  >//
+        # //<without this check ethscan would not work on none windows images  >//        
+        self.taskobj = self.get_tasks()
+        if self.taskobj.next() == False  or self.config.ENABLE_PROC == False:
+            self.windows = 0 
+        else:
+            self.windows = 1 
+            self.ptpobj = self.get_tasks() 
+            
+            #// self.templist = list(self.ptpobj)
+            #// this will not work as effective as self.templist = list(self.ptpobj) becase of the object being iterated 
+            self.templist = list(self.ptpobj)
+        
+    def get_tasks(self):
+        """ yield task object (pid, task, pages) also checks if image is windows based upon return """
+        try:
+            tasks = taskmods.DllList.calculate(self)            
+            for task in tasks:
+                if task.UniqueProcessId:
+                    pid = task.UniqueProcessId
+                    task_space = task.get_process_address_space()
+                    pages = task_space.get_available_pages()
+                yield pid, task, pages            
+        except:
+            yield False 
+            
     def calculate(self):       
         """calculate and extract frames from memory"""
-        address_space = utils.load_as(self._config, astype = 'physical')
-        self.ethcontrol = EthDisplayControl(self.config,  address_space)
-        self.ethcontrol.run_config()
+        address_space = utils.load_as(self.config, astype = 'physical')
+        self.ethcontrol = EthDisplayControl(self.config,  address_space,  self.windows,  self.templist)
+        self.ethcontrol.runconfig()
 
         for offset in EthScanner().scan(address_space):
             objct = obj.Object('ethFrame', vm = address_space, offset = offset)
@@ -891,4 +913,3 @@ class EthScan(common.AbstractWindowsCommand):
                 outfd.write(self.pktstring)
                 
         self.ethcontrol.cleanup()
-        
