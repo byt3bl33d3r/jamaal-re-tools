@@ -15,27 +15,45 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA 
 
-# ETHSCAN - Recover ethernet packets from memory 
-# 
+# ################################################################################
+# ETHSCAN - Recover ethernet packets from memory  
 # This plugin will attempt to recovere packets from memory. 
 # Packets found in memory can be saved as individual raw binary files or 
 # each packet will be saved to a pcap file.  
+
+# Example:  
+# $ python vol.py ethscan -f be2.vmem -F 0x0800 -S -M 1500 -P -R -D ethscan_dump/
+# Packets Found: 14
+# ProcName: winlogon.exe PID: 632 Base Address: 0x158000  End Address: 0x1000
+# Ethernet:    Src: (00:50:56:c0:00:08)       Dst: (ff:ff:ff:ff:ff:ff)
+# Type:        IPv4 (0x0800)
+# IPv4:        Src: 172.16.176.1:33262       Dst: 172.16.176.255:35072
+# Protocol:    UDP (17)
+# Packet Size: (92) Bytes
+# 0x00000000  ff ff ff ff ff ff 00 50 56 c0 00 08 08 00 45 00   .......PV.....E.
+# 0x00000010  00 4e cf e4 00 00 40 11 f1 98 ac 10 b0 01 ac 10   .N....@.........
+# 0x00000020  b0 ff ee 81 00 89 00 3a 91 a0 1c 2e 01 10 00 01   .......:........
+# 0x00000030  00 00 00 00 00 00 20 41 42 41 43 46 50 46 50 45   .......ABACFPFPE
+# 0x00000040  4e 46 44 45 43 46 43 45 50 46 48 46 44 45 46 46   NFDECFCEPFHFDEFF
+# 0x00000050  50 46 50 41 43 41 42 00 00 20 00 01               PFPACAB.....
 #
 #
-#ProcName: VMip.exe PID: 180  Base Address: 0x162000  End Address: 0x163000
-#IPv4 (0x0800) 
-#Protocol UDP (17)
-#Src: 172.16.176.1:31982 (00:50:56:c0:00:08), Dst: 172.16.176.255:35072 (ff:ff:ff:ff:ff:ff)
-#Data (92 Bytes)
-#0x00000000  ff ff ff ff ff ff 00 50 56 c0 00 08 08 00 45 00   .......PV.....E.
-#0x00000010  00 4e 97 dc 00 00 40 11 29 a1 ac 10 b0 01 ac 10   .N....@.).......
-#0x00000020  b0 ff ee 7c 00 89 00 3a 6d 90 67 45 01 10 00 01   ...|...:m.gE....
-#0x00000030  00 00 00 00 00 00 20 46 48 45 50 46 43 45 4c 45   .......FHEPFCELE
-#0x00000040  48 46 43 45 50 46 46 46 41 43 41 43 41 43 41 43   HFCEPFFFACACACAC
-#0x00000050  41 43 41 43 41 42 4e 00 00 20 00 01               ACACABN.....
+# $ ls -la ethscan_dump/
+# total 2480
+# drwxrwxr-x  2 ff ff 57344 Jul 30 00:15 .
+# drwxr-xr-x 15 ff ff 12288 Jul 29 16:14 ..
+# -rw-rw-r--  1 ff ff   150 Jul 29 23:59 100__3ffe:507::1:200:86ff:fe05:80da__2403__3ffe:501:4819::42__53__UDP.bin
+# -rw-rw-r--  1 ff ff    73 Jul 30 00:02 100__3ffe:507::1:200:86ff:fe05:80da__41077__3ffe:501:410::2c0:dfff:fe47:33e__33441__UDP.bin
+# -rw-rw-r--  1 ff ff    58 Jul 30 00:15 10__131.107.115.254__47873__172.16.176.143__3332__TCP.bin
+# -rw-rw-r--  1 ff ff   121 Jul 30 00:02 101__3ffe:501:1800:2345::2__768__3ffe:507::1:200:86ff:fe05:80da__48740__IPv6-ICMP.bin
+# -rw-rw-r--  1 ff ff   324 Jul 29 23:59 101__3ffe:501:4819::42__53__3ffe:507::1:200:86ff:fe05:80da__2403__UDP.bin
+# ################################################################################
 
-# // TOFIX: fix filter options so only selected options are printed
-
+# ^ UPDATES ^:
+# // 7/30/13: Bug Fixes  
+#  // Filter options not filtering only selected items if selection list is larger than 1 Example: -F 0x0800,0x86DD (fixed)
+#  // Checksum Options for IPv6 not working completely (fixed)
+#  // EthDisplayControl displayed as a vol pluging because of  taskmods.DllList inherent (fixed) 
 
 import struct
 import os 
@@ -298,7 +316,7 @@ class PacketDataClass(object):
         self.IPv6 =  struct.pack('>H', self.IPv6Header)   
         self.ethertypes = ethertypes
         self.protocols = protocols
-        # // from ethscan config options 
+        # // from Ethscan config options 
         global setmtu 
         global disablechecksum
         self.MTU = setmtu        
@@ -358,17 +376,17 @@ class PacketDataClass(object):
                         
     def check_IPV6(self, eth):
         """returns True if frame has valid IPv4 packet"""
-        
         if eth.ipv6Ver == 0x60:  
             if eth.ethType ==  0x86dd:
-                 if disablechecksum == False:
-                    self.ipv6_ispktValid(eth)
-                    return True
-                 else:
-                    return False
-            else:
-                return True 
-            
+                if disablechecksum == False:
+                    self.checksumValue = self.ipv6_ispktValid(eth)
+                    if self.checksumValue == True:
+                        return True
+                    else:
+                        return False 
+                else:  # // checksum is disabled always return true 
+                    return True 
+                
             
 class EthScanVTypes(obj.ProfileModification):
     """ EthScanVTypes packet structure """
@@ -426,9 +444,7 @@ class FindEthFrame(scan.ScannerCheck):
 
     def check(self, offset):
         """checks for valid ipv4/ipv6 packets"""    
-
         eth = obj.Object('ethFrame', vm = self.address_space, offset = offset)
-        
         # //<IPv4 header check so check_IPV4() method isnt called needlesssly 
         if eth.ethType == self.ipv4Header:
             if self.packet.check_IPV4(eth):
@@ -530,12 +546,15 @@ class EthDisplayControl(object):
             for filtername in  temp_list:
                 refval = eval(str(filtername))
                 protoitem= self.protocols.get(refval)
-                etheritem = self.ethertypes.get(refval)                
+                etheritem = self.ethertypes.get(refval)     
+
                 if protoitem:
                     self.protokeylist.append(str(refval))
                 if etheritem:
                     self.ethkeylist.append(str(refval))
+
                 # // Rut Roh
+                # //Filter selection not in ethkeylist or protokeylist
                 if len(self.ethkeylist or self.protokeylist) == 0:
                     estr = "Ethernet Types:\n"
                     pstr = "Protocols:\n"
@@ -554,7 +573,6 @@ class EthDisplayControl(object):
         
     def buildpkt(self, objct, counter):
         """builds the packet found in memory as a dictionary"""
-        
         #//< determin type > // 
         self.etype = objct.ethType.v()
         self.pktoffset =  objct.ethDst.obj_offset
@@ -638,7 +656,7 @@ class EthDisplayControl(object):
                                 for pref in self.protokeylist:
                                         if self.ipv4pkt.get("ipv4ProtoType") == eval(pref):     #///issue 
                                             self.tmppkt = self.ipv4pkt                      
-                    # // evalulate Packet or Ethernet 
+
                     else:
                         if (len(self.ethkeylist) + len(self.protokeylist)) == 1:
                             # // Ethernet Filter 
@@ -673,6 +691,7 @@ class EthDisplayControl(object):
             
                 # // Packet Filter 
                 if self.filterset == 1:                                
+                    # // Ethernet and Protocol filter types are set. 
                     if self.ethkeylist and self.protokeylist:
                         for eref in self.ethkeylist:
                             if self.ipv6pkt.get("ethType") == eval(eref):
@@ -856,8 +875,8 @@ class EthScan(taskmods.DllList):
         self.pktstring = ""
         self.counter = 1
         self.templist  = []
-        global setmtu    # // global command line option used in PacketDataClass
-        global disablechecksum # // global command line option used in PacketDataClass
+        global setmtu    # // global variable for command line option used in PacketDataClass
+        global disablechecksum # // global variable for command line option used in PacketDataClass
         setmtu = self.config.SET_MTU
         disablechecksum = self.config.DISABLE_CHECKSUM 
         
