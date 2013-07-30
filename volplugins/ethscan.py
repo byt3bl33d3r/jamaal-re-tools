@@ -44,14 +44,12 @@
 # 10__131.107.115.254__47873__172.16.176.143__3332__TCP.bin
 # 101__3ffe:501:1800:2345::2__768__3ffe:507::1:200:86ff:fe05:80da__48740__IPv6-ICMP.bin
 # 101__3ffe:501:4819::42__53__3ffe:507::1:200:86ff:fe05:80da__2403__UDP.bin
-# ################################################################################
 
-# ###############################################################################
-# //^UPDATES
-# - 7/30/13: Bug Fixes  
-#  // Filter options not filtering only selected items if selection list is larger than 1 Example: -F 0x0800,0x86DD (fixed)
-#  // Checksum Options for IPv6 not working completely (fixed)
-#  // EthDisplayControl displayed as a vol pluging because of  taskmods.DllList inherent (fixed) 
+# // Fixes/Updates 
+#  // 7/30/13: Bug Fixes  
+#  // Filter options not filtering selected items if list is larger than 1 Example: -F 0x0800,0x86DD  - (fixed)
+#  // Checksum Options for IPv6 not working completely - (fixed)
+#  // EthDisplayControl displayed as a vol pluging because of  taskmods.DllList inherent - (fixed) 
 # ###############################################################################
 
 import struct
@@ -758,7 +756,7 @@ class EthDisplayControl(object):
         
         # // IPv6 packet writing with dpkt still has some bugs/features
         if self.config.SAVE_PCAP:
-            # //   File "/usr/lib/pymodules/python2.7/dpkt/ip6.py", line 47, in __str__
+            # // File "/usr/lib/pymodules/python2.7/dpkt/ip6.py", line 47, in __str__
             # // not self.data.sum:
             # // AttributeError: 'str' object has no attribute 'sum'
             try:
