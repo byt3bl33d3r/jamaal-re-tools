@@ -15,21 +15,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA 
 
-import volatility.plugins.taskmods as taskmods
-import volatility.plugins.dlldump as dlldump
 import volatility.plugins.vadinfo as vadinfo
-import binascii 
-
 import volatility.utils as utils
 import volatility.win32.tasks as tasks
 import volatility.win32 as win32
 import volatility.obj as obj
-import uuid
-import sys 
-import os 
-
-from sys import platform as _platform
-from binascii import hexlify
 
 ProtectionDict={
     0: 'NOACCESS',
