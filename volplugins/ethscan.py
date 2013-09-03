@@ -50,7 +50,8 @@
 #  // Filter options not filtering selected items if list is larger than 1 Example: -F 0x0800,0x86DD  - (fixed)
 #  // Checksum Options for IPv6 not working completely - (fixed)
 #  // EthDisplayControl displayed as a vol pluging because of  taskmods.DllList inherent - (fixed) 
-# 
+#  
+#  //Next Revision: Improve IPv6 
 # ###############################################################################
 
 import struct
@@ -70,7 +71,7 @@ try:
     import dpkt 
     from dpkt import pcap 
     from dpkt.pcap import Writer 
-    has_dpkt = True
+    has_dpkt = True 
 except ImportError:
     has_dpkt = False
 
@@ -183,7 +184,7 @@ protocols = {
         0x68:  'ARIS', 
         0x69:  'SCPS', 
         0x6A:  'QNX', 
-        0x6B:  'A/N', 
+        0x6B:  'A_N', 
         0x6C:  'IPComp', 
         0x6D:  'SNP', 
         0x6E:  'Compaq-Peer', 
@@ -749,7 +750,7 @@ class EthDisplayControl(object):
         pktstring += "Ethernet: %s %s %s %s\n" % (fmtSrc.rjust(7),  lp+macsrc+rp,  fmtDst.rjust(10),    lp+macdst+rp)
         pktstring += "Type: %s %s\n" % (ethname.rjust(11), lp+ethnumstr+rp)
         pktstring += "IPv4: %s %s:%s %s %s:%s\n" % (fmtSrc.rjust(11),  source, srcport,fmtDst.rjust(10),  dst,  dstport)
-        pktstring += "Protocol: %s %s\n" % (protostr.rjust(6), lp+str(protonum)+rp)
+        pktstring += "Protocol: %ss %s\n" % (protostr.rjust(6), lp+str(protonum)+rp)
         pktstring += "Packet Size: %s Bytes\n" %(lp+str(len(pheader+pdata))+rp)
         for offset, hextext, chars in utils.Hexdump(pheader+pdata):
             pktstring += "{0:#010x}  {1:<48}  {2}\n".format(offset, hextext, ''.join(chars))
@@ -767,9 +768,9 @@ class EthDisplayControl(object):
                 pass 
                 
         if self.config.SAVE_RAW:
-            filename = str(self.counter) + fmtSpacer+str(source)+fmtSpacer+str(srcport)+fmtSpacer+str(dst)+fmtSpacer+str(dstport)+fmtSpacer+protostr+'.bin'
+            filename = str(self.counter) + fmtSpacer+str(source)+fmtSpacer+str(srcport)+fmtSpacer+str(dst)+fmtSpacer+str(dstport)+fmtSpacer+protostr+'.bin'.replace(" ", "_")
             fh = open(os.path.join(self.config.DUMP_DIR, filename), 'wb')
-            fh.write(pheader+pdata)
+            fh.write(pheader+pdata) 
             fh.close()  
     
         return pktstring
