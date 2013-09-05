@@ -750,7 +750,7 @@ class EthDisplayControl(object):
         pktstring += "Ethernet: %s %s %s %s\n" % (fmtSrc.rjust(7),  lp+macsrc+rp,  fmtDst.rjust(10),    lp+macdst+rp)
         pktstring += "Type: %s %s\n" % (ethname.rjust(11), lp+ethnumstr+rp)
         pktstring += "IPv4: %s %s:%s %s %s:%s\n" % (fmtSrc.rjust(11),  source, srcport,fmtDst.rjust(10),  dst,  dstport)
-        pktstring += "Protocol: %ss %s\n" % (protostr.rjust(6), lp+str(protonum)+rp)
+        pktstring += "Protocol: %s %s\n" % (protostr.rjust(6), lp+str(protonum)+rp)
         pktstring += "Packet Size: %s Bytes\n" %(lp+str(len(pheader+pdata))+rp)
         for offset, hextext, chars in utils.Hexdump(pheader+pdata):
             pktstring += "{0:#010x}  {1:<48}  {2}\n".format(offset, hextext, ''.join(chars))
