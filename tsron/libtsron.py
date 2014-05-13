@@ -274,7 +274,7 @@ if __name__ == "__main__":
     parser.add_argument('--pcap','-p', dest='srcpcap', action='store', \
         help='Input pcap file to use.  Example: -p libpcap.pcap',required=True)
     group.add_argument('--dir', '-d',dest='outdir', action='store', help='output stream directory',default=None)
-    parser.add_argument('--type','-T', dest='typestream', action='store', choices=['TCP','UDP','GRE','ALL'], default='TCP', \
+    parser.add_argument('--type','-T', dest='typestream', action='store', choices=['TCP','UDP','GRE'], default='TCP', \
         help='Type of stream to rip (TCP,UDP,GRE)')
     group.add_argument('-D', dest='display', action='store_true', help='Display stream table')
     parser.add_argument('-s', '--streams', dest='streamnum' ,nargs="+", type=int, action='store', \
@@ -299,4 +299,4 @@ if __name__ == "__main__":
     #// calling libtsronV2 directly  
     #tvar = {'typestream': 'GRE', 'header': '__TSRONHEADER__', 'srcpcap': 'out_libpcap.pcap', 'streamnum': 0, 'display': True, 'outdir': None}
     #streamObj=Tsron(**tvar)
-        
+
