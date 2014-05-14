@@ -182,19 +182,20 @@ class Tsron(object):
 
     def __displayStream(self):
         '''Used to display stats associated with assembled streams'''
-        for key, value in self.streamDict.iteritems(): 
-            pckCnt = 0
-            dlen = 0 
-            dispkey = key.split("_")
-            dispkey = str(dispkey[0])+(":")+str(dispkey[1])+" <--> "+str(dispkey[2])+(":")+str(dispkey[3])
-            value.sort()
-            value = list(value for value,_ in itertools.groupby(value))
-            for streamList in sorted(value):
-                pckCnt += 1 
-                dlen += streamList[2]
-            print str(self.streamCounter) + " " + dispkey + " | packets: " + str(pckCnt) + " data size: " + str(dlen)
-            self.streamCounter += 1 
-        return True 
+        if self.display:
+            for key, value in self.streamDict.iteritems(): 
+                pckCnt = 0
+                dlen = 0 
+                dispkey = key.split("_")
+                dispkey = str(dispkey[0])+(":")+str(dispkey[1])+" <--> "+str(dispkey[2])+(":")+str(dispkey[3])
+                value.sort()
+                value = list(value for value,_ in itertools.groupby(value))
+                for streamList in sorted(value):
+                    pckCnt += 1 
+                    dlen += streamList[2]
+                print str(self.streamCounter) + " " + dispkey + " | packets: " + str(pckCnt) + " data size: " + str(dlen)
+                self.streamCounter += 1 
+            return True 
 
 
     def TCP(self): 
