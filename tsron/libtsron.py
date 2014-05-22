@@ -23,7 +23,8 @@ class Tsron(object):
         self.pckNum = 0   
         self.streamCounter = 1
         self.streamCounterIndex = []
-        self.streamDict = {}
+        self.streamDict = {}         
+        self.connStrheader = ""
         try:
     	   self.pcap = dpkt.pcap.Reader(open(self.srcpcap,'rb'))
         except ValueError:
@@ -33,7 +34,6 @@ class Tsron(object):
                 print "\nThe input pcap is most likely pcap-ng.  Convert it to libpcap using the following:\
                 \n$ editcap -F libpcap " + self.srcpcap.name + " " + fileName+"_libpcap"+fileExtension + "\n"
                 sys.exit(2)
-        #self.getPacketDict()
 
 
     # // used to return packet type 
@@ -57,6 +57,17 @@ class Tsron(object):
                 if  len(udp.data) > 0:
                     return udp
 
+    def __getSrc(self,src,srcPort,streamStr):
+        
+        '''Returns a direction arrow to srcPointer, pointing to the Destination 
+           From the Source address to help visualize data flow''' 
+
+        locateSrc = streamStr.split("_")
+        if src == locateSrc[0] and srcPort == locateSrc[1]:
+            return ">"
+        else:
+            return "<"
+
     def __iPpacketRules(self,ip,tcp,pckNum):
         '''Reorders TCP streams into dictionaries for sorting and processing'''
         if len(tcp.data) > 1:
@@ -66,12 +77,13 @@ class Tsron(object):
             # // build the file string ip.src,sport,ip.dst,dspot seprated by "_"
             streamStr =''.join(str(e)+"_" for e in streamStr)
             streamStr = streamStr[:-1]
+            srcPointer = self.__getSrc(str(socket.inet_ntoa(ip.src)),str(tcp.sport),streamStr)
             if streamStr not in self.streamDict:
                 self.streamDict[streamStr] = []
-                self.streamDict[streamStr].append([tcp.seq + tcp.ack,pckNum,len(tcp.data)])
+                self.streamDict[streamStr].append([tcp.seq + tcp.ack,pckNum,len(tcp.data),srcPointer])
             else:
                 if streamStr in self.streamDict:
-                    self.streamDict[streamStr].append([tcp.seq + tcp.ack,pckNum,len(tcp.data)])
+                    self.streamDict[streamStr].append([tcp.seq + tcp.ack,pckNum,len(tcp.data),srcPointer])
 
 
     def __UDPpacketRules(self,ip,udp,pckNum):
@@ -83,12 +95,40 @@ class Tsron(object):
             # // build the file string ip.src,sport,ip.dst,dspot seprated by "_"
             streamStr =''.join(str(e)+"_" for e in streamStr)
             streamStr = streamStr[:-1]
+            srcPointer = self.__getSrc(str(socket.inet_ntoa(ip.src)),str(udp.sport),streamStr)
             if streamStr not in self.streamDict:
                 self.streamDict[streamStr] = []
-                self.streamDict[streamStr].append([pckNum,pckNum,len(udp.data)])
+                self.streamDict[streamStr].append([pckNum,pckNum,len(udp.data),srcPointer])
             else:
                 if streamStr in self.streamDict:
-                    self.streamDict[streamStr].append([pckNum,pckNum,len(udp.data)])
+                    self.streamDict[streamStr].append([pckNum,pckNum,len(udp.data),srcPointer])
+
+
+    def __connectionHeader(self,key,streamList):
+        '''Modifies self.header to append connection information'''
+
+        # // Example: 
+        # // 10.0.1.1_1043_10.0.1.1_3460 
+        # // 10.0.1.1_3460_10.0.1.1_1043 
+        # // 10.0.1.1_3460_10.0.1.1_1043 etc.. 
+        # // if self.header is defined it will look like this 
+        # // 10.0.1.1_3460_10.0.1.1_1043__LibTsron__ 
+        # // 10.0.1.1_1043_10.0.1.1_3460__LibTsron__ 
+
+        # // if self.header is defined, append the connection string to the left 
+        # // of the header 
+        connstr = key
+        connstr = connstr.split("_")
+        srcPointer = streamList[3]
+        lheader = "<--__="
+        rheader = "=__-->"
+
+        # // < is only checked because the default layout is ">" 
+        if srcPointer == "<":
+           connstr = connstr[2] + "_" + connstr[3] + "_" + connstr[0] + "_" + connstr[1]
+           self.connStrheader = lheader + connstr + rheader 
+        else:
+           self.connStrheader = lheader + key + rheader 
 
 
     def __writeStream(self):
@@ -99,10 +139,10 @@ class Tsron(object):
             for key, value in self.streamDict.iteritems():
                 if self.outdir:
                     if os.path.exists(self.outdir):
-                        filestring = self.outdir + "//" + self.typestream + "_" + key
+                        filestring = os.path.join(self.outdir,self.typestream + "_" + key)
                         if os.path.exists(filestring):
                             os.remove(filestring)
-                        f = open(self.outdir + "//" + self.typestream + "_" + key, 'ab')
+                        f = open(os.path.join(self.outdir,self.typestream + "_" + key),'ab')
                 else:
                     f = open("tsron.stream.tmp", 'ab')
 
@@ -113,6 +153,7 @@ class Tsron(object):
                 value = list(value for value,_ in itertools.groupby(value))
                 # // Sort the nested list by the first value in each list (Syn + Ack)
                 for streamList in sorted(value):
+                    #if self.connection:
                     pktWriteNumber = streamList[1]
                     # // We access the pcap this way to put unorded packets back in order 
                     eth = dpkt.ethernet.Ethernet(streampkts[pktWriteNumber-1][1])
@@ -120,10 +161,12 @@ class Tsron(object):
                     tcp = self.__ipProto(ip)
                     if len(tcp.data) == 0:
                         print "ERROR for packet", tcp.seq, streamList
+                    if self.connheader:
+                        self.__connectionHeader(key,streamList)
                     if self.outdir:
-                        f.write(self.header + tcp.data)
+                        f.write(self.connStrheader + self.header + tcp.data)
                     else:
-                        f.write(self.header + tcp.data)
+                        f.write(self.connStrheader + self.header + tcp.data)
                 if self.outdir:
                     f.close()
             if self.outdir:
@@ -143,10 +186,10 @@ class Tsron(object):
                     key, value = self.streamDict.items()[streamIndex]
                     if self.outdir:
                         if os.path.exists(self.outdir):
-                            filestring = self.outdir + "//" + self.typestream + "_" + key
+                            filestring = os.path.join(self.outdir,self.typestream + "_" + key)
                             if os.path.exists(filestring):
                                 os.remove(filestring)
-                            f = open(self.outdir + "//" + self.typestream + "_" + key, 'ab')
+                            f = open(os.path.join(self.outdir,self.typestream + "_" + key),'ab')
                     value.sort()
                     value = list(value for value,_ in itertools.groupby(value))
                     # // Sort the nested list by the first value in each list (Syn + Ack)
@@ -159,10 +202,12 @@ class Tsron(object):
                         tcp = self.__ipProto(ip)
                         if len(tcp.data) == 0:
                             print "ERROR for packet", tcp.seq, streamList
+                        if self.connheader:
+                            self.__connectionHeader(key,streamList)
                         if self.outdir:
-                            f.write(self.header + tcp.data)
+                            f.write(self.connStrheader + self.header + tcp.data)
                         else:
-                            f.write(self.header + tcp.data)
+                            f.write(self.connStrheader + self.header + tcp.data)
                     if self.outdir:
                         f.close()
                 if self.outdir:
@@ -281,14 +326,21 @@ if __name__ == "__main__":
     parser.add_argument('-s', '--streams', dest='streamnum' ,nargs="+", type=int, action='store', \
         default=0, help='Extract only the specified streams:\nExample: -s 1 10 15')
     parser.add_argument('--header', dest='header', action='store', default="")
-
+    parser.add_argument('-c', '--connect', dest='connheader', action='store_true', help='Include Src and Dst output')
 
     if len(sys.argv) <= 1: 
         parser.print_help()
-        sys.exit(1) 
+        sys.exit() 
+
+
 
     else:
         args = parser.parse_args()
+        if args.outdir:
+            if not os.path.isdir(args.outdir):
+                print "\nError: Output directory \"%s\" does not exists, create it first." % (args.outdir)
+                print "exiting....\n"
+                sys.exit() 
         streamObj=Tsron(**vars(args))
         if args.typestream == "TCP":
             datastream = streamObj.TCP()
@@ -298,6 +350,6 @@ if __name__ == "__main__":
             datastream = streamObj.UDP()
 
     #// calling libtsronV2 directly  
-    #tvar = {'typestream': 'GRE', 'header': '__TSRONHEADER__', 'srcpcap': 'out_libpcap.pcap', 'streamnum': 0, 'display': True, 'outdir': None}
+    #tvar = {'typestream': 'GRE', 'header': '__TSRONHEADER__', 'srcpcap': 'out_libpcap.pcap', 'streamnum': 0, 'display': True, 'outdir': None, connheader: True}
     #streamObj=Tsron(**tvar)
 

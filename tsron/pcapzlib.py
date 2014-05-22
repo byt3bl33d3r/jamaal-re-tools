@@ -40,7 +40,7 @@ while offset != -1:
                     except:
                         pass
                     decompressed_data = zlib.decompress(compressed_data)
-                    print "\ndecompressed zlib data-> ", decompressed_data
+                    #print "\ndecompressed zlib data-> ", decompressed_data
                     dd_printable = filter(lambda x: x in string.printable, decompressed_data)
                     print "***Printable data->", dd_printable
                 except zlib.error:
