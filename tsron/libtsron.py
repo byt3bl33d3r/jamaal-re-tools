@@ -23,8 +23,12 @@ class Tsron(object):
         self.pckNum = 0   
         self.streamCounter = 1
         self.streamCounterIndex = []
-        self.streamDict = {}         
-        self.connStrheader = ""
+        self.streamDict = {}
+        self.tsrondata = "tsron.stream.tmp"
+        try:
+            os.remove(self.tsrondata)
+        except OSError:
+            pass
         try:
     	   self.pcap = dpkt.pcap.Reader(open(self.srcpcap,'rb'))
         except ValueError:
@@ -128,8 +132,7 @@ class Tsron(object):
            connstr = connstr[2] + "_" + connstr[3] + "_" + connstr[0] + "_" + connstr[1]
            self.connStrheader = lheader + connstr + rheader 
         else:
-           self.connStrheader = lheader + key + rheader 
-
+           self.connStrheader = lheader + key + rheader
 
     def __writeStream(self):
         '''Returns TCP/GRE/UDP stream to caller or writes streams to the filesystem in specified location'''
@@ -144,8 +147,7 @@ class Tsron(object):
                             os.remove(filestring)
                         f = open(os.path.join(self.outdir,self.typestream + "_" + key),'ab')
                 else:
-                    f = open("tsron.stream.tmp", 'ab')
-
+                    f = open(self.tsrondata, 'ab')
                 # // http://stackoverflow.com/questions/2213923/python-removing-duplicates-from-a-list-of-lists
                 # // Retransmissions are just that, packets with the same Seq, Ack and tcp.data lenght.
                 # // The below sort and groupby will remove duplicates from a nested list 
@@ -172,7 +174,7 @@ class Tsron(object):
             if self.outdir:
                 return True
             else:
-                f = open("tsron.stream.tmp", 'rb')
+                f = open(self.tsrondata, 'rb')
                 return f.read()
 
         else:
@@ -190,6 +192,8 @@ class Tsron(object):
                             if os.path.exists(filestring):
                                 os.remove(filestring)
                             f = open(os.path.join(self.outdir,self.typestream + "_" + key),'ab')
+                    else:
+                        f = open(self.tsrondata, 'ab')
                     value.sort()
                     value = list(value for value,_ in itertools.groupby(value))
                     # // Sort the nested list by the first value in each list (Syn + Ack)
@@ -213,7 +217,7 @@ class Tsron(object):
                 if self.outdir:
                     return True
                 else:
-                    f = open("tsron.stream.tmp", 'rb')
+                    f = open(self.tsrondata, 'rb')
                     return f.read()
 
 
