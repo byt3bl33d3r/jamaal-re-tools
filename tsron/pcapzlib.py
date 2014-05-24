@@ -1,4 +1,20 @@
-#This will print zlib compressed data in pcaps regardless of the location in the data area of the packet.   
+# Copyright (C) 2014 Jamaal Speights 
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+#This will print zlib compressed data in pcaps regardless of the location in the data area of the packet.  
+#jamaal.speights@gmail.com  
 from libtsron import Tsron 
 import sys
 import binascii
@@ -11,7 +27,6 @@ header = "__libtsron_packet__"
 start = 0
 zlibstart = 0
 zlib_nextoffset = 0 
-
 if __name__ == "__main__":
     try:
         srcpcap = sys.argv[1]
@@ -19,8 +34,16 @@ if __name__ == "__main__":
 	print "python pzcapzlib.py file.pcap "
         sys.exit(2)
 
-tvar = {'typestream': 'TCP', 'header': header, 'srcpcap': srcpcap, 'streamnum': 0, 'display': False, 'outdir': None}
-streamObj=Tsron(**tvar)
+targs = {
+'typestream': 'TCP', 
+'header': header, 
+'srcpcap': srcpcap, 
+'streamnum': 0, 
+'display': False, 
+'outdir': None,
+'connheader': False
+}
+streamObj=Tsron(**targs)
 x = streamObj.TCP()
 
 while offset != -1:
