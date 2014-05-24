@@ -25,6 +25,8 @@ class Tsron(object):
         self.streamCounterIndex = []
         self.streamDict = {}
         self.tsrondata = "tsron.stream.tmp"
+        if not self.connheader:
+            self.connStrheader = ""
         try:
             os.remove(self.tsrondata)
         except OSError:
