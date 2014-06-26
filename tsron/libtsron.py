@@ -29,7 +29,6 @@ import textwrap
 import os
 
 
-     #//def __init__(self, *args, **kwargs):
 class Tsron(object):	
     '''TCP stream reassembler output normalizer - Rebuilds ordered TCP steams along with dumping UDP streams from pcaps'''
     def __init__(self, **kwargs):
