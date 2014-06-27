@@ -1,10 +1,10 @@
-# jsqextract.py 
+# pyqextract.py 
 # Symantec quarantine file decoder
 # jamaal.speights@gmail.com
 # Symantec xor's quarantine executables with 0xA5, while the symantec header is xor'ed with
 # 0x5a.  Symantec also adds ODB (OL' DIRTY BYTES) to the executable offsetting the IAT,
 # code and data segments.
-# jsqextract.py fixes all this
+# pyqextract.py fixes all this
 # uncomment out the print header statement to view the header
 # version 0.2 
 
