@@ -69,7 +69,7 @@ class MsCarverDecompressor(object):
                             ucdatalen = self.nt.lznt1_uncompressed_size(CompressedBuffer,CompressedBufferSize)
                             lznt1chunkrtn = self.nt.lznt1_decompress_chunk(byref(CompressedBuffer,2),byref(CompressedBuffer,csize),UncompressedBuffer,byref(UncompressedBuffer,UnCompressedBufferSize.value))
 
-                            if lznt1chunkrtn >= 0 and ucdatalen >= 0:
+                            if lznt1chunkrtn >= 0 or ucdatalen >= 0:
                                 tcompressedbuff = pagebuff[lzntheader:lzntheader+csize]
                                 tdecompressedbuff = UncompressedBuffer.raw[:csize]
                                 minsize = self.config.SET_MINSIZE
